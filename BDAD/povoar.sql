@@ -209,13 +209,11 @@ insert into Possui(idAnfitriao, idHabitacao) values(1, 17);
 
 
 insert into Estado(idEstado,estado) values(0,"Concluida");
-insert into Estado(idEstado,estado) values(1,"Em espera");
-insert into Estado(idEstado,estado) values(2,"A decorrer");
-insert into Estado(idEstado,estado) values(3,"Cancelado");
+insert into Estado(idEstado,estado) values(1,"Cancelado");
 
 insert into Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) values (1, '2019-06-20', '2019-06-27', 6, 260, 1, 0);
-insert into Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) values (2, '2019-07-02', '2019-07-15', 1, 80, 4, 3);
-insert into Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) values (3, '2019-05-03', '2019-08-03', 1, 3235, 3, 2);
+insert into Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) values (2, '2019-07-02', '2019-07-15', 1, 80, 4, 1);
+insert into Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) values (3, '2019-05-03', '2019-08-03', 1, 3235, 3, 0);
 insert into Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) values (4, '2019-06-28', '2019-06-29', 6, 260, 1, 0);
 insert into Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) values (5, '2019-06-30', '2019-07-01', 6, 260, 2, 0);
 insert into Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) values (6, '2019-04-30', '2019-05-01', 6, 100, 1, 0);
@@ -237,8 +235,8 @@ insert into Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTota
 insert into Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) values (22, '2018-05-03', '2018-06-08', 2, 215, 13, 0);
 insert into Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) values (23, '2019-07-30', '2019-08-01', 4, 76, 14, 1);
 insert into Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) values (24, '2019-09-30', '2019-10-01', 5, 130, 15, 1);
-insert into Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) values (25, '2019-06-30', '2019-07-01', 4, 76, 14, 3);
-insert into Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) values (26, '2019-08-30', '2019-09-01', 5, 130, 15, 3);
+insert into Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) values (25, '2019-06-30', '2019-07-01', 4, 76, 14, 0);
+insert into Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) values (26, '2019-08-30', '2019-09-01', 5, 130, 15, 0);
 
 insert into Efetua(idCliente, idReserva) values (3, 1);
 insert into Efetua(idCliente, idReserva) values (4, 2);

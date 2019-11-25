@@ -31,12 +31,12 @@ DROP TABLE IF EXISTS Utilizador;
 
 CREATE TABLE Utilizador (
     idUtilizador    INTEGER PRIMARY KEY,
-    nome            VARCHAR(30) NOT NULL, 
+    hashedPassword TEXT NOT NULL,
+    primeiroNome    VARCHAR(30) NOT NULL, 
+    ultimoNome    VARCHAR(30) NOT NULL, 
     dataNascimento  DATE        NOT NULL, 
     email           VARCHAR(30) UNIQUE NOT NULL, 
     telefone        VARCHAR(15) UNIQUE NOT NULL, 
-    morada          VARCHAR(250) NOT NULL, 
-    codigoPostal    VARCHAR(10) NOT NULL, 
     idPais          INTEGER REFERENCES Pais (idPais) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
@@ -79,12 +79,16 @@ CREATE TABLE Estado (
     estado  CHAR(9) UNIQUE NOT NULL
 );
 
+insert into Estado(idEstado,estado) values(0,"Em espera");
+insert into Estado(idEstado,estado) values(1,"Concluida");
+insert into Estado(idEstado,estado) values(2,"Comentado");
+insert into Estado(idEstado,estado) values(3,"Cancelado");
+
 -- Table: Cancelamento
 DROP TABLE IF EXISTS Cancelamento;
 
 CREATE TABLE Cancelamento (
     reembolso   INTEGER     NOT NULL, 
-    idCliente     INTEGER REFERENCES Cliente (idCliente)  ON DELETE CASCADE ON UPDATE CASCADE, 
     idReserva     INTEGER REFERENCES Reserva (idReserva)  ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY(idReserva)
 );
@@ -98,7 +102,6 @@ CREATE TABLE ClassificacaoPorCliente (
     checkIn     INTEGER CHECK(checkIn >= 1 AND checkIn <= 5),
     localizacao INTEGER CHECK(localizacao >= 1 AND localizacao <= 5),
     outros      VARCHAR(500) DEFAULT 'Nao preenchido', 
-    idCliente INTEGER REFERENCES Cliente (idCliente)  ON DELETE RESTRICT ON UPDATE RESTRICT,
     idReserva INTEGER REFERENCES Reserva (idReserva) ON DELETE RESTRICT ON UPDATE RESTRICT, 
     PRIMARY KEY (idReserva)
 );
@@ -128,6 +131,15 @@ CREATE TABLE TipoDeHabitacao (
     nome VARCHAR(30) UNIQUE NOT NULL
 );
 
+insert into TipoDeHabitacao(idTipo,nome) values (1,"Apartamento");
+insert into TipoDeHabitacao(idTipo,nome) values (2,"Casa");
+insert into TipoDeHabitacao(idTipo,nome) values (3,"Bungalow");
+insert into TipoDeHabitacao(idTipo,nome) values (4,"Tenda");
+insert into TipoDeHabitacao(idTipo,nome) values (5,"Quarto de Hotel");
+insert into TipoDeHabitacao(idTipo,nome) values (6,"Quarto Privado");
+insert into TipoDeHabitacao(idTipo,nome) values (7,"Quarto Partilhado");
+insert into TipoDeHabitacao(idTipo,nome) values (8,"Hostel");
+
 -- Table: PoliticaDeCancelamento
 DROP TABLE IF EXISTS PoliticaDeCancelamento;
 
@@ -137,6 +149,11 @@ CREATE TABLE PoliticaDeCancelamento (
     descricao   VARCHAR(500) NOT NULL, 
     percentagemReembolso INTEGER CHECK (percentagemReembolso >= 0 AND percentagemReembolso <= 1)
 );
+
+insert into PoliticaDeCancelamento(idPolitica, nome, descricao, percentagemReembolso) values(1,"Flexivel", " Reembolso total das taxas de alojamento e limpeza.", 1);
+insert into PoliticaDeCancelamento(idPolitica, nome, descricao, percentagemReembolso) values(2,"Moderada", "Reembolso de 50% das taxas de alojamento e limpeza.", 0.5);
+insert into PoliticaDeCancelamento(idPolitica, nome, descricao, percentagemReembolso) values(3,"Rigida", "Reembolso de 25% das taxas de alojamento e limpeza.",0.25);
+insert into PoliticaDeCancelamento(idPolitica, nome, descricao, percentagemReembolso) values(4,"Super Rigida", "Nao reembolsavel", 0);
 
 -- Table: Habitacao
 DROP TABLE IF EXISTS Habitacao;

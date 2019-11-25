@@ -72,4 +72,32 @@ function addImage($idHab, $url, $description){
     $stmt = $db->execute(array($url, $description, $idHab));
 }
 
+function reserve($idRes, $idHab, $idUser, $dataCheckIn, $dataCheckOut, $numHospedes, $precoTotal){
+    global $db;
+    $stmt = $db->prepare('INSERT INTO Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) VALUES (?, ?, ?, ?, ?, ?, 0);');
+    $stmt = $db->execute(array($idRes, $dataCheckIn, $dataCheckOut, $numHospedes, $precoTotal, $idHab));
+    $stmt = $db->prepare('INSERT INTO Efetua(idCliente, idReserva) VALUES (?, ?)');
+    $stmt = $db->execute(array($idUser, $idRes));
+}
+
+function cancelReservation($idRes){
+    global $db;
+    $stmt = $db->prepare('UPDATE Reserva SET idEstado=3 WHERE idRes = ?');
+    $stmt = $db->execute(array($idRes));
+    $stmt = $db->prepare('SELECT percentagemReembolso FROM (PoliticaDeCancelamento JOIN Habitacao USING idPolitica) JOIN Reserva USING idHabitacao WHERE idReserva = ?');
+    $stmt = $db->execute(array($idRes));
+    $reembolso = $stmt->fetch();
+    $stmt = $db->prepare('SELECT precoTotal FROM Reserva WHERE idReserva = ?');
+    $stmt = $db->execute(array($idRes));
+    $price = $stmt->fetch();
+    $stmt = $db->prepare('INSERT INTO Cancelamento(reembolso, idReserva) VALUES (?, ?)');
+    $stmt = $db->execute(array($idRes, $price * $reembolso));
+}
+
+function addComment($idRes, $limpeza, $valor, $checkIn, $localizacao, $description){
+    global $db;
+    $stmt = $db->prepare('INSERT INTO ClassificacaoPorCliente(limpeza, valor, checkIn, localizacao, outros, idReserva) VALUES (?, ?, ?, ?, ?, ?)');
+    $stmt = $db->execute(array($limpeza, $valor, $checkIn, $localizacao, $description, $idRes));
+}
+
 ?>
