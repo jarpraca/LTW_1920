@@ -1,0 +1,109 @@
+body {
+    background-color: #242732;
+    font-family: Verdana, sans-serif;
+    color: #E5F0FF;
+}
+
+#menu label, #menu input{
+    display:none;
+}
+
+#menu ul{
+    list-style-type: none;
+    text-align: center;
+    font-size:0.8em;
+    padding:0;
+    margin:0;
+}
+
+#menu li{
+    padding: 1em;
+}
+
+#menu h1{
+    margin-left: 2em;
+}
+
+#menu a{
+    color:#E5F0FF;
+    text-decoration: none;
+    font-family: Verdana, sans-serif;
+    font-weight: bold;
+}
+
+#related{
+    background: #2A2F33;
+    padding:0.5em 0.3em 0.5em 0.5em;
+}
+
+
+#related h1 a{
+    color: white;
+    text-decoration: none;
+    font-family: Verdana;
+    font-size: 0.7em;
+}
+
+#related p{
+    color: white;
+    font-family: Georgia, sans-serif;
+    font-size:0.8em;
+}
+
+#news article{
+    position:relative;
+    margin-top:10px;
+}
+
+#news article header{
+    position: absolute;
+    width:15em;
+    color: white;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 1px;
+}
+
+#news article img{
+    width:100%;
+}
+#news img + p::first-letter{
+    font-size:2em;
+}
+#news header a{
+    color: white;
+    text-decoration: none;
+    font-family: Verdana, sans-serif;
+    text-shadow: 2px 2px #000000;
+}
+
+#news p{
+    color: black;
+    font-family: Georgia, sans-serif;
+    font-size:0.9em;
+}
+
+#news footer{
+    background-color:#F4655F;
+    color: white;
+    font-family: Verdana, sans-serif;
+    font-size:0.7em;
+    padding:1em;
+}
+
+#news footer a{
+    color: white;
+}
+
+.comments::after{
+    content: " comments";
+}
+
+.author::before{
+    content: "By ";
+}
+
+body > footer{
+    background: #2A2F33;
+    color:white;
+}

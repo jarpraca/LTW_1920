@@ -1,0 +1,58 @@
+#menu ul {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  #menu ul > li {
+    width: 17%;
+    text-align: center;
+  }
+
+  header{
+      grid-area: header;
+      display: grid;
+      align-items: center;
+      grid-template-areas:
+      'title title'
+      'subtitle register';
+      grid-gap: 0px;
+  }
+
+  header div{
+      grid-area: register;
+      text-align: right;
+      font-size: 12px;
+  }
+
+  header h1{
+      grid-area: title;
+  }
+
+  header h2{
+      grid-area: subtitle;
+  }
+
+  aside{
+      grid-area: sidemenu;
+  }
+
+  body>footer{
+      grid-area: footer;
+  }
+
+  #menu{
+      grid-area: menu;
+  }
+  #news{
+      grid-area: main;
+  }
+  body{
+        margin: auto;
+        display: grid;
+        grid-template-areas:
+        'menu menu menu menu'
+        'main main main main'
+        'footer footer footer';
+        grid-gap: 0px;
+    }
+

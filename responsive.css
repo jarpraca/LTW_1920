@@ -1,0 +1,47 @@
+@media(max-width: 60em){
+    aside{
+        display:none;
+    }
+}
+
+@media(max-width: 40em){
+    header h2{
+        display: none;
+    }
+
+    header{
+        display: inline;
+    }
+
+    header div{
+        text-align: left;
+    }
+
+    #menu ul{
+        display: none;
+    }
+    
+    #menu input:before{
+        content:'\2630';
+    }
+    #menu input, #menu label{
+        display:block;
+        background-color: #292f33;
+        color:white;
+        padding: 1em;
+    }
+
+    #menu ul{
+        flex-direction: column;
+        margin: 0;
+        padding:0;
+        color: white;
+    } 
+
+    #menu input:checked + ul li {
+        max-height: 1em;
+        padding: 1em;
+        opacity: 1;
+    }
+
+}
