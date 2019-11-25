@@ -37,7 +37,7 @@ CREATE TABLE Utilizador (
     telefone        VARCHAR(15) UNIQUE NOT NULL, 
     morada          VARCHAR(250) NOT NULL, 
     codigoPostal    VARCHAR(10) NOT NULL, 
-    idPais            INTEGER REFERENCES Pais (idPais) ON DELETE SET NULL ON UPDATE CASCADE
+    idPais          INTEGER REFERENCES Pais (idPais) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- Table: Cliente
@@ -98,8 +98,6 @@ CREATE TABLE ClassificacaoPorCliente (
     checkIn     INTEGER CHECK(checkIn >= 1 AND checkIn <= 5),
     localizacao INTEGER CHECK(localizacao >= 1 AND localizacao <= 5),
     outros      VARCHAR(500) DEFAULT 'Nao preenchido', 
-    classificacaoAnfitriao  INTEGER CHECK(classificacaoAnfitriao >= 1 AND classificacaoAnfitriao <= 5),
-    descricaoAnfitriao      VARCHAR(500) DEFAULT 'Nao preenchido', 
     idCliente INTEGER REFERENCES Cliente (idCliente)  ON DELETE RESTRICT ON UPDATE RESTRICT,
     idReserva INTEGER REFERENCES Reserva (idReserva) ON DELETE RESTRICT ON UPDATE RESTRICT, 
     PRIMARY KEY (idReserva)
@@ -145,6 +143,7 @@ DROP TABLE IF EXISTS Habitacao;
 
 CREATE TABLE Habitacao (
     idHabitacao INTEGER PRIMARY KEY,
+    nome        TEXT,
     numQuartos  INTEGER CHECK (numQuartos > 0), 
     maxHospedes INTEGER CHECK (maxHospedes > 0), 
     morada      VARCHAR(250) UNIQUE NOT NULL, 
