@@ -54,7 +54,7 @@ body > footer{
     color:var(--myDarkBlue);
 }
 
-#search input{
+input{
     background: var(--myLightBlue);
     color: var(--myDarkBlue);
     border-style:none;
