@@ -100,4 +100,12 @@ function addComment($idRes, $limpeza, $valor, $checkIn, $localizacao, $descripti
     $stmt = $db->execute(array($limpeza, $valor, $checkIn, $localizacao, $description, $idRes));
 }
 
+function getTypes(){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM TipoDeHabitacao');
+    $stmt->execute();
+
+    return $stmt->fetchAll();
+}
+
 ?>

@@ -17,5 +17,3 @@ function createUser($id, $Data){
     $stmt = $db->prepare('INSERT INTO Anfitriao(idAnfitriao) VALUES (?);');
     $stmt->execute(array($id));
 }
-
-?>
