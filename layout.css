@@ -1,58 +1,102 @@
-#menu ul {
+html, body {
+    height: 100%;
+}
+
+body {
     display: flex;
-    flex-wrap: nowrap;
-  }
-  
-  #menu ul > li {
-    width: 17%;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1 0 auto;
+    margin: 4em 0 0 0;
+}
+
+#menu{ 
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    overflow: hidden;
+}
+
+#menu ul{
     text-align: center;
-  }
+    padding:0;
+    margin:0;
+    display: flex;
+    align-items: center;
+}
 
-  header{
-      grid-area: header;
-      display: grid;
-      align-items: center;
-      grid-template-areas:
-      'title title'
-      'subtitle register';
-      grid-gap: 0px;
-  }
+#search img{
+    vertical-align: middle;
+    margin: 1em;    
+}
 
-  header div{
-      grid-area: register;
-      text-align: right;
-      font-size: 12px;
-  }
+#menu li:first-child + li{
+    flex-grow: 4;
+}
 
-  header h1{
-      grid-area: title;
-  }
+#menu li{
+    padding: 0em 1em;
+}
 
-  header h2{
-      grid-area: subtitle;
-  }
+#menu h5{
+    margin:0;
+    padding:1em;
+}
 
-  aside{
-      grid-area: sidemenu;
-  }
+.footer{
+    flex-shrink: 0;
+    text-align: center;
+    margin: 1em 0 0 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
-  body>footer{
-      grid-area: footer;
-  }
+.footer h3, h5{
+    margin:0.5em;
+    padding: 0em 1em;
+}
 
-  #menu{
-      grid-area: menu;
-  }
-  #news{
-      grid-area: main;
-  }
-  body{
-        margin: auto;
-        display: grid;
-        grid-template-areas:
-        'menu menu menu menu'
-        'main main main main'
-        'footer footer footer';
-        grid-gap: 0px;
-    }
+#property{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+}
 
+#profile, #login, #property{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 1em 0em;
+}
+
+.verticalForm{
+    text-align: left;
+    width:40%
+}
+
+.verticalForm input, .verticalForm select{
+    display: block;
+    height: 1.5em;
+    width:100%;
+}
+
+.verticalForm textarea{
+    display: block;
+    width:100%;
+}
+
+.verticalForm label{
+    display: block;
+    padding:1em;
+}
+
+.verticalForm .submit{
+    width:25%;
+    float: right;
+}

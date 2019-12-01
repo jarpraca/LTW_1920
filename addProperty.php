@@ -1,12 +1,12 @@
 <?php
   include('templates/common/header.php');
 ?>
-  <section id="profile">
-    <header>
-          <h1> Edit Profile </h1>
-    </header>
+  <section id="property">
+  <header>
+        <h1> Add Property </h1>
+  </header>
 <?php
-  include('templates/profile.php');
+  include('templates/edit/property.php');
 ?>
   </section>
 <?php

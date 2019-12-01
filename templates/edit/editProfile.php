@@ -3,44 +3,30 @@
         <h1> Edit Profile </h1>
     </header>
     <form action="#" method="get">
-        <label> First Name <br>
+        <label> First Name
             <input type="text" name="firstname">
         </label>
-        <br>
-        <br>
-        <label> Last Name <br>
+        <label> Last Name
             <input type="text" name="lastname">
         </label>
-        <br>
-        <br>
-        <label> Date of Birth <br>
+        <label> Date of Birth
             <input type="date" name="dateofbirth">
         </label>
-        <br>
-        <br>
-        <label> Username <br>
+        <label> Username
             <input type="text" name="username">
         </label>
-        <br>
-        <br>
-        <label> Email <br>
+        <label> Email 
             <input type="email" name="email">
         </label>
-        <br>
-        <br>
-        <label> Password <br>
+        <label> Password 
             <input type="password" name="password">
         </label>
-        <br>
-        <br>
-        <label> Confirm Password <br>
+        <label> Confirm Password 
             <input type="password" name="confirmpassword">
-            <br>
-            <br>
-            <label> Upload Picture <br>
-                <input type="file" name="picture" accept="image/*">
-                <br>
-                <br>
-                <input type="submit" value="Register">
+        </label>
+        <label> Upload Picture 
+            <input type="file" name="picture" accept="image/*">
+            </label>
+        <input type="submit" value="Register">
     </form>
 </section>

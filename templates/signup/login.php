@@ -2,17 +2,13 @@
     <header>
         <h1> Login </h1>
     </header>
-    <form action="#" method="get">
-        <label> Email / Username <br>
-            <input type="text" name="username" required="required">
+    <form class="verticalForm" action="#" method="get">
+        <label> Email / Username
+            <input type="text" name="username" required>
         </label>
-        <br>
-        <br>
-        <label> Password <br>
-            <input type="password" name="password" required="required">
+        <label> Password
+            <input type="password" name="password" required>
         </label>
-        <br>
-        <br>
-        <input type="submit" value="Login">
+        <input type="submit" class="submit" value="Login">
     </form>
 </section>

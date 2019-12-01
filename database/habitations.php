@@ -108,4 +108,12 @@ function getTypes(){
     return $stmt->fetchAll();
 }
 
+function getCancellationPolicys(){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM PoliticaDeCancelamento');
+    $stmt->execute();
+
+    return $stmt->fetchAll();
+}
+
 ?>

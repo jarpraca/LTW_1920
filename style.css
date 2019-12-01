@@ -7,9 +7,10 @@
 
 h1, h2, h3{
     font-family: var(--titlesFont);
+    margin: 0 0.5em 0 0;
 }
 
-h4, h5, h6, p, span{
+h4, h5, h6, p, span, input, label{
     font-family: var(--bodyFont);
 }
 
@@ -22,6 +23,7 @@ body {
     border-bottom-width: thin;
     border-bottom-color: var(--myLightBlue);
     border-bottom-style: solid;
+    background-color: var(--myDarkBlue);
 }
 
 #menu #hamburger{
@@ -54,60 +56,22 @@ body > footer{
     color:var(--myDarkBlue);
 }
 
-input{
+input, select, textarea{
     background: var(--myLightBlue);
     color: var(--myDarkBlue);
     border-style:none;
 }
 
-/*   //////////////layout*/
-body{
-    padding-top: 3em;
+.currency input{
+    text-align: right;
 }
 
-#menu{ 
-    position: fixed; /* Set the navbar to fixed position */
-    top: 0; /* Position the navbar at the top of the page */
-    width: 100%; /* Full width */
-    overflow: hidden;
+.currency{
+    display:inline-block;
+	position: relative;
 }
 
-#menu ul{
-    text-align: center;
-    padding:0;
-    margin:0;
-    display: flex;
-    align-items: center;
-}
-
-#search img{
-    vertical-align: middle;
-    margin: 1em;    
-}
-
-#menu li:first-child + li{
-    flex-grow: 4;
-}
-
-#menu li{
-    padding: 0em 1em 0em 1em;
-}
-
-#menu h5{
-    margin:0;
-    padding:1em;
-}
-
-footer{
-    text-align: center;
-    padding:0;
-    margin:0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-footer h3, h5{
-    margin:0.5em;
-    padding: 0em 1em 0em 1em;
-}
+.currency::before {
+	position: absolute;
+    content:"";
+ 	}
