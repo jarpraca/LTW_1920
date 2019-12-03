@@ -15,13 +15,28 @@
             <input type="checkbox" id="hamburger"> 
             <label class="hamburger" for="hamburger"></label> 
             <ul>
-                    <li><h3>Amazing Rentals</h3></li>
-                    <li>
-                        <?php
-                            include('search.php');
-                        ?>
-                    </li>
-                    <li><a href="login.php"><h5>Login</h5></a></li>     
-                    <li><a href="register.php"><h5>Register</h5></a> </li> 
-                </ul>
-            </nav>
+                <li><a href="homepage.php"><h3>Amazing Rentals</h3></a></li>
+                <li>
+                    <?php
+                        include('templates/common/search.php');
+                    ?>
+                </li>
+                    <?php
+                    if ($logedin){ ?>
+                        <li>
+                            <div class="dropdown">
+                                <h5>My Area</h5>
+                                <div class="dropdown-content">
+                                    <a href="editProfile.php"><p>Edit Profile</p></a>
+                                    <a href="#"><p>View Properties</p></a>
+                                    <a href="#"><p>View Reservations</p></a>
+                                </div>
+                            </div>
+                        </li>
+                    <?php }
+                    else{ ?>
+                        <li><a href="pages/login.php"><h5>Login</h5></a></li>
+                        <li><a href="pages/register.php"><h5>Register</h5></a></li>
+                    <?php } ?>
+            </ul>
+        </nav>

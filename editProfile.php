@@ -1,4 +1,8 @@
 <?php
+  session_start();
+  $logedin=false;
+  if (isset($_SESSION))
+    $logedin=true;
   include('templates/common/header.php');
 ?>
   <section id="profile">

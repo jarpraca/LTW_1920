@@ -1,13 +1,13 @@
 'use strict'
 
-let aform = document.getElementById("agenda_form");
+let aadd_button = document.getElementById("agenda_button");
 
-let date_from = aform.getElementsByTagName("input")[0];
-let date_to = aform.getElementsByTagName("input")[0];
+let date_from = document.getElementById("agenda_input_from");
+let date_to = document.getElementById("agenda_input_to");
 
 let atable = document.getElementById("agenda");
 
-aform.addEventListener('submit', function(event) {
+aadd_button.addEventListener('submit', function(event) {
     event.preventDefault();
     
     let agenda = document.createElement('tr');

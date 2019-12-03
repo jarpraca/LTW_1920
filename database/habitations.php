@@ -2,21 +2,21 @@
 
 function getHabitationsCity($city){
     global $db;
-    $stmt = $db->prepare('SELECT * FROM habitation JOIN cidade USING idCidade WHERE cidade.nome = ?');
+    $stmt = $db->prepare('SELECT * FROM habitation JOIN cidade USING (idCidade) WHERE cidade.nome = ?');
     $stmt->execute(array($city));
     return $stmt->fetchAll();
 }
 
 function getHabitationsCountry($country){
     global $db;
-    $stmt = $db->prepare('SELECT * FROM habitation JOIN cidade USING idCidade) JOIN Pais using idPais WHERE pais.nome = ?');
+    $stmt = $db->prepare('SELECT * FROM habitation JOIN cidade USING (idCidade) JOIN Pais using idPais WHERE pais.nome = ?');
     $stmt->execute(array($country));
     return $stmt->fetchAll();
 }
 
 function getHabitationsHabitationName($name){
     global $db;
-    $stmt = $db->prepare('SELECT * FROM habitation WHERE nome = ?');
+    $stmt = $db->prepare('SELECT * FROM Habitacao WHERE nome = ?');
     $stmt->execute(array($name));
     return $stmt->fetchAll();
 }
@@ -27,36 +27,36 @@ function getHabitations($name){
 
 function getProperties($user_id){
     global $db;
-    $stmt = $db->prepare('SELECT * FROM Habitation JOIN Possui USING IdHabitacao WHERE idAnfitriao = ?;');
+    $stmt = $db->prepare('SELECT * FROM Habitation JOIN Possui USING (IdHabitacao) WHERE idAnfitriao = ?;');
     $stmt->execute(array($user_id));
     return $stmt->fetchAll();
 }
 
 function getReservations($user_id){
     global $db;
-    $stmt = $db->prepare('SELECT * FROM (Habitation JOIN Reserva USING IdHabitacao) JOIN Efetua USING idReserva WHERE idCliente = ?');
+    $stmt = $db->prepare('SELECT * FROM (Habitation JOIN Reserva USING (IdHabitacao) JOIN Efetua USING (idReserva) WHERE idCliente = ?');
     $stmt->execute(array($user_id));
     return $stmt->fetchAll();
 }
 
 function insertHabitation($idHab, $name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $nome_cidade, $nomeTipo, $nomePolitica, $descricao, $idUser){
     global $db;
-    $stmt = $db->prepare('SELECT idCidade FROM Cidade WHERE nome = ?;');
+    $stmt = $db->prepare('SELECT idCidade FROM Cidade WHERE nome = ?');
     $stmt = $db->execute(array($nome_cidade));
     $idCidade = $stmt->fetch();
 
-    $stmt = $db->prepare('SELECT idTipo FROM TipoHabitacao WHERE nome = ?;');
+    $stmt = $db->prepare('SELECT idTipo FROM TipoHabitacao WHERE nome = ?');
     $stmt = $db->execute(array($nomeTipo));
     $idTipo = $stmt->fetch();
 
-    $stmt = $db->prepare('SELECT idPolitica FROM PoliticaDeCancelamento WHERE nome = ?;');
+    $stmt = $db->prepare('SELECT idPolitica FROM PoliticaDeCancelamento WHERE nome = ?');
     $stmt = $db->execute(array($nomePolitica));
     $idPolitica = $stmt->fetch();
 
-    $stmt = $db->prepare('INSERT INTO Habitacao(idHabitacao, nome, numQuartos, maxHospedes,morada, precoNoite, taxaLimpeza, classificacaoHabitacao, idCidade, idTipo, idPolitica, descricao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
+    $stmt = $db->prepare('INSERT INTO Habitacao(idHabitacao, nome, numQuartos, maxHospedes,morada, precoNoite, taxaLimpeza, classificacaoHabitacao, idCidade, idTipo, idPolitica, descricao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     $stmt = $db->execute(array($idHab, $name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $idCidade, $idTipo, $idPolitica, $descricao));
     
-    $stmt = $db->prepare('INSERT INTO Possui(idAnfitriao, idHabitacao) values (?, ?);');
+    $stmt = $db->prepare('INSERT INTO Possui(idAnfitriao, idHabitacao) values (?, ?)');
     $stmt = $db->execute(array($idAnfitriao, $idHabitacao));
 }
 
@@ -84,7 +84,7 @@ function cancelReservation($idRes){
     global $db;
     $stmt = $db->prepare('UPDATE Reserva SET idEstado=3 WHERE idRes = ?');
     $stmt = $db->execute(array($idRes));
-    $stmt = $db->prepare('SELECT percentagemReembolso FROM (PoliticaDeCancelamento JOIN Habitacao USING idPolitica) JOIN Reserva USING idHabitacao WHERE idReserva = ?');
+    $stmt = $db->prepare('SELECT percentagemReembolso FROM (PoliticaDeCancelamento JOIN Habitacao USING (idPolitica)) JOIN Reserva USING (idHabitacao) WHERE idReserva = ?');
     $stmt = $db->execute(array($idRes));
     $reembolso = $stmt->fetch();
     $stmt = $db->prepare('SELECT precoTotal FROM Reserva WHERE idReserva = ?');
@@ -121,7 +121,7 @@ function getHabitationById($id){
     $stmt = $db->prepare('SELECT * FROM Habitacao WHERE idHabitacao=?');
     $stmt->execute(array($id));
 
-    return $stmt->fetchAll();
+    return $stmt->fetch();
 }
 
 function getNameType($id){
@@ -150,7 +150,7 @@ function getNameCity($id){
 
 function getCountryCity($idCity){
     global $db;
-    $stmt = $db->prepare('SELECT Pais.nome FROM Cidade JOIN Pais USING idPais WHERE idCidade=?');
+    $stmt = $db->prepare('SELECT Pais.nome FROM Cidade JOIN Pais USING (idPais) WHERE idCidade=?');
     $stmt->execute(array($idCity));
 
     return $stmt->fetch();
@@ -166,7 +166,7 @@ function getImagesProperty($id){
 
 function getAmenities($idHabitacao){
     global $db;
-    $stmt = $db->prepare('SELECT nome FROM Comodidade JOIN Dispoe USING idComodidade WHERE idHabitacao=?');
+    $stmt = $db->prepare('SELECT nome FROM Comodidade JOIN Dispoe USING (idComodidade) WHERE idHabitacao=?');
     $stmt->execute(array($idHabitacao));
 
     return $stmt->fetchAll();
@@ -174,23 +174,23 @@ function getAmenities($idHabitacao){
 
 function getOwner($idHabitation){
     global $db;
-    $stmt = $db->prepare('SELECT * FROM Possui JOIN Utilizador WHERE idUtilizador=idAnfitriao and idHabitacao=?');
+    $stmt = $db->prepare('SELECT * FROM Habitacao JOIN Utilizador USING (idUtilizador) WHERE idHabitacao=?');
     $stmt->execute(array($idHabitation));
 
     return $stmt->fetch();
 }
 
-function getUserPicture($idUser){
+/*function getUserPicture($idUser){
     global $db;
-    $stmt = $db->prepare('SELECT foto FROM Utilizador WHERE idUtilizador=?');
+    $stmt = $db->prepare('SELECT  FROM Utilizador WHERE idUtilizador=?');
     $stmt->execute(array($idHabitation));
 
     return $stmt->fetch();
-}
+}*/
 
 function getComments($idHabitation){
     global $db;
-    $stmt = $db->prepare('SELECT idCliente FROM ClassificacaoPorCliente JOIN Reserva USING idReserva WHERE idHabitacao=?');
+    $stmt = $db->prepare('SELECT idUtilizador FROM ClassificacaoPorCliente JOIN Reserva USING (idReserva) WHERE idHabitacao=?');
     $stmt->execute(array($idHabitation));
 
     return $stmt->fetchAll();
@@ -198,7 +198,7 @@ function getComments($idHabitation){
 
 function getClientReservation($idReservation){
     global $db;
-    $stmt = $db->prepare('SELECT idCliente FROM Efetua USING idReserva WHERE idReserva=?');
+    $stmt = $db->prepare('SELECT idUtilizador FROM Reserva WHERE idReserva=?');
     $stmt->execute(array($idReservation));
 
     return $stmt->fetch();

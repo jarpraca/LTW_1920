@@ -1,7 +1,11 @@
 <?php
+  session_start();
+  $logedin=false;
+  if (isset($_SESSION))
+    $logedin=true;
   include('templates/common/header.php');
 ?>
-  <section id="property">
+  <section id="editProperty">
   <header>
         <h1> Edit Property </h1>
   </header>

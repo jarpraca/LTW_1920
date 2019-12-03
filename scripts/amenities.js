@@ -1,12 +1,10 @@
 'use strict'
 
-let form = document.getElementById("amenities_form");
+let input = document.getElementById("amenities_input");
+let add_button = document.getElementById("amenities_button");
+let table = document.getElementById("amenities_table");
 
-let input = form.querySelector("input");
-
-let table = document.getElementById("amenities");
-
-form.addEventListener('submit', function(event) {
+add_button.addEventListener('submit', function(event) {
     event.preventDefault();
     
     let amenity = document.createElement('tr');

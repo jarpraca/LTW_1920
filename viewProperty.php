@@ -1,6 +1,11 @@
 <?php
-    include('database/habitations.php');
+    session_start();
+    $logedin=false;
+    if (isset($_SESSION))
+        $logedin=true;
     include('templates/common/header.php');
+    include_once('database/connection.php');
+    include_once('database/habitations.php');
 
     if (!isset($_GET['id']))
     die("No id!");

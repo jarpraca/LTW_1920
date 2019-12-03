@@ -5,6 +5,8 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+    margin:0;
+    padding:0;
 }
 
 .content {
@@ -16,7 +18,8 @@ body {
     position: fixed; /* Set the navbar to fixed position */
     top: 0; /* Position the navbar at the top of the page */
     width: 100%; /* Full width */
-    overflow: hidden;
+    z-index:999;
+	overflow:visible;
 }
 
 #menu ul{
@@ -25,15 +28,21 @@ body {
     margin:0;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+#menu li:first-child, #menu li:first-child ~ li ~ li, #menu li:first-child ~ li ~ li ~ li{
+    flex-basis: 200px;
+    text-align: right;
+}
+
+#menu li:first-child{
+    text-align: left;
 }
 
 #search img{
     vertical-align: middle;
     margin: 1em;    
-}
-
-#menu li:first-child + li{
-    flex-grow: 4;
 }
 
 #menu li{
@@ -60,14 +69,7 @@ body {
     padding: 0em 1em;
 }
 
-#property{
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-    align-items: center;
-}
-
-#profile, #login, #property{
+#profile, #login, #editProperty{
     display: flex;
     text-align: center;
     flex-direction: column;
@@ -81,15 +83,10 @@ body {
     width:40%
 }
 
-.verticalForm input, .verticalForm select{
-    display: block;
-    height: 1.5em;
-    width:100%;
-}
-
-.verticalForm textarea{
+.verticalForm input, .verticalForm select, textarea{
     display: block;
     width:100%;
+    padding:0.5em 0;
 }
 
 .verticalForm label{
@@ -101,7 +98,7 @@ body {
     width:25%;
     float: right;
     margin: 1em;
-    padding:1em;
+    padding: 1em;
 }
 
 #homepage{
@@ -119,4 +116,92 @@ body {
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+}
+
+#property{
+    display:grid;
+    grid-template-areas: "header header header"
+                        "data data aside";
+    text-align: left;
+}
+
+#property header{
+    grid-area: header;
+}
+
+#property aside{
+    grid-area: aside;
+    padding: 1em;
+    display:grid;
+    grid-template-areas: "priceNight priceNight"
+                        "datesLabel dates"
+                        "priceNightsCalc priceNights"
+                        "taxLabel tax"
+                        "totalLabel total"
+                        " submit submit";
+    align-items:center; 
+    text-align: left;
+}
+
+#property aside p:first-child{
+    grid-area: priceNight;
+}
+#property aside h3:first-child{
+    grid-area: datesLabel;
+}
+#property aside h3:first-child ~ p{
+    grid-area: dates;
+}
+#property aside h3:first-child ~ p{
+    grid-area: priceNightsCalc;
+}
+#property aside h3:first-child ~ p ~ p{
+    grid-area: priceNights;
+}
+#property aside h3:first-child ~ p ~ p ~ p{
+    grid-area: taxLabel;
+}
+#property aside h3:first-child ~ p ~ p ~ p ~ p{
+    grid-area: tax;
+}
+#property aside h3:first-child ~ h3{
+    grid-area: totalLabel;
+}
+#property aside h3:first-child ~ h3 ~ h3{
+    grid-area: total;
+}
+#property aside form{
+    grid-area: submit;
+    text-align: right;
+}
+
+#property #property_data{
+    grid-area: data;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    right: 0%;
+    z-index: 1;
+}
+  
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content p{
+    display: block;
+    padding:0.5em;
+    margin:0;
+}
+
+#property{
+    margin:1em;
 }

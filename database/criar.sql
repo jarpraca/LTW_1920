@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS Cidade;
 CREATE TABLE Cidade (
     idCidade    INTEGER PRIMARY KEY,
     nome        VARCHAR(15) NOT NULL, 
-    idPais      INTEGER REFERENCES Pais (idPais) 
+    idPais      INTEGER REFERENCES Pais(idPais) 
 );
 
 -- Table: Utilizador
@@ -53,6 +53,7 @@ CREATE TABLE Utilizador (
     dataNascimento  DATE        NOT NULL, 
     email           VARCHAR(30) UNIQUE NOT NULL, 
     telefone        VARCHAR(15) UNIQUE NOT NULL, 
+    foto            VARCHAR(30) UNIQUE,
     idPais          INTEGER REFERENCES Pais (idPais) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
@@ -121,7 +122,7 @@ CREATE TABLE TipoDeHabitacao (
     nome    VARCHAR(30) UNIQUE NOT NULL
 );
 
-insert into TipoDeHabitacao(idTipo,nome) values (1,"Apartament");
+insert into TipoDeHabitacao(idTipo,nome) values (1,"Apartment");
 insert into TipoDeHabitacao(idTipo,nome) values (2,"House");
 insert into TipoDeHabitacao(idTipo,nome) values (3,"Bungalow");
 insert into TipoDeHabitacao(idTipo,nome) values (4,"Tent");

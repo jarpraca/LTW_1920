@@ -14,6 +14,10 @@ h4, h5, h6, p, span, input, label{
     font-family: var(--bodyFont);
 }
 
+p{
+    font-size:0.8em;
+}
+
 a{
     color:var(--myLightBlue)
 }
@@ -48,14 +52,20 @@ body > footer{
     color:var(--myDarkBlue);
 }
 
-#menu li:first-child + li + li h5:hover, #menu li:first-child + li + li + li h5:hover{
+.dropdown-content{
+    background: var(--myDarkBlue);
+    border-style: none;
+    border-color: var(--myLightBlue);
+}
+
+#menu li:first-child + li + li h5:hover, #menu li:first-child + li + li + li h5:hover, .dropdown-content p:hover{
     background: var(--myDarkBlue);
     border-style: solid;
     border-width: thin;
     border-color: var(--myLightBlue);
 }
 
-#menu li:first-child + li + li h5:active, #menu li:first-child + li + li + li h5:active{
+#menu li:first-child + li + li h5:active, #menu li:first-child + li + li + li h5:active, .dropdown-content p:active{
     background: var(--myLightBlue);
     color:var(--myDarkBlue);
 }
@@ -103,4 +113,16 @@ input, select, textarea{
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
+}
+
+#property aside{
+    background: var(--myLightBlue);
+    color: var(--myDarkBlue);
+}
+
+.submit{
+    background: var(--myDarkBlue);
+    color: var(--myLightBlue);
+    text-align: center;
+    border: none
 }
