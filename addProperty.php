@@ -6,7 +6,7 @@
         <h1> Add Property </h1>
   </header>
 <?php
-  include('templates/edit/property.php');
+  include('templates/forms/property.php');
 ?>
   </section>
 <?php

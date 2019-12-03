@@ -1,4 +1,4 @@
-<form class="verticalForm" action="#" method="get">
+<form class="verticalForm" action="#" method="post">
     <label> First Name
         <input type="text" name="firstname" required>
     </label>

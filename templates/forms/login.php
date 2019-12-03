@@ -2,7 +2,7 @@
     <header>
         <h1> Login </h1>
     </header>
-    <form class="verticalForm" action="#" method="get">
+    <form class="verticalForm" action="#" method="post">
         <label> Email / Username
             <input type="text" name="username" required>
         </label>

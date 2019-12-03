@@ -6,7 +6,7 @@
         <h1> Register </h1>
   </header>
 <?php
-  include('templates/edit/profile.php');
+  include('templates/forms/profile.php');
 ?>
   </section>
 <?php

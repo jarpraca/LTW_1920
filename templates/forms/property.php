@@ -1,4 +1,4 @@
-<form  class="verticalForm" action="#" method="get">
+<form  class="verticalForm" action="#" method="post">
     <label id="property_name"> Name
         <input type="text" name="firstname" required>
     </label>
@@ -56,7 +56,7 @@
 </form>
 <script src="scripts/amenities.js" defer></script>
 <div id="property_amenities">
-    <form id="amenities_form" action="#" method="get">
+    <form id="amenities_form" action="#" method="post">
         <label>Amenity:
             <input type="text" name="amenity">
         </label>
@@ -67,7 +67,7 @@
 </div>
 <script src="scripts/agenda.js" defer></script>
 <div id="property_agenda">
-    <form id="agenda_form" action="#" method="get">
+    <form id="agenda_form" action="#" method="post">
         <label>From:
             <input id="date_from" type="date" name="date_from">
         </label>
