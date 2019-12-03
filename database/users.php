@@ -17,3 +17,12 @@ function createUser($id, $Data){
     $stmt = $db->prepare('INSERT INTO Anfitriao(idAnfitriao) VALUES (?);');
     $stmt->execute(array($id));
 }
+
+function getCountries(){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Pais');
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+?>

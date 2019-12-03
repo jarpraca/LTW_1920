@@ -17,6 +17,19 @@
     <label> Phone Number
         <input type="tel" name="phone" required>
     </label>
+    <label> Country
+        <select name="country" required>
+            <?php
+            include_once('database/connection.php');
+            include_once('database/users.php');
+            $countries = getCountries();
+
+            foreach ($countries as $country) {
+                echo '<option value="' . $country . '">' . $country['nome'] . '</option>';
+            }
+            ?>
+        </select>
+    </label>
     <label> Password 
         <input type="password" name="password" required>
     </label>

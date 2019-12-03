@@ -54,7 +54,7 @@
     <label>
     <input id="property_submit" class="submit" type="submit" value="Submit" onsubmit="return copyFromForm2Function()">
 </form>
-<script src="templates/edit/amenities.js" defer></script>
+<script src="scripts/amenities.js" defer></script>
 <div id="property_amenities">
     <form id="amenities_form" action="#" method="get">
         <label>Amenity:
@@ -65,7 +65,7 @@
     <table id="amenities">
     </table>
 </div>
-<script src="templates/edit/agenda.js" defer></script>
+<script src="scripts/agenda.js" defer></script>
 <div id="property_agenda">
     <form id="agenda_form" action="#" method="get">
         <label>From:

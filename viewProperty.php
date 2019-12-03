@@ -1,0 +1,20 @@
+<?php
+    include('database/habitations.php');
+    include('templates/common/header.php');
+
+    if (!isset($_GET['id']))
+    die("No id!");
+
+    if (!isset($_GET['dateFrom']))
+    die("No dateFrom!");
+
+    if (!isset($_GET['dateTo']))
+    die("No dateTo!");
+
+    $habitation = getHabitationById($_GET['id']);
+    $dateFrom = $_GET['dateFrom'];
+    $dateTo = $_GET['dateTo'];
+
+    include('templates/properties/viewProperty.php');
+    include('templates/common/footer.php');
+?>

@@ -21,7 +21,7 @@ function getHabitationsHabitationName($name){
     return $stmt->fetchAll();
 }
 
-function getHabitation($name){
+function getHabitations($name){
     return array_merge(getHabitationsCity($name), getHabitationsCountry($name), getHabitationsHabitationName($name));
 }
 
@@ -114,6 +114,94 @@ function getCancellationPolicys(){
     $stmt->execute();
 
     return $stmt->fetchAll();
+}
+
+function getHabitationById($id){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Habitacao WHERE idHabitacao=?');
+    $stmt->execute(array($id));
+
+    return $stmt->fetchAll();
+}
+
+function getNameType($id){
+    global $db;
+    $stmt = $db->prepare('SELECT nome FROM TipoDeHabitacao WHERE idTipo=?');
+    $stmt->execute(array($id));
+
+    return $stmt->fetch();
+}
+
+function getPolicy($id){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM PoliticaDeCancelamento WHERE idPolitica=?');
+    $stmt->execute(array($id));
+
+    return $stmt->fetch();
+}
+
+function getNameCity($id){
+    global $db;
+    $stmt = $db->prepare('SELECT nome FROM Cidade WHERE idCidade=?');
+    $stmt->execute(array($id));
+
+    return $stmt->fetch();
+}
+
+function getCountryCity($idCity){
+    global $db;
+    $stmt = $db->prepare('SELECT Pais.nome FROM Cidade JOIN Pais USING idPais WHERE idCidade=?');
+    $stmt->execute(array($idCity));
+
+    return $stmt->fetch();
+}
+
+function getImagesProperty($id){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Imagem WHERE idHabitacao=?');
+    $stmt->execute(array($id));
+
+    return $stmt->fetchAll();
+}
+
+function getAmenities($idHabitacao){
+    global $db;
+    $stmt = $db->prepare('SELECT nome FROM Comodidade JOIN Dispoe USING idComodidade WHERE idHabitacao=?');
+    $stmt->execute(array($idHabitacao));
+
+    return $stmt->fetchAll();
+}
+
+function getOwner($idHabitation){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Possui JOIN Utilizador WHERE idUtilizador=idAnfitriao and idHabitacao=?');
+    $stmt->execute(array($idHabitation));
+
+    return $stmt->fetch();
+}
+
+function getUserPicture($idUser){
+    global $db;
+    $stmt = $db->prepare('SELECT foto FROM Utilizador WHERE idUtilizador=?');
+    $stmt->execute(array($idHabitation));
+
+    return $stmt->fetch();
+}
+
+function getComments($idHabitation){
+    global $db;
+    $stmt = $db->prepare('SELECT idCliente FROM ClassificacaoPorCliente JOIN Reserva USING idReserva WHERE idHabitacao=?');
+    $stmt->execute(array($idHabitation));
+
+    return $stmt->fetchAll();
+}
+
+function getClientReservation($idReservation){
+    global $db;
+    $stmt = $db->prepare('SELECT idCliente FROM Efetua USING idReserva WHERE idReserva=?');
+    $stmt->execute(array($idReservation));
+
+    return $stmt->fetch();
 }
 
 ?>

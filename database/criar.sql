@@ -5,8 +5,8 @@ BEGIN TRANSACTION;
 DROP TABLE IF EXISTS Agenda;
 
 CREATE TABLE Agenda (
-    dataInicio DATE PRIMARY KEY,
-    dataFim DATE 
+    dataInicio  DATE PRIMARY KEY,
+    dataFim     DATE 
 );
 
 -- Table: Pais
@@ -14,16 +14,32 @@ DROP TABLE IF EXISTS Pais;
 
 CREATE TABLE Pais (
     idPais      INTEGER PRIMARY KEY,
-    nome    VARCHAR(15) UNIQUE NOT NULL 
+    nome        VARCHAR(15) UNIQUE NOT NULL 
 );
+insert into Pais(idPais, nome) values (1, "Portugal");
+insert into Pais(idPais, nome) values (2, "United Kingdom");
+insert into Pais(idPais, nome) values (3, "Spain");
+insert into Pais(idPais, nome) values (4, "France");
+insert into Pais(idPais, nome) values (5, "Germany");
+insert into Pais(idPais, nome) values (6, "Norway");
+insert into Pais(idPais, nome) values (7, "Poland");
+insert into Pais(idPais, nome) values (8, "Italy");
+insert into Pais(idPais, nome) values (9, "Greece");
+insert into Pais(idPais, nome) values (10, "Belgium");
+insert into Pais(idPais, nome) values (11, "Netherlands");
+insert into Pais(idPais, nome) values (12, "Denmark");
+insert into Pais(idPais, nome) values (13, "Sweden");
+insert into Pais(idPais, nome) values (14, "Finland");
+insert into Pais(idPais, nome) values (15, "Austria");
+insert into Pais(idPais, nome) values (16, "Czech Republic");
 
 -- Table: Cidade
 DROP TABLE IF EXISTS Cidade;
 
 CREATE TABLE Cidade (
-    idCidade      INTEGER PRIMARY KEY,
-    nome    VARCHAR(15) NOT NULL, 
-    idPais    INTEGER REFERENCES Pais (idPais) 
+    idCidade    INTEGER PRIMARY KEY,
+    nome        VARCHAR(15) NOT NULL, 
+    idPais      INTEGER REFERENCES Pais (idPais) 
 );
 
 -- Table: Utilizador
@@ -31,65 +47,48 @@ DROP TABLE IF EXISTS Utilizador;
 
 CREATE TABLE Utilizador (
     idUtilizador    INTEGER PRIMARY KEY,
-    hashedPassword TEXT NOT NULL,
+    hashedPassword  TEXT NOT NULL,
     primeiroNome    VARCHAR(30) NOT NULL, 
-    ultimoNome    VARCHAR(30) NOT NULL, 
+    ultimoNome      VARCHAR(30) NOT NULL, 
     dataNascimento  DATE        NOT NULL, 
     email           VARCHAR(30) UNIQUE NOT NULL, 
     telefone        VARCHAR(15) UNIQUE NOT NULL, 
     idPais          INTEGER REFERENCES Pais (idPais) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
--- Table: Cliente
-DROP TABLE IF EXISTS Cliente;
-
-CREATE TABLE Cliente (
-    idCliente  INTEGER REFERENCES Utilizador(idUtilizador)  ON DELETE CASCADE ON UPDATE CASCADE,
-    PRIMARY KEY(idCliente)
-);
-
-
--- Table: Anfitriao
-DROP TABLE IF EXISTS Anfitriao;
-
-CREATE TABLE Anfitriao (
-    idAnfitriao INTEGER REFERENCES Utilizador(idUtilizador)  ON DELETE CASCADE ON UPDATE CASCADE,
-    classificacaoAnfitriao INTEGER CHECK(classificacaoAnfitriao >= 1 AND classificacaoAnfitriao <= 5),
-    PRIMARY KEY(idAnfitriao)
-);
-
 -- Table: Reserva
 DROP TABLE IF EXISTS Reserva;
 
 CREATE TABLE Reserva (
-    idReserva          INTEGER PRIMARY KEY, 
-    dataCheckIn DATE    NOT NULL,
-    dataCheckOut DATE   NOT NULL,
-    numHospedes INTEGER CHECK (numHospedes > 0), 
-    precoTotal  REAL    CHECK (precoTotal > 0), 
-    idEstado INTEGER REFERENCES Estado(idEstado) ON DELETE CASCADE ON UPDATE CASCADE,
-    idHabitacao   INTEGER REFERENCES Habitacao (idHabitacao),
+    idReserva       INTEGER PRIMARY KEY, 
+    dataCheckIn     DATE    NOT NULL,
+    dataCheckOut    DATE   NOT NULL,
+    numHospedes     INTEGER CHECK (numHospedes > 0), 
+    precoTotal      REAL    CHECK (precoTotal > 0), 
+    idEstado        INTEGER REFERENCES Estado(idEstado) ON DELETE CASCADE ON UPDATE CASCADE,
+    idHabitacao     INTEGER REFERENCES Habitacao(idHabitacao),
+    idUtilizador       INTEGER REFERENCES Utilizador(idUtilizador),
     UNIQUE (dataCheckIn, idHabitacao)
 );
 
 DROP TABLE IF EXISTS Estado;
 
 CREATE TABLE Estado (
-    idEstado      INTEGER PRIMARY KEY,                 
-    estado  CHAR(9) UNIQUE NOT NULL
+    idEstado    INTEGER PRIMARY KEY,                 
+    estado      CHAR(9) UNIQUE NOT NULL
 );
 
-insert into Estado(idEstado,estado) values(0,"Em espera");
-insert into Estado(idEstado,estado) values(1,"Concluida");
-insert into Estado(idEstado,estado) values(2,"Comentado");
-insert into Estado(idEstado,estado) values(3,"Cancelado");
+insert into Estado(idEstado,estado) values(0,"On hold");
+insert into Estado(idEstado,estado) values(1,"Concluded");
+insert into Estado(idEstado,estado) values(2,"Comented");
+insert into Estado(idEstado,estado) values(3,"Canceled");
 
 -- Table: Cancelamento
 DROP TABLE IF EXISTS Cancelamento;
 
 CREATE TABLE Cancelamento (
-    reembolso   INTEGER     NOT NULL, 
-    idReserva     INTEGER REFERENCES Reserva (idReserva)  ON DELETE CASCADE ON UPDATE CASCADE,
+    reembolso   REAL     NOT NULL, 
+    idReserva   INTEGER REFERENCES Reserva (idReserva)  ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY(idReserva)
 );
 
@@ -101,7 +100,7 @@ CREATE TABLE ClassificacaoPorCliente (
     valor       INTEGER CHECK(valor >= 1 AND valor <= 5),
     checkIn     INTEGER CHECK(checkIn >= 1 AND checkIn <= 5),
     localizacao INTEGER CHECK(localizacao >= 1 AND localizacao <= 5),
-    outros      VARCHAR(500) DEFAULT 'Nao preenchido', 
+    outros      TEXT, 
     idReserva INTEGER REFERENCES Reserva (idReserva) ON DELETE RESTRICT ON UPDATE RESTRICT, 
     PRIMARY KEY (idReserva)
 );
@@ -110,50 +109,41 @@ CREATE TABLE ClassificacaoPorCliente (
 DROP TABLE IF EXISTS Comodidade;
 
 CREATE TABLE Comodidade (
-    idComodidade      INTEGER PRIMARY KEY,
-    nome    VARCHAR(15) UNIQUE NOT NULL
-);
-
--- Table: Efetua
-DROP TABLE IF EXISTS Efetua;
-
-CREATE TABLE Efetua (
-    idCliente INTEGER REFERENCES Cliente(idCliente) ON DELETE CASCADE ON UPDATE CASCADE, 
-    idReserva INTEGER REFERENCES Reserva(idReserva) ON DELETE CASCADE ON UPDATE CASCADE,
-    PRIMARY KEY(idReserva)
+    idComodidade    INTEGER PRIMARY KEY,
+    nome            VARCHAR(15) UNIQUE NOT NULL
 );
 
 -- Table: TipoDeHabitacao
 DROP TABLE IF EXISTS TipoDeHabitacao;
 
 CREATE TABLE TipoDeHabitacao (
-    idTipo   INTEGER PRIMARY KEY,
-    nome VARCHAR(30) UNIQUE NOT NULL
+    idTipo  INTEGER PRIMARY KEY,
+    nome    VARCHAR(30) UNIQUE NOT NULL
 );
 
-insert into TipoDeHabitacao(idTipo,nome) values (1,"Apartamento");
-insert into TipoDeHabitacao(idTipo,nome) values (2,"Casa");
+insert into TipoDeHabitacao(idTipo,nome) values (1,"Apartament");
+insert into TipoDeHabitacao(idTipo,nome) values (2,"House");
 insert into TipoDeHabitacao(idTipo,nome) values (3,"Bungalow");
-insert into TipoDeHabitacao(idTipo,nome) values (4,"Tenda");
-insert into TipoDeHabitacao(idTipo,nome) values (5,"Quarto de Hotel");
-insert into TipoDeHabitacao(idTipo,nome) values (6,"Quarto Privado");
-insert into TipoDeHabitacao(idTipo,nome) values (7,"Quarto Partilhado");
+insert into TipoDeHabitacao(idTipo,nome) values (4,"Tent");
+insert into TipoDeHabitacao(idTipo,nome) values (5,"Hotel Room");
+insert into TipoDeHabitacao(idTipo,nome) values (6,"Private Room");
+insert into TipoDeHabitacao(idTipo,nome) values (7,"Shared Room");
 insert into TipoDeHabitacao(idTipo,nome) values (8,"Hostel");
 
 -- Table: PoliticaDeCancelamento
 DROP TABLE IF EXISTS PoliticaDeCancelamento;
 
 CREATE TABLE PoliticaDeCancelamento (
-    idPolitica          INTEGER PRIMARY KEY,
-    nome        VARCHAR(25) UNIQUE NOT NULL, 
-    descricao   VARCHAR(500) NOT NULL, 
-    percentagemReembolso INTEGER CHECK (percentagemReembolso >= 0 AND percentagemReembolso <= 1)
+    idPolitica              INTEGER PRIMARY KEY,
+    nome                    VARCHAR(25) UNIQUE NOT NULL, 
+    descricao               VARCHAR(500) NOT NULL, 
+    percentagemReembolso    INTEGER CHECK (percentagemReembolso >= 0 AND percentagemReembolso <= 1)
 );
 
-insert into PoliticaDeCancelamento(idPolitica, nome, descricao, percentagemReembolso) values(1,"Flexivel", " Reembolso total das taxas de alojamento e limpeza.", 1);
-insert into PoliticaDeCancelamento(idPolitica, nome, descricao, percentagemReembolso) values(2,"Moderada", "Reembolso de 50% das taxas de alojamento e limpeza.", 0.5);
-insert into PoliticaDeCancelamento(idPolitica, nome, descricao, percentagemReembolso) values(3,"Rigida", "Reembolso de 25% das taxas de alojamento e limpeza.",0.25);
-insert into PoliticaDeCancelamento(idPolitica, nome, descricao, percentagemReembolso) values(4,"Super Rigida", "Nao reembolsavel", 0);
+insert into PoliticaDeCancelamento(idPolitica, nome, descricao, percentagemReembolso) values(1,"Flexible", "100% full price refund.", 1);
+insert into PoliticaDeCancelamento(idPolitica, nome, descricao, percentagemReembolso) values(2,"Moderate", "50% full price refund.", 0.5);
+insert into PoliticaDeCancelamento(idPolitica, nome, descricao, percentagemReembolso) values(3,"Strict", "25% full price refund.",0.25);
+insert into PoliticaDeCancelamento(idPolitica, nome, descricao, percentagemReembolso) values(4,"Super Strict", "Not refundable.", 0);
 
 -- Table: Habitacao
 DROP TABLE IF EXISTS Habitacao;
@@ -162,23 +152,23 @@ CREATE TABLE Habitacao (
     idHabitacao INTEGER PRIMARY KEY,
     nome        TEXT,
     numQuartos  INTEGER CHECK (numQuartos > 0), 
-    maxHospedes INTEGER CHECK (maxHospedes > 0), 
-    morada      VARCHAR(250) UNIQUE NOT NULL, 
+    maxHospedes INTEGER CHECK (maxHospedes > 0),  
     precoNoite  REAL    CHECK (precoNoite > 0), 
     taxaLimpeza REAL CHECK (taxaLimpeza >= 0), 
-    classificacaoHabitacao INTEGER  CHECK(classificacaoHabitacao >= 1 AND classificacaoHabitacao <= 5), 
-    idCidade      INTEGER REFERENCES Cidade (idCidade) ON DELETE CASCADE ON UPDATE CASCADE, 
-    idTipo        INTEGER REFERENCES TipoDeHabitacao (idTipo) ON DELETE SET NULL ON UPDATE CASCADE, 
-    idPolitica    INTEGER REFERENCES PoliticaDeCancelamento (idPolitica) ON DELETE RESTRICT ON UPDATE CASCADE,
-    descricao   TEXT
+    descricao   TEXT,
+    latitude    REAL    CHECK(latitude>=-90 and latitude<=90),
+    longitude   REAL    CHECK(longitude>=-180 and longitude<=180),
+    idUtilizador INTEGER REFERENCES Utilizador(idUtilizador) ON DELETE CASCADE ON UPDATE CASCADE,
+    idTipo      INTEGER REFERENCES TipoDeHabitacao (idTipo) ON DELETE SET NULL ON UPDATE CASCADE, 
+    idPolitica  INTEGER REFERENCES PoliticaDeCancelamento (idPolitica) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- Table: Disponivel
 DROP TABLE IF EXISTS Disponivel;
 
 CREATE TABLE Disponivel (
-    idHabitacao   INTEGER REFERENCES Habitacao (idHabitacao)  ON DELETE CASCADE ON UPDATE CASCADE, 
-    data        DATE REFERENCES Agenda (data)  ON DELETE CASCADE ON UPDATE CASCADE,
+    idHabitacao     INTEGER REFERENCES Habitacao (idHabitacao)  ON DELETE CASCADE ON UPDATE CASCADE, 
+    data            DATE REFERENCES Agenda (data)  ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (idHabitacao, data)
 );
 
@@ -195,9 +185,9 @@ CREATE TABLE Dispoe (
 DROP TABLE IF EXISTS Favorito;
 
 CREATE TABLE Favorito (
-    idCliente     INTEGER REFERENCES Cliente (idCliente) ON DELETE CASCADE ON UPDATE CASCADE, 
+    idUtilizador     INTEGER REFERENCES Utilizador (idUtilizador) ON DELETE CASCADE ON UPDATE CASCADE, 
     idHabitacao   INTEGER REFERENCES Habitacao (idHabitacao) ON DELETE CASCADE ON UPDATE CASCADE, 
-    PRIMARY KEY (idCliente, idHabitacao)
+    PRIMARY KEY (idUtilizador, idHabitacao)
 );
 
 -- Table: Fotografia
@@ -209,14 +199,12 @@ CREATE TABLE Imagem (
     idHabitacao   INTEGER REFERENCES Habitacao(idHabitacao) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+-----------------povoar para exemplo--------------------
+INSERT INTO Utilizador(idUtilizador, hashedPassword, primeiroNome, ultimoNome, dataNascimento, email, telefone, idPais)
+VALUES(1, "sjd385384534fjhdjfgdjmfgd", "Leonor", "Sousa", "1999-12-27", "leonor@gmail.com", 943434535, 1);
 
--- Table: Possui
-DROP TABLE IF EXISTS Possui;
+INSERT INTO Habitacao(idHabitacao, nome, numQuartos, maxHospedes, precoNoite, taxaLimpeza, descricao, latitude, longitude, idUtilizador, idTipo, idPolitica)
+VALUES(1, "Apartamento Barato Porto", 2, 4, 100, 3.45, "Nao sou nada barato porque estou no Porto", 41.150150, -8.610320, 1, 1, 1);
 
-CREATE TABLE Possui (
-    idAnfitriao   INTEGER REFERENCES Anfitriao (idAnfitriao) ON DELETE CASCADE ON UPDATE CASCADE, 
-    idHabitacao   INTEGER REFERENCES Habitacao (idHabitacao) ON DELETE CASCADE ON UPDATE CASCADE, 
-    PRIMARY KEY (idHabitacao)
-);
 
 COMMIT TRANSACTION;
