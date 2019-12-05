@@ -1,8 +1,6 @@
 <?php
   session_start();
-  $logedin=false;
-  if (isset($_SESSION))
-    $logedin=true;
+  $logedin=true;
   include('templates/common/header.php');
 ?>
   <section id="editProperty">

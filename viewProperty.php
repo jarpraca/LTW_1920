@@ -1,7 +1,7 @@
 <?php
     session_start();
     $logedin=false;
-    if (isset($_SESSION))
+    if (isset($_SESSION['user']))
         $logedin=true;
     include('templates/common/header.php');
     include_once('database/connection.php');

@@ -2,9 +2,9 @@
     <header>
         <h1> Login </h1>
     </header>
-    <form class="verticalForm" action="#" method="post">
-        <label> Email / Username
-            <input type="text" name="username" required>
+    <form class="verticalForm" action="templates/forms/login_action.php" method="post">
+        <label> Email
+            <input type="email" name="email" required>
         </label>
         <label> Password
             <input type="password" name="password" required>
