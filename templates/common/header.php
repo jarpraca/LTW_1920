@@ -28,16 +28,18 @@
                                 <h5>My Area</h5>
                                 <div class="dropdown-content">
                                     <a href="editProfile.php"><p>Edit Profile</p></a>
-                                    <a href="#"><p>View Properties</p></a>
-                                    <a href="#"><p>View Reservations</p></a>
+                                    <a href="listProperties.php"><p>View Properties</p></a>
+                                    <a href="listReservations.php"><p>View Reservations</p></a>
                                     <a href="templates/forms/logout.php"><p>Logout</p></a>
                                 </div>
                             </div>
                         </li>
                     <?php }
                     else{ ?>
-                        <li><a href="login.php"><h5>Login</h5></a></li>
-                        <li><a href="register.php"><h5>Register</h5></a></li>
+                        <li>
+                            <a href="login.php"><h5>Login</h5></a>
+                            <a href="register.php"><h5>Register</h5></a>
+                        </li>
                     <?php } ?>
             </ul>
         </nav>

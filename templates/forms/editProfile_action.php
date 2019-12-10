@@ -4,8 +4,8 @@
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $db->setAttribute  (PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     include_once('../../database/users.php');
-    createUser(password_hash($_POST['password'], PASSWORD_BCRYPT), $_POST['primeiroNome'], $_POST['ultimoNome'], $_POST['dateofbirth'], $_POST['email'], $_POST['phone'], $_POST['country']);
-    $user=getUserByEmail($_POST['email']);
+    $id=$_SESSION['user'];
+    modifyUser($id, $_POST['password'], $_POST['primeiroNome'], $_POST['ultimoNome'], $_POST['dateofbirth'], $_POST['email'], $_POST['phone'], $_POST['country']);
     if($_POST['picture']!=""){
         //mising type verification
         if(is_uploaded_file($_POST['picture']))

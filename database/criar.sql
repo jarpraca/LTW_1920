@@ -39,7 +39,8 @@ DROP TABLE IF EXISTS Cidade;
 CREATE TABLE Cidade (
     idCidade    INTEGER PRIMARY KEY,
     nome        VARCHAR(15) NOT NULL, 
-    idPais      INTEGER REFERENCES Pais(idPais) 
+    idPais      INTEGER REFERENCES Pais(idPais),
+    UNIQUE(nome, idPais)
 );
 
 -- Table: Utilizador
@@ -160,6 +161,8 @@ CREATE TABLE Habitacao (
     descricao   TEXT,
     latitude    REAL    CHECK(latitude>=-90 and latitude<=90),
     longitude   REAL    CHECK(longitude>=-180 and longitude<=180),
+    morada      TEXT,
+    idCidade    INTEGER REFERENCES Cidade(idCidade) ON DELETE RESTRICT ON UPDATE RESTRICT, 
     idUtilizador INTEGER REFERENCES Utilizador(idUtilizador) ON DELETE CASCADE ON UPDATE CASCADE,
     idTipo      INTEGER REFERENCES TipoDeHabitacao (idTipo) ON DELETE SET NULL ON UPDATE CASCADE, 
     idPolitica  INTEGER REFERENCES PoliticaDeCancelamento (idPolitica) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -203,10 +206,15 @@ CREATE TABLE Imagem (
 
 -----------------povoar para exemplo--------------------
 INSERT INTO Utilizador(idUtilizador, hashedPassword, primeiroNome, ultimoNome, dataNascimento, email, telefone, idPais)
-VALUES(1, "sjd385384534fjhdjfgdjmfgd", "Leonor", "Sousa", "1999-12-27", "leonor@gmail.com", 943434535, 1);
+VALUES(1, "$2y$10$jJ.U9HQxd1pzG.uisT4TauxwLqq8fPAM.VQIr1/Ci6wjRM8wM9May", "Leonor", "Sousa", "1999-12-27", "leonor@gmail.com", 943434535, 1);
+--password: 1234
 
-INSERT INTO Habitacao(idHabitacao, nome, numQuartos, maxHospedes, precoNoite, taxaLimpeza, descricao, latitude, longitude, idUtilizador, idTipo, idPolitica)
-VALUES(1, "Apartamento Barato Porto", 2, 4, 100, 3.45, "Nao sou nada barato porque estou no Porto", 41.150150, -8.610320, 1, 1, 1);
+INSERT INTO Cidade(idCidade, nome, idPais) VALUES (1, "Porto", 1);
 
+INSERT INTO Habitacao(idHabitacao, nome, numQuartos, maxHospedes, precoNoite, taxaLimpeza, descricao, latitude, longitude, morada, idCidade, idUtilizador, idTipo, idPolitica)
+VALUES(1, "Apartamento Barato Porto", 2, 4, 100, 3.45, "Nao sou nada barato porque estou no Porto", 41.150150, -8.610320, "Rua X", 1, 1, 1, 1);
+
+INSERT INTO Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idEstado, idHabitacao, idUtilizador)
+VALUES (1, "2019-03-01", "2019-03-04", 4, 345.12, 1, 1, 1);
 
 COMMIT TRANSACTION;

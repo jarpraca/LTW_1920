@@ -10,7 +10,7 @@ h1, h2, h3{
     margin: 0 0.5em 0 0;
 }
 
-h4, h5, h6, p, span, input, label{
+h4, h5, h6, p, span, input, label, tr{
     font-family: var(--bodyFont);
 }
 
@@ -58,14 +58,14 @@ body > footer{
     border-color: var(--myLightBlue);
 }
 
-#menu li:first-child + li + li h5:hover, #menu li:first-child + li + li + li h5:hover, .dropdown-content p:hover{
+#menu li:first-child + li + li h5:hover, #menu li:first-child + li + li + li h5:hover, .dropdown-content a:hover{
     background: var(--myDarkBlue);
     border-style: solid;
     border-width: thin;
     border-color: var(--myLightBlue);
 }
 
-#menu li:first-child + li + li h5:active, #menu li:first-child + li + li + li h5:active, .dropdown-content p:active{
+#menu li:first-child + li + li h5:active, #menu li:first-child + li + li + li h5:active, .dropdown-content a:active{
     background: var(--myLightBlue);
     color:var(--myDarkBlue);
 }
@@ -100,7 +100,7 @@ input, select, textarea{
     color: var(--myLightBlue);
 }
 
-#search_input{
+.search_input{
     border-bottom-width: thin;
     border-bottom-color: var(--myLightBlue);
     border-bottom-style: solid;
@@ -125,4 +125,20 @@ input, select, textarea{
     color: var(--myLightBlue);
     text-align: center;
     border: none
+}
+
+.submit:hover{
+    background: var(--myLightBlue);
+    color: var(--myDarkBlue);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.propertyShort, .reservationShort{
+    background: var(--myLightBlue);
+    color: var(--myDarkBlue);
+}
+
+.propertyShort a, .reservationShort a{
+    text-decoration: none;
 }

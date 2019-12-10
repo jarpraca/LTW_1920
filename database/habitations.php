@@ -27,37 +27,51 @@ function getHabitations($name){
 
 function getProperties($user_id){
     global $db;
-    $stmt = $db->prepare('SELECT * FROM Habitation JOIN Possui USING (IdHabitacao) WHERE idAnfitriao = ?;');
+    $stmt = $db->prepare('SELECT * FROM Habitacao WHERE idUtilizador = ?');
     $stmt->execute(array($user_id));
     return $stmt->fetchAll();
 }
 
-function getReservations($user_id){
+function getReservationsByClient($user_id){
     global $db;
-    $stmt = $db->prepare('SELECT * FROM (Habitation JOIN Reserva USING (IdHabitacao) JOIN Efetua USING (idReserva) WHERE idCliente = ?');
+    $stmt = $db->prepare('SELECT idReserva FROM Reserva WHERE idUtilizador = ?');
     $stmt->execute(array($user_id));
     return $stmt->fetchAll();
 }
 
-function insertHabitation($idHab, $name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $nome_cidade, $nomeTipo, $nomePolitica, $descricao, $idUser){
+function getReservationsByProperty($id){
     global $db;
-    $stmt = $db->prepare('SELECT idCidade FROM Cidade WHERE nome = ?');
-    $stmt = $db->execute(array($nome_cidade));
-    $idCidade = $stmt->fetch();
+    $stmt = $db->prepare('SELECT idReserva FROM Reserva WHERE idHabitacao = ?');
+    $stmt->execute(array($id));
+    return $stmt->fetchAll();
+}
 
-    $stmt = $db->prepare('SELECT idTipo FROM TipoHabitacao WHERE nome = ?');
-    $stmt = $db->execute(array($nomeTipo));
-    $idTipo = $stmt->fetch();
+function getReservationById($id){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Reserva WHERE idReserva = ?');
+    $stmt->execute(array($id));
+    return $stmt->fetch();
+}
 
-    $stmt = $db->prepare('SELECT idPolitica FROM PoliticaDeCancelamento WHERE nome = ?');
-    $stmt = $db->execute(array($nomePolitica));
-    $idPolitica = $stmt->fetch();
+include_once("users.php");
 
-    $stmt = $db->prepare('INSERT INTO Habitacao(idHabitacao, nome, numQuartos, maxHospedes,morada, precoNoite, taxaLimpeza, classificacaoHabitacao, idCidade, idTipo, idPolitica, descricao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-    $stmt = $db->execute(array($idHab, $name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $idCidade, $idTipo, $idPolitica, $descricao));
+function insertHabitation($name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $pais, $cidade, $tipo, $politica, $descricao, $idUser){
+    global $db;
+
+    $stmt = $db->prepare('SELECT idCidade FROM Cidade WHERE nome=? and idPais=?');
+    $stmt->execute(array($cidade, $pais));
+    $idCidade=$stmt->fetch();
+    if($idCidade == null){
+        $stmt = $db->prepare('INSERT INTO Cidade(nome, idPais) VALUES(?, ?)');
+        $stmt->execute(array($cidade, $pais));
+        $idCidade = $db->lastInsertId();
+    }
+
+    $stmt = $db->prepare('INSERT INTO Habitacao(nome, numQuartos, maxHospedes, morada, precoNoite, taxaLimpeza, idCidade, idTipo, idPolitica, descricao, idUtilizador) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt->execute(array($name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $idCidade, $tipo, $politica, $descricao, $idUser));
     
-    $stmt = $db->prepare('INSERT INTO Possui(idAnfitriao, idHabitacao) values (?, ?)');
-    $stmt = $db->execute(array($idAnfitriao, $idHabitacao));
+    $id=$db->lastInsertId();
+    return $id;
 }
 
 function removeHabitation($id){
@@ -65,6 +79,22 @@ function removeHabitation($id){
     $stmt = $db->prepare('DELETE FROM Habitacao WHERE idHabitacao = ?');
     $stmt = $db->execute(array($id));
 }
+
+function updateHabitation($id, $name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $pais, $cidade, $tipo, $politica, $descricao){
+    removeHabitation($id);
+    $stmt = $db->prepare('SELECT idCidade FROM Cidade WHERE nome=? and idPais=?');
+    $stmt->execute(array($cidade, $pais));
+    $idCidade=$stmt->fetch();
+    if($idCidade == null){
+        $stmt = $db->prepare('INSERT INTO Cidade(nome, idPais) VALUES(?, ?)');
+        $stmt->execute(array($cidade, $pais));
+        $idCidade = $db->lastInsertId();
+    }
+
+    $stmt = $db->prepare('INSERT INTO Habitacao(idHabitacao, nome, numQuartos, maxHospedes, morada, precoNoite, taxaLimpeza, idCidade, idTipo, idPolitica, descricao, idUtilizador) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt->execute(array($id, $name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $idCidade, $tipo, $politica, $descricao, $idUser));
+}
+
 
 function addImage($idHab, $url, $description){
     global $db;
@@ -123,11 +153,25 @@ function getHabitationById($id){
 
     return $stmt->fetch();
 }
+function getHabitationId($nome){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Habitacao WHERE idHabitacao=?');
+    $stmt->execute(array($id));
+
+    return $stmt->fetch();
+}
 
 function getNameType($id){
     global $db;
     $stmt = $db->prepare('SELECT nome FROM TipoDeHabitacao WHERE idTipo=?');
     $stmt->execute(array($id));
+
+    return $stmt->fetch();
+}
+function getTypeId($name){
+    global $db;
+    $stmt = $db->prepare('SELECT idTipo FROM TipoDeHabitacao WHERE nome=?');
+    $stmt->execute(array($name));
 
     return $stmt->fetch();
 }
@@ -140,10 +184,25 @@ function getPolicy($id){
     return $stmt->fetch();
 }
 
+function getPolicyId($nome){
+    global $db;
+    $stmt = $db->prepare('SELECT idPolitica FROM PoliticaDeCancelamento WHERE nome=?');
+    $stmt->execute(array($nome));
+
+    return $stmt->fetch();
+}
+
 function getNameCity($id){
     global $db;
     $stmt = $db->prepare('SELECT nome FROM Cidade WHERE idCidade=?');
     $stmt->execute(array($id));
+
+    return $stmt->fetch()['nome'];
+}
+function getCityId($name){
+    global $db;
+    $stmt = $db->prepare('SELECT idCidade FROM Cidade WHERE nome=?');
+    $stmt->execute(array($name));
 
     return $stmt->fetch();
 }
@@ -174,7 +233,7 @@ function getAmenities($idHabitacao){
 
 function getOwner($idHabitation){
     global $db;
-    $stmt = $db->prepare('SELECT * FROM Habitacao JOIN Utilizador USING (idUtilizador) WHERE idHabitacao=?');
+    $stmt = $db->prepare('SELECT idUtilizador FROM Habitacao JOIN Utilizador USING (idUtilizador) WHERE idHabitacao=?');
     $stmt->execute(array($idHabitation));
 
     return $stmt->fetch();
@@ -202,6 +261,14 @@ function getClientReservation($idReservation){
     $stmt->execute(array($idReservation));
 
     return $stmt->fetch();
+}
+
+function getHabitationPictures($id){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Imagem WHERE idHabitacao=?');
+    $stmt->execute(array($id));
+
+    return $stmt->fetchAll();
 }
 
 ?>

@@ -1,16 +1,16 @@
 <?php
 
-function modifyUser($id, $newData){
+function modifyUser($id, $hashedPassword, $primeiroNome, $ultimoNome, $dataNascimento, $email, $telefone, $idPais){
     global $db;
     $stmt = $db->prepare('DELETE FROM Utilizador WHERE idUtilizador = ?');
     $stmt->execute(array($id));
-    $stmt = $db->prepare('INSERT INTO Utilizador(idUtilizador, hashedPassword, nome, dataNascimento, email, telefone, morada, codigoPostal, idPais) values (?, ?, ?, ?, ?, ?, ?, ?, ?);');
-    $stmt->execute(array_merge(array($id), $newData));
+    $stmt = $db->prepare('INSERT INTO Utilizador(idUtilizador, hashedPassword, nome, dataNascimento, email, telefone, idPais) values (?, ?, ?, ?, ?, ?, ?);');
+    $stmt->execute(array($hashedPassword, $primeiroNome, $ultimoNome, $dataNascimento, $email, $telefone, $idPais));
 }
 
 function createUser($hashedPassword, $primeiroNome, $ultimoNome, $dataNascimento, $email, $telefone, $idPais){
     global $db;
-    $stmt = $db->prepare('INSERT INTO Utilizador(hashedPassword, primeiroNome, ultimoNome, dataNascimento, email, telefone, morada, codigoPostal, idPais) values (?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt = $db->prepare('INSERT INTO Utilizador(hashedPassword, primeiroNome, ultimoNome, dataNascimento, email, telefone, idPais) values (?, ?, ?, ?, ?, ?, ?)');
     $stmt->execute(array($hashedPassword, $primeiroNome, $ultimoNome, $dataNascimento, $email, $telefone, $idPais));
 }
 
@@ -34,6 +34,13 @@ function getCountryId($name){
     return $stmt->fetch();
 }
 
+function getCountryById($id){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Pais WHERE idPais=?');
+    $stmt->execute(array($id));
+    return $stmt->fetch();
+}
+
 function getUserByEmail($email){
     global $db;
     $stmt = $db->prepare('SELECT * from Utilizador WHERE email=?');
@@ -41,9 +48,9 @@ function getUserByEmail($email){
     return $stmt->fetch();
 }
 
-function getUserPassword($id){
+function getUserById($id){
     global $db;
-    $stmt = $db->prepare('SELECT hashedPassword from Utilizador WHERE idUtilizador=?');
+    $stmt = $db->prepare('SELECT * from Utilizador WHERE idUtilizador=?');
     $stmt->execute(array($id));
     return $stmt->fetch();
 }

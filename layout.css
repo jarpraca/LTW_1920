@@ -31,9 +31,13 @@ body {
     justify-content: space-between;
 }
 
-#menu li:first-child, #menu li:first-child ~ li ~ li, #menu li:first-child ~ li ~ li ~ li{
+#menu li:first-child, #menu li:first-child ~ li ~ li{
     flex-basis: 200px;
     text-align: right;
+}
+
+#menu li:first-child ~ li ~ li a{
+    display: inline-block;
 }
 
 #menu li:first-child{
@@ -69,7 +73,7 @@ body {
     padding: 0em 1em;
 }
 
-#profile, #login, #editProperty{
+#profile, #login, #editProperty, #addProperty{
     display: flex;
     text-align: center;
     flex-direction: column;
@@ -105,7 +109,6 @@ body {
     width: 100%;
     height: 100%;
     text-align: center;
-    
 }
 
 #homepage #search{
@@ -204,4 +207,32 @@ body {
 
 #property{
     margin:1em;
+}
+
+#amenities_table, #agenda{
+    display: block;
+}
+
+.propertyShort, .reservationShort{
+    width:50%;
+    display:flex;
+}
+
+.propertyShort img, .reservationShort img{
+    object-fit: cover;
+    width:25%;
+    /*height:100%;*/
+}
+
+.propertyShort .rightText, .reservationShort .rightText{
+    padding:1em;
+}
+
+.horizontalElements{
+    display: flex;
+    justify-content: space-between;
+}
+
+.propertyShort p, .reservationShort p{
+    margin:0.5em;
 }

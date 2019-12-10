@@ -3,11 +3,13 @@
 let aadd_button = document.getElementById("agenda_button");
 
 let date_from = document.getElementById("agenda_input_from");
+console.log(date_from);
 let date_to = document.getElementById("agenda_input_to");
+console.log(date_to);
 
 let atable = document.getElementById("agenda");
 
-aadd_button.addEventListener('submit', function(event) {
+aadd_button.addEventListener('click', function(event) {
     event.preventDefault();
     
     let agenda = document.createElement('tr');
@@ -20,7 +22,7 @@ aadd_button.addEventListener('submit', function(event) {
     let input_button = document.createElement('input');
     input_button.setAttribute("type", "button");
     input_button.setAttribute("class", "remove");
-    input_button.setAttribute("value", "X");
+    input_button.setAttribute("value", " X ");
     button.appendChild(input_button);
 
     input_button.addEventListener('click', function(){

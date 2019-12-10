@@ -1,7 +1,5 @@
 <?php
   session_start();
-  session_destroy();
-  //$_SESSION['user']='1';
   $logedin=false;
   if (isset($_SESSION['user']))
     $logedin=true;
