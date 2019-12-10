@@ -3,9 +3,7 @@
 let aadd_button = document.getElementById("agenda_button");
 
 let date_from = document.getElementById("agenda_input_from");
-console.log(date_from);
 let date_to = document.getElementById("agenda_input_to");
-console.log(date_to);
 
 let atable = document.getElementById("agenda");
 

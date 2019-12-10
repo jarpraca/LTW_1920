@@ -11,11 +11,11 @@
     header( 'Location: homepage.php' );
   
   include('templates/common/header.php');
-  $action_form="templates/forms/editProperty_action.php";
+  $action_form="templates/forms/editProperty_action.php?id=" . $_GET['id'];
 
   $property=getHabitationById($_GET['id']);
   $name=$property['nome'];
-  $type=getNameType($property['idTipo']);
+  $type=getTypeById($property['idTipo']);
   $numberGuests=$property['maxHospedes'];
   $numberBedrooms=$property['numQuartos'];
   $priceNight=$property['precoNoite'];
@@ -25,9 +25,10 @@
   $longitude=$property['longitude'];
   $address=$property['morada'];
   $city=getNameCity($property['idCidade']);
-  $country=getCountryCity($property['idCidade']);
-  $policy=$property['idPolitica'];
+  $country=getCountryById(getCountryCity($property['idCidade']));
+  $policy=getPolicy($property['idPolitica']);
   $image="";
+  print_r($policy);
 ?>
   <section id="editProperty">
   <header>

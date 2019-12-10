@@ -79,22 +79,25 @@
         </select>
     </label>
     <!--          cancelation policy             -->
-    <label> Cancellation Policy
-        <select name="policies" value="<?=$policy['idPolitica']?> "required>
+    <label> Cancellation Policy 
+        <select name="policies" required>
             <?php
             include_once('database/connection.php');
             include_once('database/habitations.php');
             $policys = getCancellationPolicys();
 
-            foreach ($policys as $policy) {
-                echo '<option value="' . $policy['idPolitica'] . '">' . $policy['nome'] . '</option>';
+            foreach ($policys as $policyy) {
+                if ($policyy==$policy)
+                    echo '<option value="' . $policyy['idPolitica'] . '"selected>' . $policyy['nome'] . '</option>';
+                else
+                    echo '<option value="' . $policyy['idPolitica'] . '">' . $policyy['nome'] . '</option>';
             }
             ?>
         </select>
     </label>
     <!--          pictures             -->
     <label> Upload Pictures (Select All Pictures At Once)
-        <input type="file" name="pictures" accept="image/*" value=<?=$image?> multiple required>
+        <input type="file" name="pictures" accept="image/*" value=<?=$image?> multiple>
     </label>
-    <input class="submit" type="submit" value="Submit" onsubmit="return copyFromForm2Function()">
+    <input class="submit" type="submit" value="Submit">
 </form>

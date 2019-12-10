@@ -2,10 +2,11 @@
 
 function modifyUser($id, $hashedPassword, $primeiroNome, $ultimoNome, $dataNascimento, $email, $telefone, $idPais){
     global $db;
-    $stmt = $db->prepare('DELETE FROM Utilizador WHERE idUtilizador = ?');
-    $stmt->execute(array($id));
-    $stmt = $db->prepare('INSERT INTO Utilizador(idUtilizador, hashedPassword, nome, dataNascimento, email, telefone, idPais) values (?, ?, ?, ?, ?, ?, ?);');
-    $stmt->execute(array($hashedPassword, $primeiroNome, $ultimoNome, $dataNascimento, $email, $telefone, $idPais));
+    print_r($hashedPassword);
+    print_r($primeiroNome);
+    print_r($ultimoNome);
+    $stmt = $db->prepare('UPDATE Utilizador SET hashedPassword=?, primeiroNome=?, ultimoNome=?, dataNascimento=?, email=?, telefone=?, idPais=? WHERE idUtilizador=?');
+    $stmt->execute(array($hashedPassword, $primeiroNome, $ultimoNome, $dataNascimento, $email, $telefone, $idPais, $id));
 }
 
 function createUser($hashedPassword, $primeiroNome, $ultimoNome, $dataNascimento, $email, $telefone, $idPais){

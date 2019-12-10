@@ -1,4 +1,3 @@
-<?php   print_r("ola"); print_r($firstName); ?>
 <form class="verticalForm" action=<?=$action_form?> method="post">
     <label> First Name
         <input type="text" name="primeiroNome" value="<?=$firstName?>" required>
@@ -28,27 +27,28 @@
             ?>
         </select>
     </label>
-    <?php
-    if ($action_form=="register_action.php"){ ?>
         <label> Password 
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
         </label>
         <label> Confirm Password 
-            <input type="password" name="confirmpassword" required>
-            <script language='javascript' type='text/javascript'>
-                function check(input) {
-                    if (input.value != document.getElementById('password').value) {
-                        input.setCustomValidity('Password Must be Matching.');
-                    } else {
-                        // input is valid -- reset the error message
-                        input.setCustomValidity('');
-                    }
-                }
-            </script>
+            <input type="password" name="confirmpassword" id="confirmpassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
         </label>
-    <?php } ?>
     <label> Upload Picture 
         <input type="file" name="picture" value="<?=$picture?>" accept="image/*">
     </label>
-    <input class="submit" type="submit" value="Submit">
+    <input class="submit" type="submit" id="profileSubmit" value="Submit">
+    <script language='javascript' type='text/javascript'>
+        var password = document.getElementById("password"), confirm_password = document.getElementById("confirmpassword");
+
+        function validatePassword(){
+        if(password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+        }
+
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+    </script>
 </form>
