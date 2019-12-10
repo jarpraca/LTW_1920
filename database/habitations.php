@@ -60,7 +60,7 @@ function insertHabitation($name, $numQuartos, $maxHospedes, $morada, $precoNoite
 
     $stmt = $db->prepare('SELECT idCidade FROM Cidade WHERE nome=? and idPais=?');
     $stmt->execute(array($cidade, $pais));
-    $idCidade=$stmt->fetch();
+    $idCidade=$stmt->fetch()['idCidade'];
     if($idCidade == null){
         $stmt = $db->prepare('INSERT INTO Cidade(nome, idPais) VALUES(?, ?)');
         $stmt->execute(array($cidade, $pais));
@@ -81,18 +81,19 @@ function removeHabitation($id){
 }
 
 function updateHabitation($id, $name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $pais, $cidade, $tipo, $politica, $descricao){
-    removeHabitation($id);
+    global $db;
+
     $stmt = $db->prepare('SELECT idCidade FROM Cidade WHERE nome=? and idPais=?');
     $stmt->execute(array($cidade, $pais));
-    $idCidade=$stmt->fetch();
+    $idCidade=$stmt->fetch()['idCidade'];
     if($idCidade == null){
         $stmt = $db->prepare('INSERT INTO Cidade(nome, idPais) VALUES(?, ?)');
         $stmt->execute(array($cidade, $pais));
         $idCidade = $db->lastInsertId();
     }
-
-    $stmt = $db->prepare('INSERT INTO Habitacao(idHabitacao, nome, numQuartos, maxHospedes, morada, precoNoite, taxaLimpeza, idCidade, idTipo, idPolitica, descricao, idUtilizador) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-    $stmt->execute(array($id, $name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $idCidade, $tipo, $politica, $descricao, $idUser));
+    print_r($politica);
+    $stmt = $db->prepare('UPDATE Habitacao SET nome=?, numQuartos=?, maxHospedes=?, morada=?, precoNoite=?, taxaLimpeza=?, idCidade=?, idTipo=?, idPolitica=?, descricao=? WHERE idHabitacao=?');
+    $stmt->execute(array($name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $idCidade, $tipo, $politica, $descricao, $id));
 }
 
 
@@ -168,6 +169,15 @@ function getNameType($id){
 
     return $stmt->fetch();
 }
+
+function getTypeById($id){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM TipoDeHabitacao WHERE idTipo=?');
+    $stmt->execute(array($id));
+
+    return $stmt->fetch();
+}
+
 function getTypeId($name){
     global $db;
     $stmt = $db->prepare('SELECT idTipo FROM TipoDeHabitacao WHERE nome=?');
@@ -199,6 +209,15 @@ function getNameCity($id){
 
     return $stmt->fetch()['nome'];
 }
+
+function getCityById($id){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Cidade WHERE idCidade=?');
+    $stmt->execute(array($id));
+
+    return $stmt->fetch();
+}
+
 function getCityId($name){
     global $db;
     $stmt = $db->prepare('SELECT idCidade FROM Cidade WHERE nome=?');
@@ -209,10 +228,10 @@ function getCityId($name){
 
 function getCountryCity($idCity){
     global $db;
-    $stmt = $db->prepare('SELECT Pais.nome FROM Cidade JOIN Pais USING (idPais) WHERE idCidade=?');
+    $stmt = $db->prepare('SELECT idPais FROM Cidade JOIN Pais USING (idPais) WHERE idCidade=?');
     $stmt->execute(array($idCity));
 
-    return $stmt->fetch();
+    return $stmt->fetch()['idPais'];
 }
 
 function getImagesProperty($id){

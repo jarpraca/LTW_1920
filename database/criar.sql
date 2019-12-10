@@ -53,8 +53,8 @@ CREATE TABLE Utilizador (
     ultimoNome      VARCHAR(30) NOT NULL, 
     dataNascimento  DATE        NOT NULL, 
     email           VARCHAR(30) UNIQUE NOT NULL, 
-    telefone        VARCHAR(15) UNIQUE NOT NULL, 
-    foto            VARCHAR(30) UNIQUE,
+    telefone        VARCHAR(15) NOT NULL, 
+    foto            VARCHAR(30),
     altFoto         VARCHAR(50),
     idPais          INTEGER REFERENCES Pais (idPais) ON DELETE SET NULL ON UPDATE CASCADE
 );
