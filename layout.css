@@ -42,11 +42,25 @@ body {
 
 #menu li:first-child{
     text-align: left;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 #search img{
     vertical-align: middle;
     margin: 1em;    
+}
+
+#search_text_input{
+    margin-right: 3em;
+}
+
+#dateFrom{
+    margin-right: 3em;
+}
+
+#dateTo{
+    margin-right: 3em;
 }
 
 #menu li{

@@ -10,7 +10,7 @@ h1, h2, h3{
     margin: 0 0.5em 0 0;
 }
 
-h4, h5, h6, p, span, input, label, tr{
+h4, h5, h6, p, span, input, label, tr, a{
     font-family: var(--bodyFont);
 }
 
@@ -106,6 +106,10 @@ input, select, textarea{
     border-bottom-style: solid;
     background-color: transparent;
     color: var(--myLightBlue);
+}
+
+#search a{
+    font-size: 0.9em;
 }
 
 #homepage{

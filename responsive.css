@@ -1,4 +1,4 @@
-@media(max-width: 60em){
+/* @media(max-width: 60em){
     aside{
         display:none;
     }
@@ -44,4 +44,10 @@
         opacity: 1;
     }
 
+} */
+
+@media(max-width: 76.5em){
+    #search {
+        display:none;
+    }
 }
