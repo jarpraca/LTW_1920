@@ -11,6 +11,8 @@
 
   $reservations = getReservationsByClient($_SESSION['user']);
 
+  echo '<h2 class="subtitle">My Reservations</h2>';
+
   foreach ($reservations as $reservationId){
     $reservation = getReservationById($reservationId['idReserva']);
     include("templates/properties/viewShortReservation.php");

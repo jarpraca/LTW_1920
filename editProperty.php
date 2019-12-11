@@ -28,7 +28,6 @@
   $country=getCountryById(getCountryCity($property['idCidade']));
   $policy=getPolicy($property['idPolitica']);
   $image="";
-  print_r($policy);
 ?>
   <section id="editProperty">
   <header>

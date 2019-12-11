@@ -29,7 +29,7 @@
         <h3>Total</h3>
         <h3><?=$habitation['precoNoite']*$days+$habitation['taxaLimpeza']?>€</h3>
         <form action="#" method="get">
-            <input type="submit" class="submit" value="Reserve">
+            <input type="submit" class="submit" value="Book">
         </form>
     </aside>
     <section id="property_data">

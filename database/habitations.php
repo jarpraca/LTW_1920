@@ -2,14 +2,14 @@
 
 function getHabitationsCity($city){
     global $db;
-    $stmt = $db->prepare('SELECT * FROM habitation JOIN cidade USING (idCidade) WHERE cidade.nome = ?');
+    $stmt = $db->prepare('SELECT Habitacao.* FROM Habitacao JOIN cidade USING (idCidade) WHERE cidade.nome = ?');
     $stmt->execute(array($city));
     return $stmt->fetchAll();
 }
 
 function getHabitationsCountry($country){
     global $db;
-    $stmt = $db->prepare('SELECT * FROM habitation JOIN cidade USING (idCidade) JOIN Pais using idPais WHERE pais.nome = ?');
+    $stmt = $db->prepare('SELECT Habitacao.* FROM Habitacao JOIN cidade USING (idCidade) JOIN Pais USING (idPais) WHERE Pais.nome = ?');
     $stmt->execute(array($country));
     return $stmt->fetchAll();
 }

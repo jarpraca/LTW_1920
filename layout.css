@@ -11,7 +11,7 @@ body {
 
 .content {
     flex: 1 0 auto;
-    margin: 4em 0 0 0;
+    margin: 3.7em 0 0 0;
 }
 
 #menu{ 
@@ -46,21 +46,13 @@ body {
     margin-bottom: 1em;
 }
 
-#search img{
+#glass{
     vertical-align: middle;
     margin: 1em;    
 }
 
-#search_text_input{
-    margin-right: 3em;
-}
-
-#dateFrom{
-    margin-right: 3em;
-}
-
-#dateTo{
-    margin-right: 3em;
+#search_text_input, #dateFrom, #dateTo{
+    margin-right: 2em;
 }
 
 #menu li{
@@ -104,7 +96,10 @@ body {
 .verticalForm input, .verticalForm select, textarea{
     display: block;
     width:100%;
-    padding:0.5em 0;
+    padding:0.5em ;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
 .verticalForm label{
@@ -227,26 +222,59 @@ body {
     display: block;
 }
 
-.propertyShort, .reservationShort{
-    width:50%;
-    display:flex;
+.propertyShort, .reservationShort, .propertySearch{
+    width: calc(50% - 1rem);
+    display: flex;
+    margin: 1rem;
 }
 
-.propertyShort img, .reservationShort img{
+.propertyShort img, .reservationShort img, .propertySearch img{
     object-fit: cover;
     width:25%;
-    /*height:100%;*/
 }
 
-.propertyShort .rightText, .reservationShort .rightText{
-    padding:1em;
+.rightText{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    width: 75%;
+}
+
+.rightText h1, h3, h4, p{
+    margin: 0;
+    padding: 0.3rem 0 0.3rem 0;
 }
 
 .horizontalElements{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: auto;
 }
 
-.propertyShort p, .reservationShort p{
-    margin:0.5em;
+.horizontalElements a{
+    margin-left: 1em;
+}
+
+.horizontalElements h3{
+    padding: 0;
+}
+
+.horizontalElements p{
+    padding: 0.5em;
+}
+
+.list_properties_options{
+    display: flex;
+    margin: 1rem;
+}
+
+.list_properties_options h5{
+    margin: 0 1rem 0 0;
+    padding: 1em;
+}
+
+.subtitle{
+    margin: 1rem;
 }

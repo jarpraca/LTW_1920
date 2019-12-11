@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Arvo&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 :root {
     --myDarkBlue: #242732;
     --myLightBlue: #E5F0FF;
@@ -58,6 +60,13 @@ body > footer{
     border-color: var(--myLightBlue);
 }
 
+#menu li:first-child + li + li h5, #menu li:first-child + li + li + li h5, .dropdown-content a{
+    background: var(--myDarkBlue);
+    border-style: solid;
+    border-width: thin;
+    border-color: var(--myDarkBlue);
+}
+
 #menu li:first-child + li + li h5:hover, #menu li:first-child + li + li + li h5:hover, .dropdown-content a:hover{
     background: var(--myDarkBlue);
     border-style: solid;
@@ -68,12 +77,19 @@ body > footer{
 #menu li:first-child + li + li h5:active, #menu li:first-child + li + li + li h5:active, .dropdown-content a:active{
     background: var(--myLightBlue);
     color:var(--myDarkBlue);
+    border-style: solid;
+    border-width: thin;
+    border-color: var(--myLightBlue);
 }
 
 input, select, textarea{
     background: var(--myLightBlue);
     color: var(--myDarkBlue);
     border-style:none;
+}
+
+#glass{
+    background: var(--myDarkBlue);
 }
 
 .currency input{
@@ -128,7 +144,9 @@ input, select, textarea{
     background: var(--myDarkBlue);
     color: var(--myLightBlue);
     text-align: center;
-    border: none
+    border-style: solid;
+    border-width: thin;
+    border-color: var(--myDarkBlue);
 }
 
 .submit:hover{
@@ -136,13 +154,36 @@ input, select, textarea{
     color: var(--myDarkBlue);
     font-weight: bold;
     cursor: pointer;
+    border-style: solid;
+    border-width: thin;
+    border-color: var(--myDarkBlue);
 }
 
-.propertyShort, .reservationShort{
+.propertyShort, .reservationShort, .propertySearch{
     background: var(--myLightBlue);
     color: var(--myDarkBlue);
 }
 
-.propertyShort a, .reservationShort a{
+.propertyShort a, .reservationShort a, .propertySearch a{
+    text-decoration: none;
+}
+
+.list_properties_options h5{
+    background-color: var(--myLightBlue);
+    color: var(--myDarkBlue);
+    border-style: solid;
+    border-width: thin;
+    border-color: var(--myLightBlue);
+}
+
+.list_properties_options h5:hover{
+    background-color: var(--myDarkBlue);
+    color: var(--myLightBlue);
+    border-style: solid;
+    border-width: thin;
+    border-color: var(--myLightBlue);
+}
+
+.list_properties_options a{
     text-decoration: none;
 }

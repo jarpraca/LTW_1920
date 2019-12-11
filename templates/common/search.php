@@ -1,9 +1,9 @@
-<form id="search" method="POST" action="/action_page.php">
-    <img src="images/glass.png" alt="magnifying glass" width="20"/>
-    <input class="search_input" type="search" name="q" placeholder="City, Country or Hotel" id="search_text_input">
+<form id="search" method="POST" action="templates/forms/search_action.php">
+    <a> Location: </a>
+    <input class="search_input" type="search" name="location" placeholder="City, Country or Hotel" id="search_text_input" required>
     <a> From: </a>
-    <input class="search_input" type="date" name="dateFrom" id="dateFrom">
+    <input class="search_input" type="date" name="dateFrom" id="dateFrom" required>
     <a> To: </a>
-    <input class="search_input" type="date" name="dateTo" id="dateTo">
-    <input type="submit" value="Go">
+    <input class="search_input" type="date" name="dateTo" id="dateTo" required>
+    <input type="image" src="images/glass.png" alt="Submit" height="30" id="glass">
 </form>
