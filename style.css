@@ -7,21 +7,21 @@
     --bodyFont: Roboto, sans-serif;
 }
 
-h1, h2, h3{
+h1, h2, h3 {
     font-family: var(--titlesFont);
     margin: 0 0.5em 0 0;
 }
 
-h4, h5, h6, p, span, input, label, tr, a, #filter_button{
+h4, h5, h6, p, span, input, label, tr, a, #filter_button {
     font-family: var(--bodyFont);
 }
 
-p{
-    font-size:0.8em;
+p {
+    font-size: 0.8em;
 }
 
-a{
-    color:var(--myLightBlue)
+a {
+    color: var(--myLightBlue)
 }
 
 body {
@@ -29,105 +29,102 @@ body {
     color: var(--myLightBlue);
 }
 
-#menu{
+#menu {
     border-bottom-width: thin;
     border-bottom-color: var(--myLightBlue);
     border-bottom-style: solid;
     background-color: var(--myDarkBlue);
 }
 
-#menu #hamburger{
+#menu #hamburger {
     display: none;
 }
 
-#menu ul{
+#menu ul {
     list-style-type: none;
 }
 
-#menu a{
-    color:var(--myLightBlue);
+#menu a {
+    color: var(--myLightBlue);
     text-decoration: none;
 }
 
-body > footer{
+body>footer {
     background: var(--myLightBlue);
-    color:var(--myDarkBlue);
+    color: var(--myDarkBlue);
 }
 
-.dropdown-content{
+.dropdown-content {
     background: var(--myDarkBlue);
-    /* border-style: solid;
-    border-width: thin;
-    border-color: var(--myLightBlue); */
 }
 
-#menu li:first-child + li + li h5, #menu li:first-child + li + li + li h5, .dropdown-content p{
+#menu li:first-child+li+li h5, #menu li:first-child+li+li+li h5, .dropdown-content p {
     background: var(--myDarkBlue);
     border-style: solid;
     border-width: thin;
     border-color: var(--myDarkBlue);
 }
 
-.dropdown-content p{
+.dropdown-content p {
     border-bottom-color: var(--myLightBlue);
 }
 
-#menu li:first-child + li + li h5:hover, #menu li:first-child + li + li + li h5:hover{
+#menu li:first-child+li+li h5:hover, #menu li:first-child+li+li+li h5:hover {
     background: var(--myDarkBlue);
     border-style: solid;
     border-width: thin;
     border-color: var(--myLightBlue);
 }
 
-#menu li:first-child + li + li h5:active, #menu li:first-child + li + li + li h5:active, .dropdown-content a:active{
+#menu li:first-child+li+li h5:active, #menu li:first-child+li+li+li h5:active, .dropdown-content a:active {
     background: var(--myLightBlue);
-    color:var(--myDarkBlue);
+    color: var(--myDarkBlue);
     border-style: solid;
     border-width: thin;
     border-color: var(--myLightBlue);
 }
 
-.dropdown-content p:hover{
+.dropdown-content p:hover {
     background: var(--myLightBlue);
     border-color: var(--myLightBlue);
     color: var(--myDarkBlue);
 }
 
-input, select, textarea{
+input, select, textarea {
     background: var(--myLightBlue);
     color: var(--myDarkBlue);
-    border-style:none;
+    border-style: none;
 }
 
-#glass{
+#glass {
     background: var(--myDarkBlue);
 }
 
-.currency input{
+.currency input {
     text-align: right;
 }
 
-.currency{
-    display:inline-block;
-	position: relative;
+.currency {
+    display: inline-block;
+    position: relative;
 }
 
 .currency::before {
-	position: absolute;
-    content:"";
+    position: absolute;
+    content: "";
 }
 
-.verticalForm{
+.verticalForm {
     background: var(--myLightBlue);
     color: var(--myDarkBlue);
 }
 
-.verticalForm input, .verticalForm select, .verticalForm textarea{
+.verticalForm input, .verticalForm select, .verticalForm textarea {
     background: var(--myDarkBlue);
     color: var(--myLightBlue);
 }
 
-.search_input{
+.search_input {
     border-bottom-width: thin;
     border-bottom-color: var(--myLightBlue);
     border-bottom-style: solid;
@@ -135,19 +132,19 @@ input, select, textarea{
     color: var(--myLightBlue);
 }
 
-#homepage{
+#homepage {
     background-image: url('images/background2.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
 }
 
-#property aside{
+#property aside {
     background: var(--myLightBlue);
     color: var(--myDarkBlue);
 }
 
-.submit{
+.submit {
     background: var(--myDarkBlue);
     color: var(--myLightBlue);
     text-align: center;
@@ -156,7 +153,7 @@ input, select, textarea{
     border-color: var(--myDarkBlue);
 }
 
-.submit:hover{
+.submit:hover {
     background: var(--myLightBlue);
     color: var(--myDarkBlue);
     font-weight: bold;
@@ -166,16 +163,16 @@ input, select, textarea{
     border-color: var(--myDarkBlue);
 }
 
-.propertyShort, .reservationShort, .propertySearch{
+.propertyShort, .reservationShort, .propertySearch {
     background: var(--myLightBlue);
     color: var(--myDarkBlue);
 }
 
-.propertyShort a, .reservationShort a, .propertySearch a{
+.propertyShort a, .reservationShort a, .propertySearch a {
     text-decoration: none;
 }
 
-.list_properties_options h5, .list_properties_options #filter_button{
+.list_properties_options h5, .list_properties_options #filter_button {
     background-color: var(--myLightBlue);
     color: var(--myDarkBlue);
     border-style: solid;
@@ -184,7 +181,7 @@ input, select, textarea{
     font-weight: bold;
 }
 
-.list_properties_options h5:hover, .list_properties_options #filter_button:hover{
+.list_properties_options h5:hover, .list_properties_options #filter_button:hover {
     background-color: var(--myDarkBlue);
     color: var(--myLightBlue);
     border-style: solid;
@@ -194,48 +191,46 @@ input, select, textarea{
     cursor: pointer;
 }
 
-.list_properties_options a, button{
+.list_properties_options a, button {
     text-decoration: none;
 }
 
+#search p, input {
+    font-size: 0.9em;
+}
+
+#search input::placeholder, #search #dateFrom, #search #dateTo, #search input{
+    color: grey;
+}
+
 /* The Modal (background) */
+
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-  /* Modal Content/Box */
-  .modal-content {
-    /* justify-content: center;*/
-    align-content: center; 
-    background-color:var(--myDarkBlue);
-    /* position: fixed; */
-    margin: 8rem 32.5% auto 32.5%; /* 15% from the top and centered */
-    /* margin: 15% auto; */
-    padding: 1rem;
-    border: 1px solid var(--myLightBlue);
-    width: 35%; /* Could be more or less, depending on screen size */
-  }
-  
-  /* The Close Button */
-  .close {
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+
+/* Modal Content/Box */
+
+.modal-content {
+    background-color: var(--myDarkBlue);
+}
+
+
+/* The Close Button */
+
+.close {
     color: #aaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.close:hover, .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
-  }
+}

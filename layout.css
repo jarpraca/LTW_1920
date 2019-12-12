@@ -5,8 +5,8 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
 }
 
 .content {
@@ -14,57 +14,60 @@ body {
     margin: 3.7em 0 0 0;
 }
 
-#menu{ 
-    position: fixed; /* Set the navbar to fixed position */
-    top: 0; /* Position the navbar at the top of the page */
-    width: 100%; /* Full width */
-    z-index:999;
-	overflow:visible;
+#menu {
+    position: fixed;
+    /* Set the navbar to fixed position */
+    top: 0;
+    /* Position the navbar at the top of the page */
+    width: 100%;
+    /* Full width */
+    z-index: 999;
+    overflow: visible;
 }
 
-#menu ul{
+#menu ul {
     text-align: center;
-    padding:0;
-    margin:0;
+    padding: 0;
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-#menu li:first-child, #menu li:first-child ~ li ~ li{
+#menu li:first-child, #menu li:first-child~li~li {
     flex-basis: 200px;
     text-align: right;
 }
 
-#menu li:first-child ~ li ~ li a{
+#menu li:first-child~li~li a {
     display: inline-block;
 }
 
-#menu li:first-child{
+#menu li:first-child {
     text-align: left;
     margin-top: 1em;
     margin-bottom: 1em;
 }
 
-#glass{
+#glass {
     vertical-align: middle;
-    margin: 1em;    
+    margin: 1em;
 }
 
-#search_text_input, #dateFrom, #dateTo{
+#search_text_input, #dateFrom, #dateTo {
     margin-right: 0em;
 }
 
-#menu li{
+#menu li {
     padding: 0em 1em;
 }
 
-#menu h5{
-    margin:0;
-    padding:1em;
+#menu h5 {
+    margin: 0;
+    padding: 1em;
 }
 
-.footer{
+.footer {
     flex-shrink: 0;
     text-align: center;
     margin: 1em 0 0 0;
@@ -74,12 +77,13 @@ body {
     justify-content: space-between;
 }
 
-.footer h3, h5{
-    margin:0.5em;
+.footer h3,
+h5 {
+    margin: 0.5em;
     padding: 0em 1em;
 }
 
-#profile, #login, #editProperty, #addProperty{
+#profile, #login, #editProperty, #addProperty {
     display: flex;
     text-align: center;
     flex-direction: column;
@@ -87,44 +91,53 @@ body {
     margin: 1em 0em;
 }
 
-.verticalForm{
+.verticalForm {
     margin: 1em 0 0 0;
     text-align: left;
-    width:40%
+    width: 40%
 }
 
-.verticalForm input, .verticalForm select, textarea{
+.verticalForm input, .verticalForm select, textarea {
     display: block;
-    width:100%;
-    padding:0.5em ;
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;         /* Opera/IE 8+ */
+    width: 100%;
+    padding: 0.5em;
+    -webkit-box-sizing: border-box;
+    /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;
+    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    /* Opera/IE 8+ */
 }
 
-.verticalForm label{
+.verticalForm label {
     display: block;
-    padding:1em;
+    padding: 1em;
 }
 
-.verticalForm .submit{
-    width:25%;
+.verticalForm .submit {
+    width: 25%;
     float: right;
     margin: 1em;
     padding: 1em;
 }
 
-#homepage{
+#homepage {
     width: 100%;
     height: 100%;
     text-align: center;
 }
 
-#search{
-    display: inline-block;
+#search {
+    display: flex;
+    align-items: center;
 }
 
-#homepage #search{
+#search p {
+    margin-left: 2em;
+    margin-right: 0.5em;
+}
+
+#homepage #search {
     display: inline-block;
     margin: 0;
     position: absolute;
@@ -134,64 +147,67 @@ body {
     transform: translate(-50%, -50%);
 }
 
-#property{
-    display:grid;
-    grid-template-areas: "header header header"
-                        "data data aside";
+#property {
+    display: grid;
+    grid-template-areas: "header header header" "data data aside";
     text-align: left;
 }
 
-#property header{
+#property header {
     grid-area: header;
 }
 
-#property aside{
+#property aside {
     grid-area: aside;
     padding: 1em;
-    display:grid;
-    grid-template-areas: "priceNight priceNight"
-                        "datesLabel dates"
-                        "priceNightsCalc priceNights"
-                        "taxLabel tax"
-                        "totalLabel total"
-                        " submit submit";
-    align-items:center; 
+    display: grid;
+    grid-template-areas: "priceNight priceNight" "datesLabel dates" "priceNightsCalc priceNights" "taxLabel tax" "totalLabel total" " submit submit";
+    align-items: center;
     text-align: left;
 }
 
-#property aside p:first-child{
+#property aside p:first-child {
     grid-area: priceNight;
 }
-#property aside h3:first-child{
+
+#property aside h3:first-child {
     grid-area: datesLabel;
 }
-#property aside h3:first-child ~ p{
+
+#property aside h3:first-child~p {
     grid-area: dates;
 }
-#property aside h3:first-child ~ p{
+
+#property aside h3:first-child~p {
     grid-area: priceNightsCalc;
 }
-#property aside h3:first-child ~ p ~ p{
+
+#property aside h3:first-child~p~p {
     grid-area: priceNights;
 }
-#property aside h3:first-child ~ p ~ p ~ p{
+
+#property aside h3:first-child~p~p~p {
     grid-area: taxLabel;
 }
-#property aside h3:first-child ~ p ~ p ~ p ~ p{
+
+#property aside h3:first-child~p~p~p~p {
     grid-area: tax;
 }
-#property aside h3:first-child ~ h3{
+
+#property aside h3:first-child~h3 {
     grid-area: totalLabel;
 }
-#property aside h3:first-child ~ h3 ~ h3{
+
+#property aside h3:first-child~h3~h3 {
     grid-area: total;
 }
-#property aside form{
+
+#property aside form {
     grid-area: submit;
     text-align: right;
 }
 
-#property #property_data{
+#property #property_data {
     grid-area: data;
 }
 
@@ -199,25 +215,25 @@ body {
     position: relative;
     display: inline-block;
 }
-  
+
 .dropdown-content {
     display: none;
     position: absolute;
     right: 0%;
     z-index: 1;
 }
-  
+
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
-.dropdown-content a{
+.dropdown-content a {
     width: 100%;
     margin: 0;
     padding: 0;
 }
 
-.dropdown-content p{
+.dropdown-content p {
     display: block;
     padding: 0.5em;
     margin: 0;
@@ -225,26 +241,26 @@ body {
     white-space: nowrap;
 }
 
-#property{
-    margin:1em;
+#property {
+    margin: 1em;
 }
 
-#amenities_table, #agenda{
+#amenities_table, #agenda {
     display: block;
 }
 
-.propertyShort, .reservationShort, .propertySearch{
+.propertyShort, .reservationShort, .propertySearch {
     width: calc(50% - 1rem);
     display: flex;
     margin: 1rem;
 }
 
-.propertyShort img, .reservationShort img, .propertySearch img{
+.propertyShort img, .reservationShort img, .propertySearch img {
     object-fit: cover;
-    width:25%;
+    width: 25%;
 }
 
-.rightText{
+.rightText {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -252,41 +268,41 @@ body {
     width: 75%;
 }
 
-.rightText h1, h3, h4, p{
+.rightText h1, h3, h4, p {
     margin: 0;
     padding: 0.3rem 0 0.3rem 0;
 }
 
-.horizontalElements{
+.horizontalElements {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-top: auto;
 }
 
-.horizontalElements a{
+.horizontalElements a {
     margin-left: 1em;
 }
 
-.horizontalElements h3{
+.horizontalElements h3 {
     padding: 0;
 }
 
-.horizontalElements p{
+.horizontalElements p {
     padding: 0.5em;
 }
 
-.list_properties_options{
+.list_properties_options {
     display: flex;
     margin: 1rem;
 }
 
-.list_properties_options h5, #filter_button{
+.list_properties_options h5, #filter_button {
     margin: 0 1rem 0 0;
     padding: 1em;
 }
 
-.subtitle{
+.subtitle {
     margin: 1rem;
 }
 
@@ -296,7 +312,46 @@ body {
     height: 100%;
 }
 
-.close{
+.close {
     margin: 0;
     padding: 0;
+}
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+}
+
+
+/* Modal Content/Box */
+
+.modal-content {
+    /* justify-content: center;*/
+    align-content: center;
+    /* position: fixed; */
+    margin: 8rem 32.5% auto 32.5%;
+    /* 15% from the top and centered */
+    /* margin: 15% auto; */
+    padding: 1rem;
+    border: 1px solid var(--myLightBlue);
+    width: 35%;
+    /* Could be more or less, depending on screen size */
+}
+
+
+/* The Close Button */
+
+.close {
+    float: right;
 }
