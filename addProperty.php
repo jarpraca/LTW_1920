@@ -20,6 +20,8 @@
   $country="";
   $policy="";
   $image="";
+  $amenities_array_var=[];
+  $agenda_array=[];
 ?>
   <section id="addProperty">
   <header>

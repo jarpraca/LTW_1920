@@ -1,9 +1,9 @@
 <form id="search" method="POST" action="templates/forms/search_action.php">
-    <a> Location: </a>
+    <p> Location: </p>
     <input class="search_input" type="search" name="location" placeholder="City, Country or Hotel" id="search_text_input" required>
-    <a> From: </a>
+    <p> From: </p>
     <input class="search_input" type="date" name="dateFrom" id="dateFrom" required>
-    <a> To: </a>
+    <p> To: </p>
     <input class="search_input" type="date" name="dateTo" id="dateTo" required>
     <input type="image" src="images/glass.png" alt="Submit" height="30" id="glass">
 </form>

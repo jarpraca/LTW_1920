@@ -290,4 +290,66 @@ function getHabitationPictures($id){
     return $stmt->fetchAll();
 }
 
+function addAmenity($idHabitation, $amenity){
+    global $db;
+
+    $stmt = $db->prepare('SELECT idComodidade FROM Comodidade WHERE nome=?');
+    $stmt->execute(array($amenity));
+    $idAmenity=$stmt->fetch()['idComodidade'];
+    if ($idAmenity == null)
+    {
+        $stmt = $db->prepare('INSERT INTO Comodidade(nome) VALUES(?)');
+        $stmt->execute(array($amenity));
+        $idAmenity=$db->lastInsertId();
+    }
+    else{
+        $stmt = $db->prepare('SELECT * FROM Dispoe WHERE idComodidade=? and idHabitacao=?');
+        $stmt->execute(array($idAmenity, $idHabitation));
+        $dispoe=$stmt->fetch();
+        if ($dispoe != null)
+            return;
+    }
+
+    $stmt = $db->prepare('INSERT INTO Dispoe(idComodidade, idHabitacao) VALUES (?, ?)');
+    $stmt->execute(array($idAmenity, $idHabitation));
+}
+
+function addAgenda($idHabitation, $agenda_from, $agenda_to){
+    global $db;
+    $stmt = $db->prepare('SELECT $idAgenda FROM Agenda WHERE dataInicio=? and dataFim=?');
+    $stmt->execute(array($agenda_from, $agenda_to));
+    $idAgenda=$stmt->fetch()['idAgenda'];
+    if ($idAgenda == null)
+    {
+        $stmt = $db->prepare('INSERT INTO Agenda(dataInicio, dataFim) VALUES(?, ?)');
+        $stmt->execute(array($agenda_from, $agenda_to));
+        $idAgenda=$db->lastInsertId();
+    }
+    else{
+        $stmt = $db->prepare('SELECT * FROM Disponibilidade WHERE idAgenda=? and idHabitacao=?');
+        $stmt->execute(array($idAgenda, $idHabitation));
+        $dispoe=$stmt->fetch();
+        if ($dispoe != null)
+            return;
+    }
+    $stmt = $db->prepare('INSERT INTO Disponivel(idAgenda, idHabitacao) VALUES (?, ?)');
+    $stmt->execute(array($idAgenda, $idHabitation));
+}
+
+function getAmenitiesByHabitation($idHabitation){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Dispoe JOIN Comodidade USING (idComodidade) WHERE idHabitacao=?');
+    $stmt->execute(array($idHabitation));
+
+    return $stmt->fetchAll();
+}
+
+function getAgendaByHabitation($idHabitation){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Agenda JOIN Disponivel  USING (idAgenda) WHERE idHabitacao=?');
+    $stmt->execute(array($idHabitation));
+
+    return $stmt->fetchAll();
+}
+
 ?>

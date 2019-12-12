@@ -28,6 +28,8 @@
   $country=getCountryById(getCountryCity($property['idCidade']));
   $policy=getPolicy($property['idPolitica']);
   $image="";
+  $amenities_array_var=getAmenitiesByHabitation($_GET['id']);
+  $agenda_array=getAgendaByHabitation($_GET['id']);
 ?>
   <section id="editProperty">
   <header>

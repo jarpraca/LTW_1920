@@ -1,4 +1,4 @@
-<form  class="verticalForm" action=<?=$action_form?> method="post">
+<form id="property_form" class="verticalForm" action=<?=$action_form?> method="post">
     <label> Name
         <input type="text" name="name" value="<?=$name?>" required>
     </label>
@@ -34,15 +34,17 @@
         <textarea name="description" rows="10"><?=$description?></textarea>
     </label>
     <!--         amenities           -->
-    <script src="scripts/amenities.js" defer></script>
+    <script> var amenities_array_var = <?php echo json_encode($amenities_array_var); ?>; </script>
+    <script> var agenda_array = <?php echo json_encode($agenda_array); ?>; </script>
+    <script src="scripts/property.js" defer></script>
     <label>Amenity:
         <input type="text" id="amenities_input" name="amenity">
     </label>
     <input type="button" value="Add" id="amenities_button" class="submit">
     <table id="amenities_table">
     </table>
+    <input type="hidden" name="amenities_array" id="amenities_array"/>
     <!--          agenda             -->
-    <script src="scripts/agenda.js" defer></script>
     <label>From:
         <input id="agenda_input_from" type="date" name="date_from">
     </label>
@@ -52,6 +54,7 @@
     <input type="button" value="Add" id="agenda_button" class="submit">
     <table id="agenda">
     </table>
+    <input type="hidden" name="agenda_array" id="agenda_array"/>
     <!--          coordinates             -->
     <label> Latitude (Format DD)
         <input type="number" value="<?=$latitude?>" min="-90" max="90" step="0.000001" id="latitude">
@@ -99,5 +102,5 @@
     <label> Upload Pictures (Select All Pictures At Once)
         <input type="file" name="pictures" accept="image/*" value=<?=$image?> multiple>
     </label>
-    <input class="submit" type="submit" value="Submit">
+    <input class="submit" type="submit" value="Submit" id="submitProperty">
 </form>
