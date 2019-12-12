@@ -12,7 +12,7 @@ h1, h2, h3{
     margin: 0 0.5em 0 0;
 }
 
-h4, h5, h6, p, span, input, label, tr, a{
+h4, h5, h6, p, span, input, label, tr, a, #filter_button{
     font-family: var(--bodyFont);
 }
 
@@ -56,9 +56,9 @@ body > footer{
 
 .dropdown-content{
     background: var(--myDarkBlue);
-    border-style: solid;
+    /* border-style: solid;
     border-width: thin;
-    border-color: var(--myLightBlue);
+    border-color: var(--myLightBlue); */
 }
 
 #menu li:first-child + li + li h5, #menu li:first-child + li + li + li h5, .dropdown-content p{
@@ -66,6 +66,10 @@ body > footer{
     border-style: solid;
     border-width: thin;
     border-color: var(--myDarkBlue);
+}
+
+.dropdown-content p{
+    border-bottom-color: var(--myLightBlue);
 }
 
 #menu li:first-child + li + li h5:hover, #menu li:first-child + li + li + li h5:hover{
@@ -175,22 +179,67 @@ input, select, textarea{
     text-decoration: none;
 }
 
-.list_properties_options h5{
+.list_properties_options h5, .list_properties_options #filter_button{
     background-color: var(--myLightBlue);
     color: var(--myDarkBlue);
     border-style: solid;
     border-width: thin;
     border-color: var(--myLightBlue);
+    font-weight: bold;
 }
 
-.list_properties_options h5:hover{
+.list_properties_options h5:hover, .list_properties_options #filter_button:hover{
     background-color: var(--myDarkBlue);
     color: var(--myLightBlue);
     border-style: solid;
     border-width: thin;
     border-color: var(--myLightBlue);
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.list_properties_options a{
+.list_properties_options a, button{
     text-decoration: none;
 }
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    /* justify-content: center;*/
+    align-content: center; 
+    background-color:var(--myDarkBlue);
+    /* position: fixed; */
+    margin: 8rem 32.5% auto 32.5%; /* 15% from the top and centered */
+    /* margin: 15% auto; */
+    padding: 1rem;
+    border: 1px solid var(--myLightBlue);
+    width: 35%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }

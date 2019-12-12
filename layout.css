@@ -277,11 +277,22 @@ body {
     margin: 1rem;
 }
 
-.list_properties_options h5{
+.list_properties_options h5, #filter_button{
     margin: 0 1rem 0 0;
     padding: 1em;
 }
 
 .subtitle{
     margin: 1rem;
+}
+
+#filter_form {
+    margin: 1rem;
+    width: 90%;
+    height: 100%;
+}
+
+.close{
+    margin: 0;
+    padding: 0;
 }

@@ -1,4 +1,4 @@
-<form id="search" method="POST" action="templates/forms/search_action.php">
+<form id="search" method="get" action="listSearch.php">
     <a> Location: </a>
     <input class="search_input" type="search" name="location" placeholder="City, Country or Hotel" id="search_text_input" required>
     <a> From: </a>

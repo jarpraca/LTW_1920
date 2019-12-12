@@ -1,28 +1,50 @@
 <?php
 
-function getHabitationsCity($city){
+function getHabitationsCity($city, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight){
     global $db;
-    $stmt = $db->prepare('SELECT Habitacao.* FROM Habitacao JOIN cidade USING (idCidade) WHERE cidade.nome = ?');
-    $stmt->execute(array($city));
+    $stmt = $db->prepare('SELECT Habitacao.* FROM Habitacao JOIN cidade USING (idCidade)
+    WHERE cidade.nome = ? AND idTipo like ? AND Habitacao.maxHospedes >= ? AND Habitacao.numQuartos >= ? AND Habitacao.precoNoite >= ? AND Habitacao.precoNoite <= ?');
+    $stmt->execute(array($city, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight));
     return $stmt->fetchAll();
 }
 
-function getHabitationsCountry($country){
+function getHabitationsCountry($country, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight){
     global $db;
-    $stmt = $db->prepare('SELECT Habitacao.* FROM Habitacao JOIN cidade USING (idCidade) JOIN Pais USING (idPais) WHERE Pais.nome = ?');
-    $stmt->execute(array($country));
+    $stmt = $db->prepare('SELECT Habitacao.* FROM Habitacao JOIN cidade USING (idCidade) JOIN Pais USING (idPais) JOIN TipoDeHabitacao USING (idTipo) 
+    WHERE Pais.nome = ? AND idTipo like ? AND Habitacao.maxHospedes >= ? AND Habitacao.numQuartos >= ? AND Habitacao.precoNoite >= ? AND Habitacao.precoNoite <= ?');
+    $stmt->execute(array($country, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight));
     return $stmt->fetchAll();
 }
 
-function getHabitationsHabitationName($name){
+function getHabitationsHabitationName($name, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight){
     global $db;
-    $stmt = $db->prepare('SELECT * FROM Habitacao WHERE nome like ?');
-    $stmt->execute(array("%$name%"));
+    $stmt = $db->prepare('SELECT Habitacao.* FROM Habitacao JOIN TipoDeHabitacao USING (idTipo) 
+    WHERE Habitacao.nome like ? AND idTipo like ? AND Habitacao.maxHospedes >= ? AND Habitacao.numQuartos >= ? AND Habitacao.precoNoite >= ? AND Habitacao.precoNoite <= ?');
+    $stmt->execute(array("%$name%", $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight));
     return $stmt->fetchAll();
 }
 
-function getHabitations($name){
-    return array_merge(getHabitationsCity($name), getHabitationsCountry($name), getHabitationsHabitationName($name));
+function getHabitations($location, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight){
+    if($type == null)
+        $type = "%";
+
+    if($minNumberGuests == null)
+        $minNumberGuests = 1;
+
+    if($minNumberBedroom == null)
+        $minNumberBedroom = 1;
+
+    if($minPriceNight == null)
+        $minPriceNight = 0;
+
+    if($maxPriceNight == null)
+        $maxPriceNight = 99999;
+
+    $habitations = array_merge(getHabitationsCity($location, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight), 
+    getHabitationsCountry($location, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight), 
+    getHabitationsHabitationName($location, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight));
+
+    return array_unique($habitations, SORT_REGULAR);
 }
 
 function getProperties($user_id){
@@ -91,7 +113,6 @@ function updateHabitation($id, $name, $numQuartos, $maxHospedes, $morada, $preco
         $stmt->execute(array($cidade, $pais));
         $idCidade = $db->lastInsertId();
     }
-    print_r($politica);
     $stmt = $db->prepare('UPDATE Habitacao SET nome=?, numQuartos=?, maxHospedes=?, morada=?, precoNoite=?, taxaLimpeza=?, idCidade=?, idTipo=?, idPolitica=?, descricao=? WHERE idHabitacao=?');
     $stmt->execute(array($name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $idCidade, $tipo, $politica, $descricao, $id));
 }
