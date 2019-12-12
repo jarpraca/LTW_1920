@@ -9,7 +9,7 @@
 
     include('templates/common/header.php');
 
-    echo '<h2 class="subtitle">Searched for "'.$_GET['location'].'"</h2>';
+    echo '<h2 class="subtitle">Searched for "'.$_GET['location'].'" between '.$_GET['dateFrom'].' and '.$_GET['dateTo'].'.</h2>';
 
     echo '<div class="list_properties_options">';
     echo '<a href="editProfile.php"><h5>Filter</h5></a>';

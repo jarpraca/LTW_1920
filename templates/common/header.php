@@ -28,8 +28,8 @@
                                 <h5>My Area</h5>
                                 <div class="dropdown-content">
                                     <a href="editProfile.php"><p>Edit Profile</p></a>
-                                    <a href="listProperties.php"><p>View Properties</p></a>
-                                    <a href="listReservations.php"><p>View Reservations</p></a>
+                                    <a href="listProperties.php"><p>My Properties</p></a>
+                                    <a href="listReservations.php"><p>My Reservations</p></a>
                                     <a href="templates/forms/logout.php"><p>Logout</p></a>
                                 </div>
                             </div>

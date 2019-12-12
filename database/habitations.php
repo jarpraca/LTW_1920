@@ -16,8 +16,8 @@ function getHabitationsCountry($country){
 
 function getHabitationsHabitationName($name){
     global $db;
-    $stmt = $db->prepare('SELECT * FROM Habitacao WHERE nome = ?');
-    $stmt->execute(array($name));
+    $stmt = $db->prepare('SELECT * FROM Habitacao WHERE nome like ?');
+    $stmt->execute(array("%$name%"));
     return $stmt->fetchAll();
 }
 

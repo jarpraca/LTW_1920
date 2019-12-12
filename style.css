@@ -56,18 +56,19 @@ body > footer{
 
 .dropdown-content{
     background: var(--myDarkBlue);
-    border-style: none;
+    border-style: solid;
+    border-width: thin;
     border-color: var(--myLightBlue);
 }
 
-#menu li:first-child + li + li h5, #menu li:first-child + li + li + li h5, .dropdown-content a{
+#menu li:first-child + li + li h5, #menu li:first-child + li + li + li h5, .dropdown-content p{
     background: var(--myDarkBlue);
     border-style: solid;
     border-width: thin;
     border-color: var(--myDarkBlue);
 }
 
-#menu li:first-child + li + li h5:hover, #menu li:first-child + li + li + li h5:hover, .dropdown-content a:hover{
+#menu li:first-child + li + li h5:hover, #menu li:first-child + li + li + li h5:hover{
     background: var(--myDarkBlue);
     border-style: solid;
     border-width: thin;
@@ -80,6 +81,12 @@ body > footer{
     border-style: solid;
     border-width: thin;
     border-color: var(--myLightBlue);
+}
+
+.dropdown-content p:hover{
+    background: var(--myLightBlue);
+    border-color: var(--myLightBlue);
+    color: var(--myDarkBlue);
 }
 
 input, select, textarea{
