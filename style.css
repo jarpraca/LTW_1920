@@ -135,10 +135,6 @@ input, select, textarea{
     color: var(--myLightBlue);
 }
 
-#search a{
-    font-size: 0.9em;
-}
-
 #homepage{
     background-image: url('images/background2.jpg');
     background-repeat: no-repeat;

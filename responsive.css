@@ -46,8 +46,8 @@
 
 } */
 
-@media(max-width: 78em){
-    #search {
+@media(max-width: 600px){
+    /*#search {
         display:none;
-    }
+    }*/
 }

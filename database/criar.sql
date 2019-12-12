@@ -5,7 +5,8 @@ BEGIN TRANSACTION;
 DROP TABLE IF EXISTS Agenda;
 
 CREATE TABLE Agenda (
-    dataInicio  DATE PRIMARY KEY,
+    idAgenda    INTEGER PRIMARY KEY,
+    dataInicio  DATE,
     dataFim     DATE 
 );
 
@@ -173,8 +174,8 @@ DROP TABLE IF EXISTS Disponivel;
 
 CREATE TABLE Disponivel (
     idHabitacao     INTEGER REFERENCES Habitacao (idHabitacao)  ON DELETE CASCADE ON UPDATE CASCADE, 
-    data            DATE REFERENCES Agenda (data)  ON DELETE CASCADE ON UPDATE CASCADE,
-    PRIMARY KEY (idHabitacao, data)
+    idAgenda        INTEGER REFERENCES Agenda (idAgenda)  ON DELETE CASCADE ON UPDATE CASCADE,
+    PRIMARY KEY (idHabitacao, idAgenda)
 );
 
 -- Table: Dispoe
