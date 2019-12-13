@@ -120,9 +120,9 @@ window.onload = function(event){
     for (let i = 0; i < agenda_array.length; i++) {
         let agenda = document.createElement('tr');
         let from = document.createElement('td');
-        from.innerHTML = agenda_array[i][0];
+        from.innerHTML = agenda_array[i]['dataInicio'];
         let to = document.createElement('td');
-        to.innerHTML = agenda_array[i][1];
+        to.innerHTML = agenda_array[i]['dataFim'];
     
         let button = document.createElement('td');
         let input_button = document.createElement('input');

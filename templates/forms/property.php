@@ -25,17 +25,17 @@
     </label>
     <!--          prices             -->
     <label class="currency"> Price per Night
-        <input type="number" name="priceNight" value="<?=$priceNight?>" min="0" step="0.01" id="priceNight" />
+        <input type="number" name="priceNight" value="<?=$priceNight?>" min="0.01" step="0.01" id="priceNight" />
     </label>
     <label class="currency"> Cleaning Tax
-        <input type="number" name="cleaningTax" value="<?=$tax?>" min="0" step="0.01" id="cleaningTax" />
+        <input type="number" name="cleaningTax" value="<?=$tax?>" min="0.01" step="0.01" id="cleaningTax" />
     </label>
     <label> Description
         <textarea name="description" rows="10"><?=$description?></textarea>
     </label>
     <!--         amenities           -->
-    <script> var amenities_array_var = <?php echo json_encode($amenities_array_var); ?>; </script>
-    <script> var agenda_array = <?php echo json_encode($agenda_array); ?>; </script>
+    <script> let amenities_array_var = <?php echo json_encode($amenities_array_var); ?>; </script>
+    <script> let agenda_array = <?php echo json_encode($agenda_array); ?>; </script>
     <script src="scripts/property.js" defer></script>
     <label>Amenity:
         <input type="text" id="amenities_input" name="amenity">
