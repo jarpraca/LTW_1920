@@ -10,7 +10,6 @@
     updateHabitation($id, $_POST['name'], $_POST['numberBedrooms'], $_POST['numberGuests'], $_POST['address'], $_POST['priceNight'], $_POST['cleaningTax'], $_POST['country'], $_POST['city'], $_POST['types'], $_POST['policies'], $_POST['description'], $_SESSION['user']);
     
     // -------- Images ---------
-    print_r($_FILES['pictures']);
     /*
     if(is_array($_FILES['pictures'])){
         echo 'ARRAY';

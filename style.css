@@ -261,3 +261,9 @@ input, select, textarea {
     content: '\2022';
     font-size: 1.17em;
 }
+
+#mapid { 
+    height: 400px; 
+    width: calc(50-1rem);
+    padding: 1rem;
+}

@@ -57,10 +57,10 @@
     <input type="hidden" name="agenda_array" id="agenda_array"/>
     <!--          coordinates             -->
     <label> Latitude (Format DD)
-        <input type="number" value="<?=$latitude?>" min="-90" max="90" step="0.000001" id="latitude">
+        <input type="number" value="<?=$latitude?>" min="-90" max="90" step="0.000001" id="latitude" name="latitude">
     </label>
     <label> Longitude (Format DD)
-        <input type="number" value="<?=$longitude?>" min="-180" max="180" step="0.000001" id="longitude">
+        <input type="number" value="<?=$longitude?>" min="-180" max="180" step="0.000001" id="longitude" name="longitude">
     </label>
     <label> Address
         <input type="text" name="address" value="<?=$address?>" required>

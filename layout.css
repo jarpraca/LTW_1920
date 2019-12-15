@@ -250,7 +250,7 @@ h5 {
 }
 
 .propertyShort, .reservationShort, .propertySearch {
-    width: calc(50% - 1rem);
+    /* width: calc(50% - 1rem); */
     display: flex;
     margin: 1rem;
 }
@@ -362,4 +362,24 @@ h5 {
 
 .close {
     float: right;
+}
+
+#listPropertiesMap {
+    display: flex;
+}
+
+#listPropertiesMap {
+    display: grid;
+    grid-template-areas: "data aside";
+    grid-auto-columns: 50%;
+}
+
+#propertiesSection {
+    grid-area: data;
+}
+
+#listPropertiesMap aside {
+    grid-area: aside;
+    padding: 1em;
+    align-items: center;
 }

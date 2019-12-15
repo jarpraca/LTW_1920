@@ -49,9 +49,13 @@
     $secs = $datetime2 - $datetime1;// == <seconds between the two times>
     $days = $secs / 86400;
 
+    echo '<section id="listPropertiesMap">';
+    include('templates/properties/map.php');
+    echo '<section id="propertiesSection">';
     foreach ($properties as $habitation){
         include("templates/properties/viewSearchProperty.php");
     }
-
+    echo '</section>';
+    echo '</section>';
     include_once('templates/common/footer.php');
 ?>
