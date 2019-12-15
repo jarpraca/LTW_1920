@@ -235,20 +235,20 @@ input, select, textarea {
     cursor: pointer;
 }
 
-#rating {
+.rating {
     display: block;
 }
 
-#rating::before{
+.rating::before{
     content: '\2B50';
     font-size: 1.17em;
 }
 
-#star {
+.star {
     display: block;
 }
 
-#star::before{
+.star::before{
     content: '\2606';
     font-size: 1.17em;
 }
@@ -260,4 +260,9 @@ input, select, textarea {
 #amenity::before{
     content: '\2022';
     font-size: 1.17em;
+}
+
+.comment{
+    background-color: var(--myLightBlue);
+    color: var(--myDarkBlue);
 }

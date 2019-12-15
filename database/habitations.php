@@ -167,10 +167,12 @@ function removeReservationsHabitation($id){
     $stmt->execute(array($id));
 }
 
-function addComment($idRes, $limpeza, $valor, $checkIn, $localizacao, $description){
+function addComment($idRes, $limpeza, $valor, $checkIn, $localizacao, $description, $anonimo){
     global $db;
-    $stmt = $db->prepare('INSERT INTO ClassificacaoPorCliente(limpeza, valor, checkIn, localizacao, outros, idReserva) VALUES (?, ?, ?, ?, ?, ?)');
-    $stmt->execute(array($limpeza, $valor, $checkIn, $localizacao, $description, $idRes));
+    $stmt = $db->prepare('INSERT INTO ClassificacaoPorCliente(limpeza, valor, checkIn, localizacao, outros, anonimo, idReserva) VALUES (?, ?, ?, ?, ?, ?, ?)');
+    $stmt->execute(array($limpeza, $valor, $checkIn, $localizacao, $description, $anonimo, $idRes));
+    $stmt = $db->prepare('UPDATE Reserva SET idEstado=2 WHERE idReserva=?');
+    $stmt->execute(array($idRes));
 }
 
 function getTypes(){
@@ -302,7 +304,7 @@ function getOwner($idHabitation){
 
 function getComments($idHabitation){
     global $db;
-    $stmt = $db->prepare('SELECT idUtilizador FROM ClassificacaoPorCliente JOIN Reserva USING (idReserva) WHERE idHabitacao=?');
+    $stmt = $db->prepare('SELECT * FROM ClassificacaoPorCliente JOIN Reserva USING (idReserva) WHERE idHabitacao=?');
     $stmt->execute(array($idHabitation));
 
     return $stmt->fetchAll();
@@ -382,6 +384,14 @@ function getAgendaByHabitation($idHabitation){
     global $db;
     $stmt = $db->prepare('SELECT * FROM Agenda JOIN Disponivel  USING (idAgenda) WHERE idHabitacao=?');
     $stmt->execute(array($idHabitation));
+
+    return $stmt->fetchAll();
+}
+
+function getResNotCommentedByUser($idHabitation, $idUser){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Reserva WHERE idHabitacao=? and idUtilizador=? and idEstado=1');
+    $stmt->execute(array($idHabitation, $idUser));
 
     return $stmt->fetchAll();
 }
