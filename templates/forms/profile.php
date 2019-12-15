@@ -34,7 +34,7 @@
             <input type="password" name="confirmpassword" id="confirmpassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
         </label>
     <label> Upload Picture 
-        <input type="file" name="picture" value="<?=$picture?>" accept="image/*">
+        <input type="file" name="pictures" value="<?=$pictures?>" accept="image/*">
     </label>
     <input class="submit" type="submit" id="profileSubmit" value="Submit">
     <script language='javascript' type='text/javascript'>

@@ -12,7 +12,7 @@
   $email="";
   $phone="";
   $country="";
-  $picture="";
+  $pictures="";
 ?>
   <section id="profile">
   <header>

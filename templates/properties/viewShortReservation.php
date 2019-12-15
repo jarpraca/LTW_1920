@@ -3,9 +3,9 @@
         include_once("database/connection.php");
         include_once("database/habitations.php");
         $habitation=getHabitationById($reservation['idHabitacao']);
-        $picture=getHabitationPictures($habitation['idHabitacao']);
-        if ($picture != null){
-            echo '<img src=' . $picture['urlImagem'] . 'alt=' . $picture['legenda'] . '>';
+        $pictures=getHabitationPictures($habitation['idHabitacao']);
+        if ($pictures != null){
+            echo '<img src=' . $pictures['urlImagem'] . 'alt=' . $pictures['legenda'] . '>';
         }
         else{
             echo '<img src="images/ownerPicture.jpg"  alt="Habitation Picture">';

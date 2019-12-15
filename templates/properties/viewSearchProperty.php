@@ -2,12 +2,37 @@
     <?php 
         include_once("database/connection.php");
         include_once("database/habitations.php");
-        $picture=getHabitationPictures($habitation['idHabitacao']);
-        if ($picture != null){
-            echo '<img src=' . $picture['urlImagem'] . 'alt=' . $picture['legenda'] . '>';
+        $pictures=getHabitationPictures($habitation['idHabitacao']);
+
+        if ($pictures != null){
+            echo '<img src=' . $pictures[0]['urlImagem'] . 'alt=' . $pictures[0]['legenda'] . '>';
         }
         else{
             echo '<img src="images/ownerPicture.jpg" alt="Habitation Picture">';
+        }
+
+        $total = $habitation['precoNoite']*$days+$habitation['taxaLimpeza'];
+
+        $comments = getComments($habitation['idHabitacao']);
+        $cleaning=0;
+        $location=0;
+        $value=0;
+        $check_in=0;
+        $rating=0;
+        $n=0;
+        foreach($comments as &$comment){
+            $cleaning+= $comment['limpeza'];
+            $location+= $comment['localizacao'];
+            $value+= $comment['valor'];
+            $check_in += $comment['checkIn'];
+            $n++;
+        }
+        if ($n!=0){
+            $location=$location/$n;
+            $cleaning=$cleaning/$n;
+            $value=$value/$n;
+            $check_in=$check_in/$n;
+            $rating=$location+$cleaning+$value+$check_in/4;
         }
     ?>
     <div class="rightText">
@@ -15,10 +40,8 @@
         <h1><?=$habitation['nome']?></h1>
         <p>No. Rooms: <?=$habitation['numQuartos']?></p>  
         <p>No. Max Guests: <?=$habitation['maxHospedes']?></p>  
-        <?php
-            $total = $habitation['precoNoite']*$days+$habitation['taxaLimpeza'];
-        ?> 
         <div class="horizontalElements">
+            <h3 id="rating"><?=$rating?> (<?=$n?> users)</h3>
             <h3>Total: <?=$total?>€</h3> 
             <a href="viewProperty.php?id=<?=$habitation['idHabitacao']?>&dateFrom=<?=$_GET['dateFrom']?>&dateTo=<?=$_GET['dateTo']?>" class="submit"><p>View</p></a>
         </div>

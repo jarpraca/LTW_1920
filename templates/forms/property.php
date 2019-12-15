@@ -1,4 +1,4 @@
-<form id="property_form" class="verticalForm" action=<?=$action_form?> method="post">
+<form id="property_form" class="verticalForm" action=<?=$action_form?> method="post" enctype="multipart/form-data">
     <label> Name
         <input type="text" name="name" value="<?=$name?>" required>
     </label>
@@ -100,7 +100,13 @@
     </label>
     <!--          pictures             -->
     <label> Upload Pictures (Select All Pictures At Once)
-        <input type="file" name="pictures" accept="image/*" value=<?=$image?> multiple>
+        <input type="file" name="pictures" accept="image/*" multiple value=<?=$image?> >
     </label>
+    <?php
+        if(isset($_GET['id'])){
+            $link = "templates/forms/removeAllImages_action.php?id=" . $_GET['id'];
+    ?>
+        <input type="button" value="Remove Pictures" id="rem_pictures_button" class="submit" onclick="window.location.replace('<?=$link?>');">
+    <?php } ?>
     <input class="submit" type="submit" value="Submit" id="submitProperty">
 </form>

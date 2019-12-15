@@ -16,7 +16,7 @@
   $email=$user['email'];
   $phone=$user['telefone'];
   $country=getCountryById($user['idPais']);
-  $picture=$user['foto'];
+  $pictures=$user['foto'];
 ?>
   <section id="profile">
     <header>

@@ -12,7 +12,6 @@
   echo '<h2 class="subtitle">My Properties</h2>';
 
   echo '<div class="list_properties_options">';
-  echo '<a href="editProfile.php"><h5>Filter</h5></a>';
   echo '<a href="addProperty.php"><h5>Add Property</h5></a>';
   echo '</div>';
 

@@ -3,7 +3,7 @@
 function getHabitationsCity($city, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight){
     global $db;
     $stmt = $db->prepare('SELECT Habitacao.* FROM Habitacao JOIN cidade USING (idCidade)
-    WHERE cidade.nome = ? AND idTipo like ? AND Habitacao.maxHospedes >= ? AND Habitacao.numQuartos >= ? AND Habitacao.precoNoite >= ? AND Habitacao.precoNoite <= ?');
+    WHERE cidade.nome = ? AND idTipo like ? AND Habitacao.maxHospedes >= ? AND Habitacao.numQuartos >= ? AND Habitacao.precoNoite >= ? AND Habitacao.precoNoite <= ? ORDER BY nome');
     $stmt->execute(array($city, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight));
     return $stmt->fetchAll();
 }
@@ -11,7 +11,7 @@ function getHabitationsCity($city, $type, $minNumberGuests, $minNumberBedroom, $
 function getHabitationsCountry($country, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight){
     global $db;
     $stmt = $db->prepare('SELECT Habitacao.* FROM Habitacao JOIN cidade USING (idCidade) JOIN Pais USING (idPais) JOIN TipoDeHabitacao USING (idTipo) 
-    WHERE Pais.nome = ? AND idTipo like ? AND Habitacao.maxHospedes >= ? AND Habitacao.numQuartos >= ? AND Habitacao.precoNoite >= ? AND Habitacao.precoNoite <= ?');
+    WHERE Pais.nome = ? AND idTipo like ? AND Habitacao.maxHospedes >= ? AND Habitacao.numQuartos >= ? AND Habitacao.precoNoite >= ? AND Habitacao.precoNoite <= ? ORDER BY nome');
     $stmt->execute(array($country, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight));
     return $stmt->fetchAll();
 }
@@ -19,7 +19,7 @@ function getHabitationsCountry($country, $type, $minNumberGuests, $minNumberBedr
 function getHabitationsHabitationName($name, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight){
     global $db;
     $stmt = $db->prepare('SELECT Habitacao.* FROM Habitacao JOIN TipoDeHabitacao USING (idTipo) 
-    WHERE Habitacao.nome like ? AND idTipo like ? AND Habitacao.maxHospedes >= ? AND Habitacao.numQuartos >= ? AND Habitacao.precoNoite >= ? AND Habitacao.precoNoite <= ?');
+    WHERE Habitacao.nome like ? AND idTipo like ? AND Habitacao.maxHospedes >= ? AND Habitacao.numQuartos >= ? AND Habitacao.precoNoite >= ? AND Habitacao.precoNoite <= ? ORDER BY nome');
     $stmt->execute(array("%$name%", $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight));
     return $stmt->fetchAll();
 }
@@ -49,7 +49,7 @@ function getHabitations($location, $type, $minNumberGuests, $minNumberBedroom, $
 
 function getProperties($user_id){
     global $db;
-    $stmt = $db->prepare('SELECT * FROM Habitacao WHERE idUtilizador = ?');
+    $stmt = $db->prepare('SELECT * FROM Habitacao WHERE idUtilizador = ? ORDER BY nome');
     $stmt->execute(array($user_id));
     return $stmt->fetchAll();
 }
@@ -99,7 +99,10 @@ function insertHabitation($name, $numQuartos, $maxHospedes, $morada, $precoNoite
 function removeHabitation($id){
     global $db;
     $stmt = $db->prepare('DELETE FROM Habitacao WHERE idHabitacao = ?');
-    $stmt = $db->execute(array($id));
+    $stmt->execute(array($id));
+
+    removeAllImages($id);
+    removeReservationsHabitation($id);
 }
 
 function updateHabitation($id, $name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $pais, $cidade, $tipo, $politica, $descricao){
@@ -120,36 +123,54 @@ function updateHabitation($id, $name, $numQuartos, $maxHospedes, $morada, $preco
 
 function addImage($idHab, $url, $description){
     global $db;
-    $stmt = $db->prepare('INSERT INTO Imagem(insert into Imagem(urlImagem,legenda, idHabitacao) values (?, ?, ?);');
-    $stmt = $db->execute(array($url, $description, $idHab));
+    $stmt = $db->prepare('INSERT INTO Imagem(urlImagem, legenda, idHabitacao) values (?, ?, ?)');
+    $stmt->execute(array($url, $description, $idHab));
+}
+
+function removeAllImages($idHab){   
+    $pictures = getHabitationPictures($idHab);
+
+    foreach($pictures as $picture){
+        unlink($picture['urlImagem']);
+    }
+    
+    global $db;
+    $stmt = $db->prepare('DELETE FROM Imagem WHERE idHabitacao=?');
+    $stmt->execute(array($idHab));
 }
 
 function reserve($idRes, $idHab, $idUser, $dataCheckIn, $dataCheckOut, $numHospedes, $precoTotal){
     global $db;
-    $stmt = $db->prepare('INSERT INTO Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) VALUES (?, ?, ?, ?, ?, ?, 0);');
-    $stmt = $db->execute(array($idRes, $dataCheckIn, $dataCheckOut, $numHospedes, $precoTotal, $idHab));
+    $stmt = $db->prepare('INSERT INTO Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) VALUES (?, ?, ?, ?, ?, ?, 0)');
+    $stmt->execute(array($idRes, $dataCheckIn, $dataCheckOut, $numHospedes, $precoTotal, $idHab));
     $stmt = $db->prepare('INSERT INTO Efetua(idCliente, idReserva) VALUES (?, ?)');
-    $stmt = $db->execute(array($idUser, $idRes));
+    $stmt->execute(array($idUser, $idRes));
 }
 
 function cancelReservation($idRes){
     global $db;
     $stmt = $db->prepare('UPDATE Reserva SET idEstado=3 WHERE idRes = ?');
-    $stmt = $db->execute(array($idRes));
+    $stmt->execute(array($idRes));
     $stmt = $db->prepare('SELECT percentagemReembolso FROM (PoliticaDeCancelamento JOIN Habitacao USING (idPolitica)) JOIN Reserva USING (idHabitacao) WHERE idReserva = ?');
-    $stmt = $db->execute(array($idRes));
+    $stmt->execute(array($idRes));
     $reembolso = $stmt->fetch();
     $stmt = $db->prepare('SELECT precoTotal FROM Reserva WHERE idReserva = ?');
-    $stmt = $db->execute(array($idRes));
+    $stmt->execute(array($idRes));
     $price = $stmt->fetch();
     $stmt = $db->prepare('INSERT INTO Cancelamento(reembolso, idReserva) VALUES (?, ?)');
-    $stmt = $db->execute(array($idRes, $price * $reembolso));
+    $stmt->execute(array($idRes, $price * $reembolso));
+}
+
+function removeReservationsHabitation($id){
+    global $db;
+    $stmt = $db->prepare('DELETE FROM Reserva WHERE idHabitacao = ?');
+    $stmt->execute(array($id));
 }
 
 function addComment($idRes, $limpeza, $valor, $checkIn, $localizacao, $description){
     global $db;
     $stmt = $db->prepare('INSERT INTO ClassificacaoPorCliente(limpeza, valor, checkIn, localizacao, outros, idReserva) VALUES (?, ?, ?, ?, ?, ?)');
-    $stmt = $db->execute(array($limpeza, $valor, $checkIn, $localizacao, $description, $idRes));
+    $stmt->execute(array($limpeza, $valor, $checkIn, $localizacao, $description, $idRes));
 }
 
 function getTypes(){
@@ -177,8 +198,8 @@ function getHabitationById($id){
 }
 function getHabitationId($nome){
     global $db;
-    $stmt = $db->prepare('SELECT * FROM Habitacao WHERE idHabitacao=?');
-    $stmt->execute(array($id));
+    $stmt = $db->prepare('SELECT * FROM Habitacao WHERE nome=?');
+    $stmt->execute(array($nome));
 
     return $stmt->fetch();
 }
@@ -255,14 +276,6 @@ function getCountryCity($idCity){
     return $stmt->fetch()['idPais'];
 }
 
-function getImagesProperty($id){
-    global $db;
-    $stmt = $db->prepare('SELECT * FROM Imagem WHERE idHabitacao=?');
-    $stmt->execute(array($id));
-
-    return $stmt->fetchAll();
-}
-
 function getAmenities($idHabitacao){
     global $db;
     $stmt = $db->prepare('SELECT nome FROM Comodidade JOIN Dispoe USING (idComodidade) WHERE idHabitacao=?');
@@ -337,7 +350,7 @@ function addAmenity($idHabitation, $amenity){
 
 function addAgenda($idHabitation, $agenda_from, $agenda_to){
     global $db;
-    $stmt = $db->prepare('SELECT $idAgenda FROM Agenda WHERE dataInicio=? and dataFim=?');
+    $stmt = $db->prepare('SELECT idAgenda FROM Agenda WHERE dataInicio=? and dataFim=?');
     $stmt->execute(array($agenda_from, $agenda_to));
     $idAgenda=$stmt->fetch()['idAgenda'];
     if ($idAgenda == null)
@@ -347,7 +360,7 @@ function addAgenda($idHabitation, $agenda_from, $agenda_to){
         $idAgenda=$db->lastInsertId();
     }
     else{
-        $stmt = $db->prepare('SELECT * FROM Disponibilidade WHERE idAgenda=? and idHabitacao=?');
+        $stmt = $db->prepare('SELECT * FROM Disponivel WHERE idAgenda=? and idHabitacao=?');
         $stmt->execute(array($idAgenda, $idHabitation));
         $dispoe=$stmt->fetch();
         if ($dispoe != null)

@@ -7,7 +7,7 @@
     $id=$_SESSION['user'];
     modifyUser($id, $_POST['password'], $_POST['primeiroNome'], $_POST['ultimoNome'], $_POST['dateofbirth'], $_POST['email'], $_POST['phone'], $_POST['country']);
     
-    if(is_uploaded_file($_POST['picture']['tmp_name'])){
+    if(is_uploaded_file($_POST['pictures']['tmp_name'])){
         $allowedExts = array("jpeg", "jpg", "png");
         $temp = explode(".", $_FILES["file"]["name"]);
         $extension = end($temp);
@@ -24,7 +24,7 @@
             else {
                 $ext = end(explode(".", $_FILES["file"]["name"]));
                 $fileName = "images" . $user['id'] . $ext;
-                if(move_uploaded_file($_FILES['picture']['tmp_name'], $fileName)){
+                if(move_uploaded_file($_FILES['pictures']['tmp_name'], $fileName)){
                     addPhotoProfile($user['idUtilizador'], $fileName, $_POST['primeiroNome'] . "'s Photo");
                 }
             }   

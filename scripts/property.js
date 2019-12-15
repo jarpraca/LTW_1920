@@ -5,6 +5,16 @@ let input = document.getElementById("amenities_input");
 let add_button = document.getElementById("amenities_button");
 let table = document.getElementById("amenities_table");
 
+input.onkeypress = function(event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        add_button.click();
+    }
+};
+
 add_button.addEventListener('click', function(event) {
     event.preventDefault();
     
@@ -27,6 +37,9 @@ add_button.addEventListener('click', function(event) {
     amenity.appendChild(button);
     
     table.append(amenity);
+
+    input.value = '';
+    input.focus();
 })
 
 // ----------------------   Agenda   ---------------------------
@@ -62,6 +75,10 @@ aadd_button.addEventListener('click', function(event) {
     agenda.appendChild(button);
     
     atable.append(agenda);
+
+    date_from.value = '';
+    date_to.value = '';
+    date_from.focus();
 })
 
 // ----------------------   General   ---------------------------

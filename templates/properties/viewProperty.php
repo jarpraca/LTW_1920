@@ -2,9 +2,9 @@
     <header>
         <h1><?=$habitation['nome']?></h1>
         <h3><?=""/*getNameCity($habitation['idCidade'])?>, <?=getCountryCity($habitation['idCidade'])*/?> </h3>
-        <?php /*$picture=getUserPicture(getOwner($habiatation['idHabitacao']));
-        if ($picture!=null){?>
-            <img src="<?=$picture?>" alt="Owner Picture" width="5%">
+        <?php /*$pictures=getUserPicture(getOwner($habiatation['idHabitacao']));
+        if ($pictures!=null){?>
+            <img src="<?=$pictures?>" alt="Owner Picture" width="5%">
         <?php }else{ ?>
             <img src="OwnerPicture.jpg" alt="Owner Picture" width="5%">
         <?php } */?>
@@ -34,14 +34,16 @@
     </aside>
     <section id="property_data">
         <h3><?=getNameType($habitation['idTipo'])['nome'] ?></h3>
-        <p>Guests Maximum: <?=$habitation['maxHospedes']?>   |   Bedrooms:<?=$habitation['numQuartos']?></p>
+        <p>Maximum Guests: <?=$habitation['maxHospedes']?></p>
+        <p>Bedrooms: <?=$habitation['numQuartos']?></p>
+        <p>Cancelling Policy: <?=getPolicy($habitation['idPolitica'])['nome']?></p>
         <h3>Description</h3>
         <p><?=$habitation['descricao']?></p>
         <h3>Amenities</h3>
         <?php
         $amenities=getAmenities($habitation['idHabitacao']);
-        foreach ($amenities as &$value) { ?>
-            <p><?=$value?></p>
+        foreach ($amenities as $value) { ?>
+            <p id="amenity">   <?=$value['nome']?></p>
         <?php } ?>
         <h3>Location</h3>
         Em construcao.
@@ -52,12 +54,14 @@
         <h3>Reviews</h3>
         <script src="https://kit.fontawesome.com/yourcode.js"></script>
         <?php
+            $photos = getHabitationPictures($habitation['idHabitacao']);
+            print_r($photos);
             $comments = getComments($habitation['idHabitacao']);
             $cleaning=0;
             $location=0;
             $value=0;
             $check_in=0;
-            $total=0;
+            $rating=0;
             $n=0;
             foreach($comments as &$comment){
                 $cleaning+= $comment['limpeza'];
@@ -71,19 +75,19 @@
                 $cleaning=$cleaning/$n;
                 $value=$value/$n;
                 $check_in=$check_in/$n;
-                $total=$location+$cleaning+$value+$check_in/4;
+                $rating=$location+$cleaning+$value+$check_in/4;
             }
         ?>
         <i class="fas fa-star"></i>
-        <p><?=$total?></h5><p>(<?=$n?> Users)</p>
+        <p id="rating"><?=$rating?> (<?=$n?> users)</p>
         <i class="fas fa-star"></i>
-        <p><?=$cleaning?> Cleaning</p>
+        <p id="star"> <?=$cleaning?> Cleaning</p>
         <i class="fas fa-star"></i>
-        <p><?=$location?> Location</p>
+        <p id="star"> <?=$location?> Location</p>
         <i class="fas fa-star"></i>
-        <p><?=$value?> Price</p>
+        <p id="star"> <?=$value?> Price</p>
         <i class="fas fa-star"></i>
-        <p><?=$check_in?> Check In</p>
+        <p id="star"> <?=$check_in?> Check In</p>
         <?php ?>
     </section>
     <section id="comments">

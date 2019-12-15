@@ -8,7 +8,7 @@
     $id=insertHabitation($_POST['name'], $_POST['numberBedrooms'], $_POST['numberGuests'], $_POST['address'], $_POST['priceNight'], $_POST['cleaningTax'], $_POST['country'], $_POST['city'], $_POST['types'], $_POST['policies'], $_POST['description'], $_SESSION['user']);
     
     // -------- Images ---------
-    foreach ($_FILES['picture']['filesToUpload'] as $file){
+    foreach ($_FILES['pictures']['filesToUpload'] as $file){
         $allowedExts = array("jpeg", "jpg", "png");
         $temp = explode(".", $file["name"]);
         $extension = end($temp);

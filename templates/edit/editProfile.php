@@ -38,7 +38,7 @@
             <br>
             <br>
             <label> Upload Picture <br>
-                <input type="file" name="picture" accept="image/*">
+                <input type="file" name="pictures" accept="image/*">
                 <br>
                 <br>
                 <input type="submit" value="Register">

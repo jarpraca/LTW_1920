@@ -292,6 +292,14 @@ h5 {
     padding: 0.5em;
 }
 
+#rating {
+    margin-right: auto;
+}
+
+#star,#amenity {
+    padding-left: 1rem;
+}
+
 .list_properties_options {
     display: flex;
     margin: 1rem;
