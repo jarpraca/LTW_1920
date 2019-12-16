@@ -271,3 +271,7 @@ input, select, textarea {
     background-color: var(--myLightBlue);
     color: var(--myDarkBlue);
 }
+
+a{
+    text-decoration: none;
+}

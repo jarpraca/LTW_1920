@@ -403,4 +403,16 @@ function getResNotCommentedByUser($idHabitation, $idUser){
     return $stmt->fetchAll();
 }
 
+function isAvailable($idHabitation, $dateFrom, $dateTo){
+    return true;
+}
+
+function getStateName($idState){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Estado WHERE idEstado=?');
+    $stmt->execute(array($idState));
+
+    return $stmt->fetch()['estado'];
+}
+
 ?>

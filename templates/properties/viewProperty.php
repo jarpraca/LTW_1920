@@ -10,28 +10,37 @@
         <?php } */?>
     </header>
     <!-- fotos -->
-    <aside>
-        <p><?=$habitation['precoNoite']?> /night</p>
-        <h3>Dates</h3>
-        <p><?=$dateFrom?> -> <?=$dateTo?></p>
-        <!--<hr>-->
-        <?php
-            $datetime1 = strtotime($dateFrom . ' 00:00:00');
-            $datetime2 = strtotime($dateTo . ' 00:00:00');
-            
-            $secs = $datetime2 - $datetime1;// == <seconds between the two times>
-            $days = $secs / 86400;
-        ?>
-        <p><?=$habitation['precoNoite']?>x<?=$days?> nights</p>
-        <p><?=$habitation['precoNoite']*$days?>€</p>
-        <p>Cleaning Tax</p>
-        <p><?=$habitation['taxaLimpeza']?>€</p>
-        <h3>Total</h3>
-        <h3><?=$habitation['precoNoite']*$days+$habitation['taxaLimpeza']?>€</h3>
-        <form action="#" method="get">
-            <input type="submit" class="submit" value="Book">
-        </form>
-    </aside>
+    <?php
+    if ($dateFrom!=null && $dateTo!=null){
+    ?>
+        <aside>
+            <p><?=$habitation['precoNoite']?> /night</p>
+            <h3>Dates</h3>
+            <p><?=$dateFrom?> -> <?=$dateTo?></p>
+            <!--<hr>-->
+            <?php
+                $datetime1 = strtotime($dateFrom . ' 00:00:00');
+                $datetime2 = strtotime($dateTo . ' 00:00:00');
+                
+                $secs = $datetime2 - $datetime1;// == <seconds between the two times>
+                $days = $secs / 86400;
+            ?>
+            <p><?=$habitation['precoNoite']?>x<?=$days?> nights</p>
+            <p><?=$habitation['precoNoite']*$days?>€</p>
+            <p>Cleaning Tax</p>
+            <p><?=$habitation['taxaLimpeza']?>€</p>
+            <h3>Total</h3>
+            <h3><?=$habitation['precoNoite']*$days+$habitation['taxaLimpeza']?>€</h3>
+            <?php if(isset($_SESSION['user'])) {?>
+                <form action="#" method="get">
+                    <input type="submit" class="submit" value="Book">
+                </form>
+            <?php }
+            else{ ?>
+                <a href="login.php" class="submit"><p>Login to Reserve</p></a>
+            <?php } ?>
+        </aside>
+    <?php } ?>
     <section id="property_data">
         <h3><?=getNameType($habitation['idTipo'])['nome'] ?></h3>
         <p>Maximum Guests: <?=$habitation['maxHospedes']?></p>

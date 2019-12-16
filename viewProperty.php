@@ -8,17 +8,18 @@
     include_once('database/habitations.php');
 
     if (!isset($_GET['id']))
-    die("No id!");
-
-    if (!isset($_GET['dateFrom']))
-    die("No dateFrom!");
-
-    if (!isset($_GET['dateTo']))
-    die("No dateTo!");
+        header('location: homepage.php');
 
     $habitation = getHabitationById($_GET['id']);
-    $dateFrom = $_GET['dateFrom'];
-    $dateTo = $_GET['dateTo'];
+    $dateFrom = null;
+    if (isset($_GET['dateFrom']))
+        $dateFrom = $_GET['dateFrom'];
+    $dateTo = null;
+    if (isset($_GET['dateTo']))
+        $dateTo = $_GET['dateTo'];
+
+    if ($dateFrom!=null && $dateTo!=null && !isAvailable($_GET['id'], $dateFrom, $dateTo))
+        header('location: homepage.php');
 
     include('templates/properties/viewProperty.php');
     include('templates/common/footer.php');

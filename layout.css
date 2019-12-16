@@ -155,26 +155,14 @@ h5 {
     transform: translate(-50%, -50%);
 }
 
-#property {
-    display: grid;
-    grid-template-areas: "header header header"
-                        "data data aside";
-    text-align: left;
-}
-
-#property header {
-    grid-area: header;
-}
-
 #property aside {
-    grid-area: aside;
+    float: right;
     display: fixed;
     padding: 1em;
     display: grid;
     grid-template-areas: "priceNight priceNight" "datesLabel dates" "priceNightsCalc priceNights" "taxLabel tax" "totalLabel total" " submit submit";
     align-items: center;
     text-align: left;
-    grid-gap: 0px;
 }
 
 #property aside p:first-child {
@@ -219,7 +207,7 @@ h5 {
 }
 
 #property #property_data {
-    grid-area: data;
+    float:left;
 }
 
 .dropdown {
