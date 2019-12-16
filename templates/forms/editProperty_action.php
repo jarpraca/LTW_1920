@@ -3,6 +3,8 @@ function generate_random_token() {
     return bin2hex(openssl_random_pseudo_bytes(32));
   }
   session_start();
+  session_regenerate_id(true);
+
   if (!isset($_SESSION['csrf'])) {
     $_SESSION['csrf'] = generate_random_token();
   }   
@@ -60,12 +62,14 @@ function generate_random_token() {
     $agenda_array = json_decode($_POST['agenda_array']);
 
     if(is_array($amenities_array)){
+        removeAmenities($_GET['id']);
         foreach ($amenities_array as $amenity){
             addAmenity($_GET['id'], $amenity);
         }
     }
 
     if(is_array($agenda_array)){
+        removeAgenda($_GET['id']);
         foreach ($agenda_array as $agenda){
             addAgenda($_GET['id'], $agenda[0], $agenda[1]);
         }

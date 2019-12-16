@@ -342,6 +342,13 @@ function getHabitationPictures($id){
     return $stmt->fetchAll();
 }
 
+function removeAmenities($idHabitation){
+    global $db;
+
+    $stmt = $db->prepare('DELETE FROM Dispoe WHERE idHabitacao=?');
+    $stmt->execute(array($idHabitation));
+}
+
 function addAmenity($idHabitation, $amenity){
     global $db;
 
@@ -364,6 +371,13 @@ function addAmenity($idHabitation, $amenity){
 
     $stmt = $db->prepare('INSERT INTO Dispoe(idComodidade, idHabitacao) VALUES (?, ?)');
     $stmt->execute(array($idAmenity, $idHabitation));
+}
+
+function removeAgenda($idHabitation){
+    global $db;
+
+    $stmt = $db->prepare('DELETE FROM Disponivel WHERE idHabitacao=?');
+    $stmt->execute(array($idHabitation));
 }
 
 function addAgenda($idHabitation, $agenda_from, $agenda_to){
