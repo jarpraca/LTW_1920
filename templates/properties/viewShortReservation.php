@@ -5,7 +5,7 @@
         $habitation=getHabitationById($reservation['idHabitacao']);
         $pictures=getHabitationPictures($habitation['idHabitacao']);
         if ($pictures != null){
-            echo '<img src=' . $pictures['urlImagem'] . 'alt=' . $pictures['legenda'] . '>';
+            echo '<img src=' . $pictures[0]['urlImagem'] . 'alt=' . $pictures[0]['legenda'] . '>';
         }
         else{
             echo '<img src="images/ownerPicture.jpg"  alt="Habitation Picture">';

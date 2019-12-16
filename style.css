@@ -276,11 +276,6 @@ input, select, textarea {
     font-size: 1.17em;
 }
 
-#mapid { 
-    height: 400px; 
-    width: calc(50-1rem);
-    padding: 1rem;
-}
 .comment{
     background-color: var(--myLightBlue);
     color: var(--myDarkBlue);

@@ -9,6 +9,8 @@
     $id = $_GET['id'];
     updateHabitation($id, $_POST['name'], $_POST['numberBedrooms'], $_POST['numberGuests'], $_POST['address'], $_POST['priceNight'], $_POST['cleaningTax'], $_POST['country'], $_POST['city'], $_POST['types'], $_POST['policies'], $_POST['description'], $_POST['latitude'], $_POST['longitude']);
     
+    print_r($_FILES);
+
     // -------- Images ---------
    
     if(is_array($_FILES['pictures'])){
@@ -30,7 +32,6 @@
                 else {
                     $name = $_FILES['pictures']["name"][$i];
                     $ext = explode(".", $name)[1];
-                    print_r("ola");
                     $fileName = "images/" . $id . "-" . $i . "." . $ext;
                     if(move_uploaded_file($_FILES['pictures']['tmp_name'][$i], "../../".$fileName)){
                         addImage($id, $fileName, $_POST['name'] . "'s Photo");

@@ -215,6 +215,13 @@ h5 {
     grid-area: map;
     margin-top: 10%;
 }
+
+#mapid { 
+    height: 400px; 
+    /* width: calc(50%-1rem); */
+    padding: 1rem;
+}
+
 /* #property aside h3:first-child~h3~h3~h3 {
     grid-area: location;
 }
@@ -381,10 +388,6 @@ h5 {
 }
 
 #listPropertiesMap {
-    display: flex;
-}
-
-#listPropertiesMap {
     display: grid;
     grid-template-areas: "data aside";
     grid-auto-columns: 50%;
@@ -398,4 +401,8 @@ h5 {
     grid-area: aside;
     padding: 1em;
     align-items: center;
+}
+
+#no_results {
+    margin-left: 1rem;
 }
