@@ -1,17 +1,22 @@
 <form id="property_form" class="verticalForm" action=<?=$action_form?> method="post" enctype="multipart/form-data">
+<input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+
     <label> Name
         <input type="text" name="name" value="<?=$name?>" required>
     </label>
     <!--          type             -->
     <label> Type
-        <select name="types" value="<?=$type['idTipo']?>" required>
+        <select name="types" required>
             <?php
             include_once('database/connection.php');
             include_once('database/habitations.php');
             $types = getTypes();
 
-            foreach ($types as $type) {
-                echo '<option value="' . $type['idTipo'] . '">' . $type['nome'] . '</option>';
+            foreach ($types as $t) {
+                echo '<option value="' . $t['idTipo'] . '"';
+                if($type != "" && $type['idTipo'] == $t['idTipo'])
+                    echo ' selected ';
+                echo '>' . $t['nome'] . '</option>';
             }
             ?>
         </select>
@@ -69,7 +74,7 @@
         <input type="text" name="city" value="<?=$city?>" required>
     </label>
     <label> Country
-        <select name="country"  value="<?=$country['idPais']?>" required>
+        <select name="country" value="<?=$country['idPais']?>" required>
             <?php
             include_once('database/connection.php');
             include_once('database/users.php');
@@ -90,7 +95,7 @@
             $policys = getCancellationPolicys();
 
             foreach ($policys as $policyy) {
-                if ($policyy==$policy)
+                if ($policyy == $policy)
                     echo '<option value="' . $policyy['idPolitica'] . '"selected>' . $policyy['nome'] . '</option>';
                 else
                     echo '<option value="' . $policyy['idPolitica'] . '">' . $policyy['nome'] . '</option>';

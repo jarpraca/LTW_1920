@@ -4,6 +4,7 @@ if($dateTo==null || $dateFrom==null)
 else
     echo '<form id="comment_form" class="commentForm verticalForm" action="templates/forms/comment_action.php?id=<?=$idReserva?>&<?=$habitation?>&<?=$dateFrom?>&<?=$dateTo?>" method="post">';
 ?>
+    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
     <label> Cleaning
         <input type="number" name="cleaning" value="1" min="1" max="5" required>
     </label>

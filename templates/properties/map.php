@@ -23,9 +23,15 @@
 		id: 'mapbox/streets-v11'
 	}).addTo(mymap);
 
+    var properties_markers = [];
     for (i = 0; i < properties.length; i++) {
-            L.marker([properties[i]['latitude'], properties[i]['longitude']]).addTo(mymap);
-        }
+        var marker = L.marker([properties[i]['latitude'], properties[i]['longitude']]);
+        marker.addTo(mymap);
+        properties_markers.push(marker);
+    }
+
+    var group = L.featureGroup(properties_markers);
+    mymap.fitBounds(group.getBounds());
 
 	var popup = L.popup();
 

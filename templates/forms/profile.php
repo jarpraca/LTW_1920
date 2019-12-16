@@ -1,5 +1,7 @@
 <form class="verticalForm" action=<?=$action_form?> method="post">
-    <label> First Name
+<input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+    
+<label> First Name
         <input type="text" name="primeiroNome" value="<?=$firstName?>" required>
     </label>
     <label> Last Name

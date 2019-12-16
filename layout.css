@@ -164,6 +164,10 @@ h5 {
     transform: translate(-50%, -50%);
 }
 
+#homepage #search_text_input {
+    border-radius: 0.2em;
+}
+
 #property aside {
     padding: 1em;
     display: grid;
@@ -254,6 +258,11 @@ h5 {
     display: block;
 }
 
+.dropdown h5 {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 .dropdown-content a {
     width: 100%;
     margin: 0;
@@ -323,7 +332,7 @@ h5 {
     margin-right: auto;
 }
 
-#star,#amenity {
+#star, #amenity {
     padding-left: 1rem;
 }
 
@@ -410,4 +419,9 @@ h5 {
 
 #no_results {
     margin-left: 1rem;
+}
+
+#title {
+    overflow: hidden;
+    white-space: nowrap;
 }

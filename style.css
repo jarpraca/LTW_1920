@@ -121,7 +121,7 @@ input, select, textarea {
 
 .verticalForm input, .verticalForm select, .verticalForm textarea {
     background: var(--myDarkBlue);
-    /* color: var(--myLightBlue); */
+    color: var(--myLightBlue);
 }
 
 .search_input {
@@ -197,10 +197,6 @@ input, select, textarea {
 
 .propertySearch h1, .propertySearch h3 {
     color: var(--myDarkBlue);    
-}
-
-.propertySearch .submit {
-    color: var(--myLightBlue);
 }
 
 .propertyShort a, .reservationShort a, .propertySearch a {

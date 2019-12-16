@@ -3,6 +3,7 @@
         <h1> Login </h1>
     </header>
     <form class="verticalForm" action="templates/forms/login_action.php" method="post">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <label> Email
             <input type="email" name="email" required>
         </label>

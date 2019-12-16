@@ -4,6 +4,7 @@
     <div class="modal-content">
         <span class="close">&times;</span>        
         <form id="reservation_form" class="commentForm verticalForm" action="templates/forms/cancel_action.php?idReserva=<?=$reservation['idReserva']?>" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <div> 
             <p> Are you sure you want to cancel your reservation? </p>
         </div>

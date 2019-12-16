@@ -46,8 +46,18 @@
 
 } */
 
-@media(max-width: 600px){
-    /*#search {
-        display:none;
-    }*/
+@media(max-width: 1175px){
+    #search{
+        display: none;
+    }
+}
+
+@media(max-width: 1130px){
+    .listPropertiesMap #map{
+        display: none;
+    }
+
+    .listPropertiesMap #propertiesSection {
+        width: 100%;
+    }
 }

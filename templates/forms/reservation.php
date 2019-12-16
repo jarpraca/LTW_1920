@@ -6,6 +6,7 @@
         <?php $action_form = "templates/forms/reservation_action.php?idHabitacao=". $habitation['idHabitacao'] ?>
 
         <form id="reservation_form" class="commentForm verticalForm" action=<?= $action_form ?> method="post" enctype="multipart/form-data">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <label> Type
                 <input type="text" name="type" value= <?= getNameType($habitation['idTipo'])['nome'] ?> readonly >
             </label>

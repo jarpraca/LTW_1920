@@ -1,4 +1,5 @@
 <form id="search" method="get" action="listSearch.php">
+    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
     <h3> Location: </h3>
     <input class="search_input" type="search" name="location" placeholder="City, Country or Hotel" id="search_text_input" required>
     <h3> From: </h3>

@@ -4,6 +4,7 @@
     <div class="modal-content">
         <span class="close">&times;</span>
         <form class="verticalForm" id="filter_form" method="post" action=<?=$action_form?>>    
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <!--          type             -->
             <label> Type
                 <select name="types">
