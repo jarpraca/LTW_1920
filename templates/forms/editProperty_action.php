@@ -49,8 +49,8 @@
         /*}
     }
     else if(is_file($_FILES['pictures'])){*/
-        $path = "../../images/$id.jpg";
-        move_uploaded_file($_FILES['pictures']['tmp_name'], $path);
+        $path = "images/$id.jpg";
+        move_uploaded_file($_FILES['pictures']['tmp_name'], "../../" . $path);
         addImage($id, $path, $_POST['name'] . "'s Photo");
         echo 'ONLY ONE';
     //}
@@ -70,5 +70,5 @@
         }
     }
 
-    // header( 'Location: ../../listProperties.php');
+    header( 'Location: ../../listProperties.php');
 ?>

@@ -3,12 +3,12 @@
         include_once("database/connection.php");
         include_once("database/habitations.php");
         $pictures=getHabitationPictures($habitation['idHabitacao']);
-        foreach($pictures as $picture)
-        if ($picture != null){
-            echo '<img src=' . $picture['urlImagem'] . 'alt=' . $picture['legenda'] . '>';
+
+        if ($pictures != null){
+            echo '<img src=' . $pictures[0]['urlImagem'] . ' alt=' . $pictures[0]['legenda'] . '>';
         }
         else{
-            echo '<img src="images/ownerPicture.jpg"  alt="Habitation Picture">';
+            echo '<img src="images/ownerPicture.jpg" alt="Habitation Picture">';
         }
     ?>
     <div class="rightText">

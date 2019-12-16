@@ -55,7 +55,6 @@
         <script src="https://kit.fontawesome.com/yourcode.js"></script>
         <?php
             $photos = getHabitationPictures($habitation['idHabitacao']);
-            print_r($photos);
             $comments = getComments($habitation['idHabitacao']);
             $cleaning=0;
             $location=0;

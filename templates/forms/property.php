@@ -104,6 +104,10 @@
     </label>
     <?php
         if(isset($_GET['id'])){
+            $pictures=getHabitationPictures($_GET['id']);
+            foreach($pictures as $pic){
+                echo '<p>' . $pic['urlImagem'] . '</p>';
+            }
             $link = "templates/forms/removeAllImages_action.php?id=" . $_GET['id'];
     ?>
         <input type="button" value="Remove Pictures" id="rem_pictures_button" class="submit" onclick="window.location.replace('<?=$link?>');">

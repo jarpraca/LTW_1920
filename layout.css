@@ -114,6 +114,14 @@ h5 {
     padding: 1em;
 }
 
+.verticalForm td{
+    padding-left: 1em;
+}
+
+.verticalForm p{
+    margin-left: 1rem;
+}
+
 .verticalForm .submit {
     width: 25%;
     float: right;
