@@ -62,5 +62,5 @@
         }
     }
 
-    //header( 'Location: ../../listProperties.php');
+    header( 'Location: ../../listProperties.php');
 ?>

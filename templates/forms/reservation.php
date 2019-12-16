@@ -3,9 +3,9 @@
 <div id="reservationModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>        
-<?php $action_form = "templates/forms/reservation_action.php?idHabitacao=". $habitation['idHabitacao'] ?>
+        <?php $action_form = "templates/forms/reservation_action.php?idHabitacao=". $habitation['idHabitacao'] ?>
 
-<form id="reservation_form" class="commentForm verticalForm" action=<?= $action_form ?> method="post" enctype="multipart/form-data">
+        <form id="reservation_form" class="commentForm verticalForm" action=<?= $action_form ?> method="post" enctype="multipart/form-data">
             <label> Type
                 <input type="text" name="type" value= <?= getNameType($habitation['idTipo'])['nome'] ?> readonly >
             </label>
@@ -58,4 +58,3 @@
         }
     }
 </script>
-</form>

@@ -5,7 +5,7 @@
         $habitation=getHabitationById($reservation['idHabitacao']);
         $pictures=getHabitationPictures($habitation['idHabitacao']);
         if ($pictures != null){
-            echo '<img src=' . $pictures[0]['urlImagem'] . 'alt=' . $pictures[0]['legenda'] . '>';
+            echo '<img src=' . $pictures[0]['urlImagem'] . ' alt=' . $pictures[0]['legenda'] . '>';
         }
         else{
             echo '<img src="images/ownerPicture.jpg"  alt="Habitation Picture">';
@@ -24,19 +24,19 @@
             $days = $secs / 86400;
             $total = $habitation['precoNoite']*$days+$habitation['taxaLimpeza'];
         ?>
-            <div class="horizontalElements">
-                <h3>Total: <?=$total?>€</h3>
-                <?php
-                    $state = $reservation['idEstado'];
-                    if ($state == 0)
-                        echo '<a href=#>" class="submit"><p>Cancel</p></a>';
-                    else if ($state == 1){
-                        echo '<a href="viewProperty.php?id=' . $habitation['idHabitacao'] . '#comment_form" class="submit"><p>Comment</p></a>';
-                    }
-                ?>
-                <a href="viewProperty.php?id=<?=$reservation['idHabitacao']?>" class="submit"> <p> View </p> </a>
-                
-            </div>
+        <div class="horizontalElements">
+            <h3>Total: <?=$total?>€</h3>
+            <?php
+                $state = $reservation['idEstado'];
+                if ($state == 0)
+                   include_once("templates/forms/cancel.php"); 
+
+                else if ($state == 1){
+                    echo '<a href="viewProperty.php?id=' . $habitation['idHabitacao'] . '#comment_form" class="submit"><p>Comment</p></a>';
+                }
+            ?>
+            <a href="viewProperty.php?id=<?=$reservation['idHabitacao']?>" class="submit"> <p> View </p> </a>
+            
         </div>
     </div>
 </section>

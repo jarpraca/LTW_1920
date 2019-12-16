@@ -50,7 +50,7 @@
     $days = $secs / 86400;
 
     if($properties != null){
-        echo '<section id="listPropertiesMap">';
+        echo '<section class="listPropertiesMap">';
         echo '<aside id="map">';
         include('templates/properties/map.php');
         echo '</aside>';

@@ -155,26 +155,18 @@ function removeAllImages($idHab){
     $stmt->execute(array($idHab));
 }
 
-function reserve($idRes, $idHab, $idUser, $dataCheckIn, $dataCheckOut, $numHospedes, $precoTotal){
-    global $db;
-    $stmt = $db->prepare('INSERT INTO Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idHabitacao, idEstado) VALUES (?, ?, ?, ?, ?, ?, 0)');
-    $stmt->execute(array($idRes, $dataCheckIn, $dataCheckOut, $numHospedes, $precoTotal, $idHab));
-    $stmt = $db->prepare('INSERT INTO Efetua(idCliente, idReserva) VALUES (?, ?)');
-    $stmt->execute(array($idUser, $idRes));
-}
-
 function cancelReservation($idRes){
     global $db;
-    $stmt = $db->prepare('UPDATE Reserva SET idEstado=3 WHERE idRes = ?');
+    $stmt = $db->prepare('UPDATE Reserva SET idEstado=3 WHERE idReserva = ?');
     $stmt->execute(array($idRes));
     $stmt = $db->prepare('SELECT percentagemReembolso FROM (PoliticaDeCancelamento JOIN Habitacao USING (idPolitica)) JOIN Reserva USING (idHabitacao) WHERE idReserva = ?');
     $stmt->execute(array($idRes));
-    $reembolso = $stmt->fetch();
+    $reembolso = $stmt->fetch()['percentagemReembolso'];
     $stmt = $db->prepare('SELECT precoTotal FROM Reserva WHERE idReserva = ?');
     $stmt->execute(array($idRes));
-    $price = $stmt->fetch();
+    $price = $stmt->fetch()['precoTotal'];
     $stmt = $db->prepare('INSERT INTO Cancelamento(reembolso, idReserva) VALUES (?, ?)');
-    $stmt->execute(array($idRes, $price * $reembolso));
+    $stmt->execute(array($price * $reembolso, $idRes));
 }
 
 function removeReservationsHabitation($id){
@@ -442,7 +434,7 @@ function isAvailableDay($idHabitation, $date){
     $reservations = $stmt->fetchAll();
 
     foreach($reservations as $reservation){
-        if ($date >= $reservation['dateCheckIn'] && $date <= $reservation['dateCheckOut'] && $reservation['idEstado']!= 3){
+        if ($date >= $reservation['dataCheckIn'] && $date <= $reservation['dataCheckOut'] && $reservation['idEstado']!= 3){
             $available=false;
             break;
         }

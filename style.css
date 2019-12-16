@@ -12,7 +12,7 @@ h1, h2, h3 {
     margin: 0 0.5em 0 0;
 }
 
-h4, h5, h6, p, span, input, label, tr, a, #filter_button {
+h4, h5, h6, p, span, input, label, tr, a, button {
     font-family: var(--bodyFont);
 }
 
@@ -162,6 +162,10 @@ input, select, textarea {
     border-width: thin;
     border-color: var(--myDarkBlue);
 }
+
+/* #cancel_button {
+    font-size: 12.8px;
+} */
 
 .propertyShort, .reservationShort, .propertySearch {
     background: var(--myLightBlue);

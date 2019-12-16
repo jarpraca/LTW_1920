@@ -17,7 +17,7 @@
 
   $properties = getProperties($_SESSION['user']);
 
-  echo '<section id="listPropertiesMap">';
+  echo '<section class="listPropertiesMap">';
   echo '<aside id="map">';
   include('templates/properties/map.php');
   echo '</aside>';

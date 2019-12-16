@@ -134,6 +134,10 @@ h5 {
     padding: 1em;
 }
 
+#cancel_button {
+    padding: 0;
+}
+
 #homepage {
     width: 100%;
     height: 100%;
@@ -303,7 +307,7 @@ h5 {
     margin-top: auto;
 }
 
-.horizontalElements a {
+.horizontalElements a, button {
     margin-left: 1em;
 }
 
@@ -341,6 +345,7 @@ h5 {
     margin: 1rem;
     width: 90%;
     height: 100%;
+    z-index: 2;
 }
 
 .close {
@@ -353,7 +358,7 @@ h5 {
     /* Hidden by default */
     position: fixed;
     /* Stay in place */
-    z-index: 1;
+    z-index: 2;
     /* Sit on top */
     left: 0;
     top: 0;
@@ -377,6 +382,8 @@ h5 {
     padding: 1rem;
     border: 1px solid var(--myLightBlue);
     width: 35%;
+    z-index: 2;
+
     /* Could be more or less, depending on screen size */
 }
 
@@ -387,20 +394,18 @@ h5 {
     float: right;
 }
 
-#listPropertiesMap {
-    display: grid;
-    grid-template-areas: "data aside";
-    grid-auto-columns: 50%;
-}
-
 #propertiesSection {
-    grid-area: data;
+    float: left;
+    width: calc(50% - 1em);
 }
 
-#listPropertiesMap aside {
-    grid-area: aside;
+#map {
+    float: right;
     padding: 1em;
     align-items: center;
+    height: 100%;
+    z-index: 1;
+    width: calc(50% - 1em);
 }
 
 #no_results {

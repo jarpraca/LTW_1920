@@ -72,7 +72,6 @@ CREATE TABLE Reserva (
     idEstado        INTEGER REFERENCES Estado(idEstado) ON DELETE CASCADE ON UPDATE CASCADE,
     idHabitacao     INTEGER REFERENCES Habitacao(idHabitacao),
     idUtilizador       INTEGER REFERENCES Utilizador(idUtilizador),
-    UNIQUE (dataCheckIn, idHabitacao)
 );
 
 DROP TABLE IF EXISTS Estado;
