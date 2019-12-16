@@ -235,20 +235,20 @@ input, select, textarea {
     cursor: pointer;
 }
 
-#rating {
+.rating {
     display: block;
 }
 
-#rating::before{
+.rating::before{
     content: '\2B50';
     font-size: 1.17em;
 }
 
-#star {
+.star {
     display: block;
 }
 
-#star::before{
+.star::before{
     content: '\2606';
     font-size: 1.17em;
 }
@@ -266,4 +266,8 @@ input, select, textarea {
     height: 400px; 
     width: calc(50-1rem);
     padding: 1rem;
+}
+.comment{
+    background-color: var(--myLightBlue);
+    color: var(--myDarkBlue);
 }

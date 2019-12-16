@@ -105,7 +105,8 @@ CREATE TABLE ClassificacaoPorCliente (
     checkIn     INTEGER CHECK(checkIn >= 1 AND checkIn <= 5),
     localizacao INTEGER CHECK(localizacao >= 1 AND localizacao <= 5),
     outros      TEXT, 
-    idReserva INTEGER REFERENCES Reserva (idReserva) ON DELETE RESTRICT ON UPDATE RESTRICT, 
+    anonimo     BOOLEAN,
+    idReserva   INTEGER REFERENCES Reserva (idReserva) ON DELETE RESTRICT ON UPDATE RESTRICT, 
     PRIMARY KEY (idReserva)
 );
 

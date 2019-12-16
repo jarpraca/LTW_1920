@@ -149,7 +149,8 @@ h5 {
 
 #property {
     display: grid;
-    grid-template-areas: "header header header" "data data aside";
+    grid-template-areas: "header header header"
+                        "data data aside";
     text-align: left;
 }
 
@@ -159,11 +160,13 @@ h5 {
 
 #property aside {
     grid-area: aside;
+    display: fixed;
     padding: 1em;
     display: grid;
     grid-template-areas: "priceNight priceNight" "datesLabel dates" "priceNightsCalc priceNights" "taxLabel tax" "totalLabel total" " submit submit";
     align-items: center;
     text-align: left;
+    grid-gap: 0px;
 }
 
 #property aside p:first-child {
@@ -292,11 +295,11 @@ h5 {
     padding: 0.5em;
 }
 
-#rating {
+.rating {
     margin-right: auto;
 }
 
-#star,#amenity {
+.star,#amenity {
     padding-left: 1rem;
 }
 
