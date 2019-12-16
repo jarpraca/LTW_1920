@@ -1,8 +1,8 @@
 <section id="property">
     <header>
         <h1><?=$habitation['nome']?></h1>
-        <h3><?=""/*getNameCity($habitation['idCidade'])?>, <?=getCountryCity($habitation['idCidade'])*/?> </h3>
-        <?php /*$pictures=getUserPicture(getOwner($habiatation['idHabitacao']));
+        <h3><?= getNameCity($habitation['idCidade'])?>, <?= getNameCountry($habitation['idCidade'])?> </h3>
+        <?php /*$pictures=getUserPicture(getOwner($habitation['idHabitacao']));
         if ($pictures!=null){?>
             <img src="<?=$pictures?>" alt="Owner Picture" width="5%">
         <?php }else{ ?>
@@ -46,13 +46,11 @@
             <p id="amenity">   <?=$value['nome']?></p>
         <?php } ?>
         <h3>Location</h3>
-        Em construcao.
-        <!--<script src="scripts/maps.js"></script>
-        <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap">
-        </script>-->
+            <?php  
+                $properties = array($habitation);
+                include('templates/properties/map.php'); ?>
+
         <h3>Reviews</h3>
-        <script src="https://kit.fontawesome.com/yourcode.js"></script>
         <?php
             $photos = getHabitationPictures($habitation['idHabitacao']);
             $comments = getComments($habitation['idHabitacao']);
@@ -74,23 +72,28 @@
                 $cleaning=$cleaning/$n;
                 $value=$value/$n;
                 $check_in=$check_in/$n;
-                $rating=$location+$cleaning+$value+$check_in/4;
+                $rating=($location+$cleaning+$value+$check_in)/4;
             }
         ?>
-        <i class="fas fa-star"></i>
-        <p id="rating"><?=$rating?> (<?=$n?> users)</p>
-        <i class="fas fa-star"></i>
-        <p id="star"> <?=$cleaning?> Cleaning</p>
-        <i class="fas fa-star"></i>
-        <p id="star"> <?=$location?> Location</p>
-        <i class="fas fa-star"></i>
-        <p id="star"> <?=$value?> Price</p>
-        <i class="fas fa-star"></i>
-        <p id="star"> <?=$check_in?> Check In</p>
+        <p class="rating"><?=$rating?> (<?=$n?> users)</p>
+        <p class="star"> <?=$cleaning?> Cleaning</p>
+        <p class="star"> <?=$location?> Location</p>
+        <p class="star"> <?=$value?> Price</p>
+        <p class="star"> <?=$check_in?> Check In</p>
         <?php ?>
-    </section>
-    <section id="comments">
-    <?php 
-    ?>
+        <section id="comments">
+            <?php 
+                foreach($comments as $comment){
+                    include("templates/properties/viewComment.php");
+                }
+                if (isset($_SESSION['user'])){
+                    $reservationsByUser = getResNotCommentedByUser($habitation['idHabitacao'], $_SESSION['user']);
+                    if (!empty($reservationsByUser)){
+                        $idReserva = $reservationsByUser[0]['idReserva'];
+                        include("templates/forms/comment.php");
+                    }
+                }
+            ?>
+        </section>
     </section>
 </section>

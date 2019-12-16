@@ -105,7 +105,8 @@ CREATE TABLE ClassificacaoPorCliente (
     checkIn     INTEGER CHECK(checkIn >= 1 AND checkIn <= 5),
     localizacao INTEGER CHECK(localizacao >= 1 AND localizacao <= 5),
     outros      TEXT, 
-    idReserva INTEGER REFERENCES Reserva (idReserva) ON DELETE RESTRICT ON UPDATE RESTRICT, 
+    anonimo     BOOLEAN,
+    idReserva   INTEGER REFERENCES Reserva (idReserva) ON DELETE RESTRICT ON UPDATE RESTRICT, 
     PRIMARY KEY (idReserva)
 );
 
@@ -208,6 +209,9 @@ CREATE TABLE Imagem (
 -----------------povoar para exemplo--------------------
 INSERT INTO Utilizador(idUtilizador, hashedPassword, primeiroNome, ultimoNome, dataNascimento, email, telefone, idPais)
 VALUES(1, "$2y$10$jJ.U9HQxd1pzG.uisT4TauxwLqq8fPAM.VQIr1/Ci6wjRM8wM9May", "Leonor", "Sousa", "1999-12-27", "leonor@gmail.com", 943434535, 1);
+
+INSERT INTO Utilizador(idUtilizador, hashedPassword, primeiroNome, ultimoNome, dataNascimento, email, telefone, idPais)
+VALUES(2, "$2y$10$jJ.U9HQxd1pzG.uisT4TauxwLqq8fPAM.VQIr1/Ci6wjRM8wM9May", "João", "Praça", "1999-12-27", "joao@gmail.com", 943434534, 1);
 --password: 1234
 
 INSERT INTO Cidade(idCidade, nome, idPais) VALUES (1, "Porto", 1);
@@ -217,5 +221,8 @@ VALUES(1, "Apartamento Barato Porto", 2, 4, 100, 3.45, "Nao sou nada barato porq
 
 INSERT INTO Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idEstado, idHabitacao, idUtilizador)
 VALUES (1, "2019-03-01", "2019-03-04", 4, 345.12, 1, 1, 1);
+
+INSERT INTO Reserva(idReserva, dataCheckIn, dataCheckOut, numHospedes, precoTotal, idEstado, idHabitacao, idUtilizador)
+VALUES (2, "2019-05-01", "2019-05-04", 4, 345.12, 1, 1, 2);
 
 COMMIT TRANSACTION;

@@ -34,8 +34,8 @@
         <textarea name="description" rows="10"><?=$description?></textarea>
     </label>
     <!--         amenities           -->
-    <script> let amenities_array_var = <?php echo json_encode($amenities_array_var); ?>; </script>
-    <script> let agenda_array = <?php echo json_encode($agenda_array); ?>; </script>
+    <script> let amenities_array_var = <?php echo json_encode($amenities_array_var); ?> </script>
+    <script> let agenda_array = <?php echo json_encode($agenda_array); ?> </script>
     <script src="scripts/property.js" defer></script>
     <label>Amenity:
         <input type="text" id="amenities_input" name="amenity">
@@ -57,10 +57,10 @@
     <input type="hidden" name="agenda_array" id="agenda_array"/>
     <!--          coordinates             -->
     <label> Latitude (Format DD)
-        <input type="number" value="<?=$latitude?>" min="-90" max="90" step="0.000001" id="latitude">
+        <input type="number" value="<?=$latitude?>" min="-90" max="90" step="0.000001" id="latitude" name="latitude">
     </label>
     <label> Longitude (Format DD)
-        <input type="number" value="<?=$longitude?>" min="-180" max="180" step="0.000001" id="longitude">
+        <input type="number" value="<?=$longitude?>" min="-180" max="180" step="0.000001" id="longitude" name="longitude">
     </label>
     <label> Address
         <input type="text" name="address" value="<?=$address?>" required>

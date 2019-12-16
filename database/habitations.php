@@ -43,7 +43,6 @@ function getHabitations($location, $type, $minNumberGuests, $minNumberBedroom, $
     $habitations = array_merge(getHabitationsCity($location, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight), 
     getHabitationsCountry($location, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight), 
     getHabitationsHabitationName($location, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight));
-
     return array_unique($habitations, SORT_REGULAR);
 }
 
@@ -77,7 +76,7 @@ function getReservationById($id){
 
 include_once("users.php");
 
-function insertHabitation($name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $pais, $cidade, $tipo, $politica, $descricao, $idUser){
+function insertHabitation($name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $pais, $cidade, $tipo, $politica, $descricao, $latitude, $longitude, $idUser){
     global $db;
 
     $stmt = $db->prepare('SELECT idCidade FROM Cidade WHERE nome=? and idPais=?');
@@ -89,8 +88,8 @@ function insertHabitation($name, $numQuartos, $maxHospedes, $morada, $precoNoite
         $idCidade = $db->lastInsertId();
     }
 
-    $stmt = $db->prepare('INSERT INTO Habitacao(nome, numQuartos, maxHospedes, morada, precoNoite, taxaLimpeza, idCidade, idTipo, idPolitica, descricao, idUtilizador) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-    $stmt->execute(array($name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $idCidade, $tipo, $politica, $descricao, $idUser));
+    $stmt = $db->prepare('INSERT INTO Habitacao(nome, numQuartos, maxHospedes, morada, precoNoite, taxaLimpeza, idCidade, idTipo, idPolitica, descricao, latitude, longitude, idUtilizador) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt->execute(array($name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $idCidade, $tipo, $politica, $descricao, $latitude, $longitude, $idUser));
     
     $id=$db->lastInsertId();
     return $id;
@@ -105,7 +104,7 @@ function removeHabitation($id){
     removeReservationsHabitation($id);
 }
 
-function updateHabitation($id, $name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $pais, $cidade, $tipo, $politica, $descricao){
+function updateHabitation($id, $name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $pais, $cidade, $tipo, $politica, $descricao, $latitude, $longitude){
     global $db;
 
     $stmt = $db->prepare('SELECT idCidade FROM Cidade WHERE nome=? and idPais=?');
@@ -116,8 +115,8 @@ function updateHabitation($id, $name, $numQuartos, $maxHospedes, $morada, $preco
         $stmt->execute(array($cidade, $pais));
         $idCidade = $db->lastInsertId();
     }
-    $stmt = $db->prepare('UPDATE Habitacao SET nome=?, numQuartos=?, maxHospedes=?, morada=?, precoNoite=?, taxaLimpeza=?, idCidade=?, idTipo=?, idPolitica=?, descricao=? WHERE idHabitacao=?');
-    $stmt->execute(array($name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $idCidade, $tipo, $politica, $descricao, $id));
+    $stmt = $db->prepare('UPDATE Habitacao SET nome=?, numQuartos=?, maxHospedes=?, morada=?, precoNoite=?, taxaLimpeza=?, idCidade=?, idTipo=?, idPolitica=?, descricao=?, latitude=?, longitude=? WHERE idHabitacao=?');
+    $stmt->execute(array($name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $idCidade, $tipo, $politica, $descricao, $latitude, $longitude, $id));
 }
 
 
@@ -167,10 +166,12 @@ function removeReservationsHabitation($id){
     $stmt->execute(array($id));
 }
 
-function addComment($idRes, $limpeza, $valor, $checkIn, $localizacao, $description){
+function addComment($idRes, $limpeza, $valor, $checkIn, $localizacao, $description, $anonimo){
     global $db;
-    $stmt = $db->prepare('INSERT INTO ClassificacaoPorCliente(limpeza, valor, checkIn, localizacao, outros, idReserva) VALUES (?, ?, ?, ?, ?, ?)');
-    $stmt->execute(array($limpeza, $valor, $checkIn, $localizacao, $description, $idRes));
+    $stmt = $db->prepare('INSERT INTO ClassificacaoPorCliente(limpeza, valor, checkIn, localizacao, outros, anonimo, idReserva) VALUES (?, ?, ?, ?, ?, ?, ?)');
+    $stmt->execute(array($limpeza, $valor, $checkIn, $localizacao, $description, $anonimo, $idRes));
+    $stmt = $db->prepare('UPDATE Reserva SET idEstado=2 WHERE idReserva=?');
+    $stmt->execute(array($idRes));
 }
 
 function getTypes(){
@@ -276,6 +277,14 @@ function getCountryCity($idCity){
     return $stmt->fetch()['idPais'];
 }
 
+function getNameCountry($idCity){
+    global $db;
+    $stmt = $db->prepare('SELECT Pais.nome as nome FROM Cidade JOIN Pais USING (idPais) WHERE idCidade=?');
+    $stmt->execute(array($idCity));
+
+    return $stmt->fetch()['nome'];
+}
+
 function getAmenities($idHabitacao){
     global $db;
     $stmt = $db->prepare('SELECT nome FROM Comodidade JOIN Dispoe USING (idComodidade) WHERE idHabitacao=?');
@@ -302,7 +311,7 @@ function getOwner($idHabitation){
 
 function getComments($idHabitation){
     global $db;
-    $stmt = $db->prepare('SELECT idUtilizador FROM ClassificacaoPorCliente JOIN Reserva USING (idReserva) WHERE idHabitacao=?');
+    $stmt = $db->prepare('SELECT * FROM ClassificacaoPorCliente JOIN Reserva USING (idReserva) WHERE idHabitacao=?');
     $stmt->execute(array($idHabitation));
 
     return $stmt->fetchAll();
@@ -382,6 +391,14 @@ function getAgendaByHabitation($idHabitation){
     global $db;
     $stmt = $db->prepare('SELECT * FROM Agenda JOIN Disponivel  USING (idAgenda) WHERE idHabitacao=?');
     $stmt->execute(array($idHabitation));
+
+    return $stmt->fetchAll();
+}
+
+function getResNotCommentedByUser($idHabitation, $idUser){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Reserva WHERE idHabitacao=? and idUtilizador=? and idEstado=1');
+    $stmt->execute(array($idHabitation, $idUser));
 
     return $stmt->fetchAll();
 }

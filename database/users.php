@@ -2,9 +2,6 @@
 
 function modifyUser($id, $hashedPassword, $primeiroNome, $ultimoNome, $dataNascimento, $email, $telefone, $idPais){
     global $db;
-    print_r($hashedPassword);
-    print_r($primeiroNome);
-    print_r($ultimoNome);
     $stmt = $db->prepare('UPDATE Utilizador SET hashedPassword=?, primeiroNome=?, ultimoNome=?, dataNascimento=?, email=?, telefone=?, idPais=? WHERE idUtilizador=?');
     $stmt->execute(array($hashedPassword, $primeiroNome, $ultimoNome, $dataNascimento, $email, $telefone, $idPais, $id));
 }
