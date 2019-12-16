@@ -18,7 +18,9 @@
   $properties = getProperties($_SESSION['user']);
 
   echo '<section id="listPropertiesMap">';
+  echo '<aside id="map">';
   include('templates/properties/map.php');
+  echo '</aside>';
   echo '<section id="propertiesSection">';
   foreach ($properties as $habitation){
     include("templates/properties/viewShortProperty.php");

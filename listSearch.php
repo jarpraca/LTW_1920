@@ -63,7 +63,7 @@
         echo '</section>';
     }
     else {
-        echo '<div> No results found </div>';
+        echo '<h4 id="no_results"> No results found </h4>';
     }
    
     include_once('templates/common/footer.php');

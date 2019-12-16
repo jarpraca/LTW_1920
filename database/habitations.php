@@ -431,7 +431,7 @@ function isAvailableDay($idHabitation, $date){
     $reservations = $stmt->fetchAll();
 
     foreach($reservations as $reservation){
-        if ($date >= $reservation['dateCheckIn'] && $date <= $reservation['dateCheckOut']){
+        if ($date >= $reservation['dataCheckIn'] && $date <= $reservation['dataCheckOut']){
             $available=false;
             break;
         }
@@ -462,6 +462,13 @@ function getStateName($idState){
     $stmt->execute(array($idState));
 
     return $stmt->fetch()['estado'];
+}
+
+function getNumberGuests() {
+    $guests = 1;
+      if(isset( $_GET['minNumberGuests']))
+        $guests = $_GET['minNumberGuests'];
+    return $guests;
 }
 
 ?>
