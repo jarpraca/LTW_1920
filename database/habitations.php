@@ -403,8 +403,51 @@ function getResNotCommentedByUser($idHabitation, $idUser){
     return $stmt->fetchAll();
 }
 
+function isAvailableDay($idHabitation, $date){
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Agenda JOIN Disponivel USING (idAgenda) WHERE idHabitacao=?');
+    $stmt->execute(array($idHabitation));
+    $agendas = $stmt->fetchAll();
+
+    $available=false;
+    foreach($agendas as $agenda){
+        if ($date >= $agenda['dateFrom'] && $date <= $agenda['dateTo']){
+            $available=true;
+            break;
+        }
+    }
+    if (!$available)
+        return false;
+
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Reserva WHERE idHabitacao=?');
+    $stmt->execute(array($idHabitation));
+    $reservations = $stmt->fetchAll();
+
+    foreach($reservations as $reservation){
+        if ($date >= $reservations['dateCheckIn'] && $date <= $reservations['dateCheckOut']){
+            $available=false;
+            break;
+        }
+    }
+
+    return $available;
+}
+
 function isAvailable($idHabitation, $dateFrom, $dateTo){
-    return true;
+    $begin = new DateTime($dateFrom);
+    $end = new DateTime($dateTo);
+
+    $allAvailable=true;
+    for($i = $begin; $i <= $end; $i->modify('+1 day')){
+        $date = $i->format("Y-m-d");
+        if (!isAvailableDay($idHabitation, $date)){
+            $allAvailable = false;
+            break;
+        }
+    }
+
+    return $allAvailable;
 }
 
 function getStateName($idState){
