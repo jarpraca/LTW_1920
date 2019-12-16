@@ -39,6 +39,11 @@
             else{ ?>
                 <a href="login.php" class="submit"><p>Login to Reserve</p></a>
             <?php } ?>
+
+            <?php  
+                $properties = array($habitation);
+                include('templates/properties/map.php'); ?>
+
         </aside>
     <?php } ?>
     <section id="property_data">
@@ -54,10 +59,6 @@
         foreach ($amenities as $value) { ?>
             <p id="amenity">   <?=$value['nome']?></p>
         <?php } ?>
-        <h3>Location</h3>
-            <?php  
-                $properties = array($habitation);
-                include('templates/properties/map.php'); ?>
 
         <h3>Reviews</h3>
         <?php

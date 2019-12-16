@@ -1,4 +1,3 @@
-<aside id="map">
 <div id="mapid"></div>
 <script>
     function getStartingCoords(properties) {
@@ -41,4 +40,3 @@
 
 </script>
 
-</aside>

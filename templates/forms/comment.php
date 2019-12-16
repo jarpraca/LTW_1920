@@ -1,8 +1,8 @@
 <?php 
 if($dateTo==null || $dateFrom==null) 
-    echo '<form id="comment_form" class="verticalForm" action="templates/forms/comment_action.php?id=<?=$idReserva?>&<?=$habitation?>" method="post">';
+    echo '<form id="comment_form" class="commentForm verticalForm" action="templates/forms/comment_action.php?id=<?=$idReserva?>&<?=$habitation?>" method="post">';
 else
-    echo '<form id="comment_form" class="verticalForm" action="templates/forms/comment_action.php?id=<?=$idReserva?>&<?=$habitation?>&<?=$dateFrom?>&<?=$dateTo?>" method="post">';
+    echo '<form id="comment_form" class="commentForm verticalForm" action="templates/forms/comment_action.php?id=<?=$idReserva?>&<?=$habitation?>&<?=$dateFrom?>&<?=$dateTo?>" method="post">';
 ?>
     <label> Cleaning
         <input type="number" name="cleaning" value="1" min="1" max="5" required>

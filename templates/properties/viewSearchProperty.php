@@ -36,11 +36,12 @@
                 $rating=($location+$cleaning+$value+$check_in)/4;
             }
         ?>
+        
         <div class="rightText">
             <h3><?=getNameType($habitation['idTipo'])['nome']?></h3>
             <h1><?=$habitation['nome']?></h1>
-            <p>No. Rooms: <?=$habitation['numQuartos']?></p>  
-            <p>No. Max Guests: <?=$habitation['maxHospedes']?></p>  
+            <p class="darkBlue">No. Rooms: <?=$habitation['numQuartos']?></p>  
+            <p class="darkBlue">No. Max Guests: <?=$habitation['maxHospedes']?></p>  
             <div class="horizontalElements">
                 <h3 id="rating"><?=$rating?> (<?=$n?> users)</h3>
                 <h3>Total: <?=$total?>€</h3> 

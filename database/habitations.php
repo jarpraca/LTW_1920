@@ -24,7 +24,7 @@ function getHabitationsHabitationName($name, $type, $minNumberGuests, $minNumber
     return $stmt->fetchAll();
 }
 
-function getHabitations($location, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight){
+function getHabitations($location, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight, $dateFrom, $dateTo){
     if($type == null)
         $type = "%";
 
@@ -40,9 +40,15 @@ function getHabitations($location, $type, $minNumberGuests, $minNumberBedroom, $
     if($maxPriceNight == null)
         $maxPriceNight = 99999;
 
-    $habitations = array_merge(getHabitationsCity($location, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight), 
+    $habitationsAux = array_merge(getHabitationsCity($location, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight), 
     getHabitationsCountry($location, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight), 
     getHabitationsHabitationName($location, $type, $minNumberGuests, $minNumberBedroom, $minPriceNight, $maxPriceNight));
+
+    $habitations = [];
+    foreach($habitationsAux as $habitation) {
+        if(isAvailable($habitation['idHabitacao'], $dateFrom, $dateTo))
+            $habitations[] = $habitation;
+    }    
     return array_unique($habitations, SORT_REGULAR);
 }
 
@@ -411,7 +417,7 @@ function isAvailableDay($idHabitation, $date){
 
     $available=false;
     foreach($agendas as $agenda){
-        if ($date >= $agenda['dateFrom'] && $date <= $agenda['dateTo']){
+        if ($date >= $agenda['dataInicio'] && $date <= $agenda['dataFim']){
             $available=true;
             break;
         }

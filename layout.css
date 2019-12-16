@@ -97,6 +97,11 @@ h5 {
     width: 40%
 }
 
+.commentForm {
+    width: 100%
+}
+
+
 .verticalForm input, .verticalForm select, textarea {
     display: block;
     width: 100%;
@@ -156,13 +161,13 @@ h5 {
 }
 
 #property aside {
-    float: right;
-    display: fixed;
     padding: 1em;
     display: grid;
-    grid-template-areas: "priceNight priceNight" "datesLabel dates" "priceNightsCalc priceNights" "taxLabel tax" "totalLabel total" " submit submit";
+    grid-template-areas: "priceNight priceNight" "datesLabel dates" "priceNightsCalc priceNights" "taxLabel tax" "totalLabel total" " submit submit" "map map";
     align-items: center;
     text-align: left;
+    width: 50%;
+    float: right;
 }
 
 #property aside p:first-child {
@@ -205,6 +210,18 @@ h5 {
     grid-area: submit;
     text-align: right;
 }
+
+#property aside #mapid {
+    grid-area: map;
+    margin-top: 10%;
+}
+/* #property aside h3:first-child~h3~h3~h3 {
+    grid-area: location;
+}
+
+#property aside h3:first-child~div {
+    grid-area: map;
+} */
 
 #property #property_data {
     float:left;

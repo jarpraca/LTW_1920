@@ -168,12 +168,20 @@ input, select, textarea {
     color: var(--myDarkBlue);
 }
 
-.propertySearch p, .propertySearch h1, .propertySearch h3 {
+.propertySearch h1, .propertySearch h3 {
     color: var(--myDarkBlue);    
+}
+
+.propertySearch .submit {
+    color: var(--myLightBlue);
 }
 
 .propertyShort a, .reservationShort a, .propertySearch a {
     text-decoration: none;
+}
+
+.darkBlue {
+    color: var(--myDarkBlue);
 }
 
 .list_properties_options h5, .list_properties_options #filter_button {

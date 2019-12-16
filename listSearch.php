@@ -42,7 +42,7 @@
     else
         $maxPriceNight = 99999;
 
-    $properties = getHabitations($_GET['location'], $type, $minNumberGuests, $minNumberBedrooms, $minPriceNight, $maxPriceNight);
+    $properties = getHabitations($_GET['location'], $type, $minNumberGuests, $minNumberBedrooms, $minPriceNight, $maxPriceNight, $_GET['dateFrom'], $_GET['dateTo'] );
 
     $datetime1 = strtotime($_GET['dateFrom'] . ' 00:00:00');
     $datetime2 = strtotime($_GET['dateTo'] . ' 00:00:00');
@@ -50,10 +50,13 @@
     $days = $secs / 86400;
 
     echo '<section id="listPropertiesMap">';
+    echo '<aside id="map">';
     include('templates/properties/map.php');
+    echo '</aside>';
     echo '<section id="propertiesSection">';
     foreach ($properties as $habitation){
-        include("templates/properties/viewSearchProperty.php");
+        if(isAvailable($habitation['idHabitacao'], $_GET['dateFrom'],$_GET['dateTo']))
+            include("templates/properties/viewSearchProperty.php");
     }
     echo '</section>';
     echo '</section>';
