@@ -4,14 +4,14 @@
             include_once("database/habitations.php");
             $pictures=getHabitationPictures($habitation['idHabitacao']);
 
-            if ($pictures != null){
-                echo '<img src=' . $pictures[0]['urlImagem'] . ' alt=' . $pictures[0]['legenda'] . '>';
-            }
-            else{
-                echo '<img src="images/ownerPicture.jpg" alt="Habitation Picture">';
-            }
+        if ($pictures != null){
+            echo '<img src=' . $pictures[0]['urlImagem'] . ' alt=' . $pictures[0]['legenda'] . '>';
+        }
+        else{
+            echo '<img src="images/ownerPicture.jpg" alt="Habitation Picture">';
+        }
 
-            $total = $habitation['precoNoite']*$days+$habitation['taxaLimpeza'];
+        $total = $habitation['precoNoite']*$days+$habitation['taxaLimpeza'];
 
             $comments = getComments($habitation['idHabitacao']);
             $cleaning=0;
