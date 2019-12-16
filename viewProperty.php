@@ -3,6 +3,8 @@
     $logedin=false;
     if (isset($_SESSION['user']))
         $logedin=true;
+    $displaySearch = true;
+
     include('templates/common/header.php');
     include_once('database/connection.php');
     include_once('database/habitations.php');

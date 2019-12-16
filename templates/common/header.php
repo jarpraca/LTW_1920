@@ -20,7 +20,8 @@
                 <li><a href="homepage.php"><h3>Amazing Rentals</h3></a></li>
                 <li>
                     <?php
-                        include('templates/common/search.php');
+                        if($displaySearch)
+                            include('templates/common/search.php');
                     ?>
                 </li>
                     <?php

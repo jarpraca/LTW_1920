@@ -9,7 +9,8 @@
   $owner = getOwner($_GET['id'])['idUtilizador'];
   if ($_SESSION['user']!=$owner)
     header( 'Location: homepage.php' );
-  
+    
+  $displaySearch = true;
   include('templates/common/header.php');
   $action_form="templates/forms/editProperty_action.php?id=" . $_GET['id'];
 

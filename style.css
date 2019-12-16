@@ -97,7 +97,7 @@ input, select, textarea {
 }
 
 #glass {
-    background: var(--myDarkBlue);
+    background: transparent;
 }
 
 .currency input {
@@ -121,7 +121,7 @@ input, select, textarea {
 
 .verticalForm input, .verticalForm select, .verticalForm textarea {
     background: var(--myDarkBlue);
-    color: var(--myLightBlue);
+    /* color: var(--myLightBlue); */
 }
 
 .search_input {
@@ -130,6 +130,29 @@ input, select, textarea {
     border-bottom-style: solid;
     background-color: transparent;
     color: var(--myLightBlue);
+}
+
+.homepageForm {
+    background: var(--myDarkBlue);
+    width: 17em;
+    height: 35%;
+    position: absolute;
+    top: 15%;
+    left:5em;
+    border-radius: 1em;
+}
+
+.homepageForm .search_input{
+    background-color: var(--myLightBlue);
+    color: var(--myDarkBlue);
+}
+
+.homepageForm h3{
+    color: var(--myLightBlue);
+    font-weight: bold;
+    align-self: flex-start;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
 }
 
 #homepage {

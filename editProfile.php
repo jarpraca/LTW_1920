@@ -3,7 +3,8 @@
   $logedin=true;
   if (!isset($_SESSION['user']))
     header( 'Location: homepage.php' );
-
+  
+  $displaySearch = true;
   include('templates/common/header.php');
 
   $action_form="templates/forms/editProfile_action.php";

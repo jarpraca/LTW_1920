@@ -8,6 +8,7 @@
         $logedin=true;
 
     $action_form = "templates/forms/search_action.php?location=".$_GET['location']."&dateFrom=".$_GET['dateFrom']."&dateTo=".$_GET['dateTo'];
+    $displaySearch = true;
 
     include_once('templates/common/header.php');
 

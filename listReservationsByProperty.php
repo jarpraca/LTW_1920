@@ -10,6 +10,7 @@
   if ($_SESSION['user']!=$owner)
     header( 'Location: homepage.php' );
   
+    $displaySearch = true;
   
   include('templates/common/header.php');
 
