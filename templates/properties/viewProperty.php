@@ -2,12 +2,9 @@
     <header>
         <h1><?=$habitation['nome']?></h1>
         <h3><?= getNameCity($habitation['idCidade'])?>, <?= getNameCountry($habitation['idCidade'])?> </h3>
-        <?php /*$pictures=getUserPicture(getOwner($habitation['idHabitacao']));
-        if ($pictures!=null){?>
-            <img src="<?=$pictures?>" alt="Owner Picture" width="5%">
-        <?php }else{ ?>
-            <img src="OwnerPicture.jpg" alt="Owner Picture" width="5%">
-        <?php } */?>
+        <?php 
+            include("templates/properties/image_slideshow.php");
+        ?>
     </header>
     <!-- fotos -->
     <?php
@@ -56,8 +53,8 @@
             <p id="amenity">   <?=$value['nome']?></p>
         <?php } ?>
         <?php  
-                $properties = array($habitation);
-                include('templates/properties/map.php'); ?>
+            $properties = array($habitation);
+            include('templates/properties/map.php'); ?>
         <h3>Reviews</h3>
         <?php
             $photos = getHabitationPictures($habitation['idHabitacao']);
