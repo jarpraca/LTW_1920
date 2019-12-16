@@ -1,5 +1,4 @@
 <section class="propertySearch">
-    <a href="viewProperty.php?id=<?=$habitation['idHabitacao']?>&<?=$_GET['dateFrom']?>&<?=$_GET['dateTo']?>">
         <?php 
             include_once("database/connection.php");
             include_once("database/habitations.php");
@@ -48,5 +47,4 @@
                 <a href="viewProperty.php?id=<?=$habitation['idHabitacao']?>&dateFrom=<?=$_GET['dateFrom']?>&dateTo=<?=$_GET['dateTo']?>" class="submit"><p>View</p></a>
             </div>
         </div>
-    </a>
 </section>
