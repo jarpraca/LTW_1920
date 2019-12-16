@@ -32,9 +32,7 @@
             <h3>Total</h3>
             <h3><?=$habitation['precoNoite']*$days+$habitation['taxaLimpeza']?>€</h3>
             <?php if(isset($_SESSION['user'])) {?>
-                <form action="#" method="get">
-                    <input type="submit" class="submit" value="Book">
-                </form>
+                <a href="templates/forms/reservation.php?type=<?=getNameType($habitation['idTipo'])['nome'] ?>&guests=<?= $_GET['guests']?>&total=<?=$habitation['precoNoite']*$days+$habitation['taxaLimpeza']?>" class="submit"> <p>Book</p></a>
             <?php }
             else{ ?>
                 <a href="login.php" class="submit"><p>Login to Reserve</p></a>
