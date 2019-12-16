@@ -7,7 +7,7 @@
     include_once('../../database/users.php');
 
     $id = $_GET['id'];
-    updateHabitation($id, $_POST['name'], $_POST['numberBedrooms'], $_POST['numberGuests'], $_POST['address'], $_POST['priceNight'], $_POST['cleaningTax'], $_POST['country'], $_POST['city'], $_POST['types'], $_POST['policies'], $_POST['description'], $_SESSION['user']);
+    updateHabitation($id, $_POST['name'], $_POST['numberBedrooms'], $_POST['numberGuests'], $_POST['address'], $_POST['priceNight'], $_POST['cleaningTax'], $_POST['country'], $_POST['city'], $_POST['types'], $_POST['policies'], $_POST['description'], $_POST['latitude'], $_POST['longitude']);
     
     // -------- Images ---------
     /*

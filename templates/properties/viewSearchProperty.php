@@ -32,7 +32,7 @@
             $cleaning=$cleaning/$n;
             $value=$value/$n;
             $check_in=$check_in/$n;
-            $rating=$location+$cleaning+$value+$check_in/4;
+            $rating=($location+$cleaning+$value+$check_in)/4;
         }
     ?>
     <div class="rightText">

@@ -277,6 +277,14 @@ function getCountryCity($idCity){
     return $stmt->fetch()['idPais'];
 }
 
+function getNameCountry($idCity){
+    global $db;
+    $stmt = $db->prepare('SELECT Pais.nome as nome FROM Cidade JOIN Pais USING (idPais) WHERE idCidade=?');
+    $stmt->execute(array($idCity));
+
+    return $stmt->fetch()['nome'];
+}
+
 function getAmenities($idHabitacao){
     global $db;
     $stmt = $db->prepare('SELECT nome FROM Comodidade JOIN Dispoe USING (idComodidade) WHERE idHabitacao=?');

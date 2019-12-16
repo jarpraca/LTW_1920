@@ -1,7 +1,7 @@
 <section id="property">
     <header>
         <h1><?=$habitation['nome']?></h1>
-        <h3><?=""/*getNameCity($habitation['idCidade'])?>, <?=getCountryCity($habitation['idCidade'])*/?> </h3>
+        <h3><?= getNameCity($habitation['idCidade'])?>, <?= getNameCountry($habitation['idCidade'])?> </h3>
         <?php /*$pictures=getUserPicture(getOwner($habitation['idHabitacao']));
         if ($pictures!=null){?>
             <img src="<?=$pictures?>" alt="Owner Picture" width="5%">
@@ -72,7 +72,7 @@
                 $cleaning=$cleaning/$n;
                 $value=$value/$n;
                 $check_in=$check_in/$n;
-                $rating=$location+$cleaning+$value+$check_in/4;
+                $rating=($location+$cleaning+$value+$check_in)/4;
             }
         ?>
         <p class="rating"><?=$rating?> (<?=$n?> users)</p>

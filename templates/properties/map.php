@@ -12,7 +12,7 @@
         longitude = longitude/properties.length;
         return [latitude, longitude];
     }
-    let properties = <?php echo json_encode($properties); ?>; 
+    let properties = <?php echo json_encode($properties); ?> ;
     var initial_coords = getStartingCoords(properties); 
     var mymap = L.map('mapid').setView([initial_coords[0], initial_coords[1]], 5);
 

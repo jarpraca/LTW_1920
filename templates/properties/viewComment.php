@@ -6,6 +6,7 @@
         else{
             echo '<h5>' . getUserById($comment['idUtilizador'])['primeiroNome'] . ' ' . getUserById($comment['idUtilizador'])['ultimoNome'] . '</h5>';
         }
+        
         echo '<h6>' . date('F, Y', strtotime($comment['dataCheckOut'])) . '</h6>';
     ?>
     <p class="rating"><?=($comment['limpeza']+$comment['localizacao']+$comment['valor']+$comment['checkIn'])/4?> Total</p>

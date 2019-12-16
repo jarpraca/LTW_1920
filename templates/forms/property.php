@@ -34,8 +34,8 @@
         <textarea name="description" rows="10"><?=$description?></textarea>
     </label>
     <!--         amenities           -->
-    <script> let amenities_array_var = <?php echo json_encode($amenities_array_var); ?>; </script>
-    <script> let agenda_array = <?php echo json_encode($agenda_array); ?>; </script>
+    <script> let amenities_array_var = <?php echo json_encode($amenities_array_var); ?> </script>
+    <script> let agenda_array = <?php echo json_encode($agenda_array); ?> </script>
     <script src="scripts/property.js" defer></script>
     <label>Amenity:
         <input type="text" id="amenities_input" name="amenity">

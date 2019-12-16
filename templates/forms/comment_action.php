@@ -11,5 +11,5 @@
         $anonimous=true;
     }
     addComment($_GET['id'], $_POST['cleaning'], $_POST['value'], $_POST['checkIn'], $_POST['location'], $_POST['description'], $anonimous);
-    header( 'Location: ../../viewProperty.php?id=' . $_GET['id'] . '&' . $_GET['dateFrom'] . '&' . $_GET['dateTo'] );
+    header( 'Location: ../../viewProperty.php?id=' . $_GET['id'] . '&dateFrom=' . $_GET['dateFrom'] . '&dateTo=' . $_GET['dateTo'] );
 ?>
