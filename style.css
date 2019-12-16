@@ -168,6 +168,10 @@ input, select, textarea {
     color: var(--myDarkBlue);
 }
 
+.propertySearch p, .propertySearch h1, .propertySearch h3 {
+    color: var(--myDarkBlue);    
+}
+
 .propertyShort a, .reservationShort a, .propertySearch a {
     text-decoration: none;
 }
