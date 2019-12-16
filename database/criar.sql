@@ -71,7 +71,7 @@ CREATE TABLE Reserva (
     precoTotal      REAL    CHECK (precoTotal > 0), 
     idEstado        INTEGER REFERENCES Estado(idEstado) ON DELETE CASCADE ON UPDATE CASCADE,
     idHabitacao     INTEGER REFERENCES Habitacao(idHabitacao),
-    idUtilizador       INTEGER REFERENCES Utilizador(idUtilizador),
+    idUtilizador       INTEGER REFERENCES Utilizador(idUtilizador)
 );
 
 DROP TABLE IF EXISTS Estado;
