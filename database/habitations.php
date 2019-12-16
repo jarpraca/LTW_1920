@@ -128,8 +128,13 @@ function updateHabitation($id, $name, $numQuartos, $maxHospedes, $morada, $preco
 
 function addImage($idHab, $url, $description){
     global $db;
-    $stmt = $db->prepare('INSERT INTO Imagem(urlImagem, legenda, idHabitacao) values (?, ?, ?)');
-    $stmt->execute(array($url, $description, $idHab));
+    $stmt = $db->prepare('SELECT * FROM Imagem WHERE urlImagem=?');
+    $stmt->execute(array($url));
+    
+    if ($stmt->fetch() == null){
+        $stmt = $db->prepare('INSERT INTO Imagem(urlImagem, legenda, idHabitacao) values (?, ?, ?)');
+        $stmt->execute(array($url, $description, $idHab));
+    }
 }
 
 function removeAllImages($idHab){   

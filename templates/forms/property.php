@@ -100,7 +100,7 @@
     </label>
     <!--          pictures             -->
     <label> Upload Pictures (Select All Pictures At Once)
-        <input type="file" name="pictures" accept="image/*" multiple value=<?=$image?> >
+        <input type="file" name="pictures[]" accept="image/*" multiple value="<?=$image?>" >
     </label>
     <?php
         if(isset($_GET['id'])){
