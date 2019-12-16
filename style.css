@@ -222,6 +222,8 @@ input, select, textarea {
     background-color: rgb(0, 0, 0);
     /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4);
+
+    z-index: 999;
     /* Black w/ opacity */
 }
 

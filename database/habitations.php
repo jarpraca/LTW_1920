@@ -431,7 +431,7 @@ function isAvailableDay($idHabitation, $date){
     $reservations = $stmt->fetchAll();
 
     foreach($reservations as $reservation){
-        if ($date >= $reservations['dateCheckIn'] && $date <= $reservations['dateCheckOut']){
+        if ($date >= $reservation['dateCheckIn'] && $date <= $reservation['dateCheckOut']){
             $available=false;
             break;
         }

@@ -1,5 +1,4 @@
 <section class="propertyShort">
-    <a href="viewProperty.php?id=<?=$habitation['idHabitacao']?>">
         <?php 
             include_once("database/connection.php");
             include_once("database/habitations.php");
@@ -16,10 +15,10 @@
             <h3><?=getNameType($habitation['idTipo'])['nome']?></h3>
             <h1><?=$habitation['nome']?></h1>     
             <div class="horizontalElements">
+                <a href="viewProperty.php?id=<?=$habitation['idHabitacao']?>" class="submit"> <p> View </p> </a>
                 <a href="templates/forms/removeProperty_action.php?id=<?=$habitation['idHabitacao']?>" class="submit"><p>Remove</p></a>
                 <a href="editProperty.php?id=<?=$habitation['idHabitacao']?>" class="submit"><p>Edit</p></a>
                 <a href="listReservationsByProperty.php?id=<?=$habitation['idHabitacao']?>" class="submit"><p>View Reservations</p></a>
             </div>
         </div>
-    </a>
 </section>

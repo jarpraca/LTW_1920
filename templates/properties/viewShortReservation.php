@@ -1,5 +1,4 @@
 <section class="reservationShort">
-    <a href="viewProperty.php?id=<?=$reservation['idHabitacao']?>">
         <?php 
             include_once("database/connection.php");
             include_once("database/habitations.php");
@@ -29,13 +28,13 @@
                 <h3>Total: <?=$total?>€</h3>
                 <?php
                     $state = $reservation['idEstado'];
-                    print_r($state);
                     if ($state == 0)
                         echo '<a href=#>" class="submit"><p>Cancel</p></a>';
                     else if ($state == 1){
                         echo '<a href="viewProperty.php?id=' . $habitation['idHabitacao'] . '#comment_form" class="submit"><p>Comment</p></a>';
                     }
                 ?>
+                <a href="viewProperty.php?id=<?=$reservation['idHabitacao']?>" class="submit"> <p> View </p> </a>
                 
             </div>
         </div>

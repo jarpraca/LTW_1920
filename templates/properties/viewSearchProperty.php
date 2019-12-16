@@ -1,5 +1,4 @@
 <section class="propertySearch">
-    <a href="viewProperty.php?id=<?=$habitation['idHabitacao']?>&<?=$_GET['dateFrom']?>&<?=$_GET['dateTo']?>">
         <?php 
             include_once("database/connection.php");
             include_once("database/habitations.php");
@@ -36,7 +35,15 @@
                 $rating=($location+$cleaning+$value+$check_in)/4;
             }
         ?>
-        
+        <?php 
+            function getNumberGuests() {
+                $guests = 1;
+                  if(isset( $_GET['minNumberGuests']))
+                    $guests = $_GET['minNumberGuests'];
+                return $guests;
+            }
+        ?>
+
         <div class="rightText">
             <h3><?=getNameType($habitation['idTipo'])['nome']?></h3>
             <h1><?=$habitation['nome']?></h1>
@@ -45,8 +52,7 @@
             <div class="horizontalElements">
                 <h3 id="rating"><?=$rating?> (<?=$n?> users)</h3>
                 <h3>Total: <?=$total?>€</h3> 
-                <a href="viewProperty.php?id=<?=$habitation['idHabitacao']?>&dateFrom=<?=$_GET['dateFrom']?>&dateTo=<?=$_GET['dateTo']?>" class="submit"><p>View</p></a>
+                <a href="viewProperty.php?id=<?=$habitation['idHabitacao']?>&dateFrom=<?=$_GET['dateFrom']?>&dateTo=<?=$_GET['dateTo']?>&guests=<?=getNumberGuests() ?>" class="submit"><p>View</p></a>
             </div>
         </div>
-    </a>
 </section>

@@ -49,16 +49,22 @@
     $secs = $datetime2 - $datetime1;// == <seconds between the two times>
     $days = $secs / 86400;
 
-    echo '<section id="listPropertiesMap">';
-    echo '<aside id="map">';
-    include('templates/properties/map.php');
-    echo '</aside>';
-    echo '<section id="propertiesSection">';
-    foreach ($properties as $habitation){
-        if(isAvailable($habitation['idHabitacao'], $_GET['dateFrom'],$_GET['dateTo']))
-            include("templates/properties/viewSearchProperty.php");
+    if($properties != null){
+        echo '<section id="listPropertiesMap">';
+        echo '<aside id="map">';
+        include('templates/properties/map.php');
+        echo '</aside>';
+        echo '<section id="propertiesSection">';
+        foreach ($properties as $habitation){
+            if(isAvailable($habitation['idHabitacao'], $_GET['dateFrom'],$_GET['dateTo']))
+                include("templates/properties/viewSearchProperty.php");
+        }
+        echo '</section>';
+        echo '</section>';
     }
-    echo '</section>';
-    echo '</section>';
+    else {
+        echo '<div> No results found </div>';
+    }
+   
     include_once('templates/common/footer.php');
 ?>

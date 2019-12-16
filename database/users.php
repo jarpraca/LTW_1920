@@ -15,7 +15,7 @@ function createUser($hashedPassword, $primeiroNome, $ultimoNome, $dataNascimento
 function addPhotoProfile($id, $urlPhoto, $description){
     global $db;
     $stmt = $db->prepare('UPDATE Utilizador SET foto=?, altFoto=? WHERE idUtilizador=?');
-    $stmt = $db->execute(array($urlPhoto, $description, $id));
+    $stmt->execute(array($urlPhoto, $description, $id));
 }
 
 function getCountries(){
