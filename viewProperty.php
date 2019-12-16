@@ -18,8 +18,8 @@
     if (isset($_GET['dateTo']))
         $dateTo = $_GET['dateTo'];
 
-    // if ($dateFrom!=null && $dateTo!=null && !isAvailable($_GET['id'], $dateFrom, $dateTo))
-    //     header('location: homepage.php');
+    if ($dateFrom!=null && $dateTo!=null && !isAvailable($_GET['id'], $dateFrom, $dateTo))
+        header('location: homepage.php');
 
     include('templates/properties/viewProperty.php');
     include('templates/common/footer.php');

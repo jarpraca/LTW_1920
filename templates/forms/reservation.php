@@ -1,21 +1,30 @@
-<?php 
-    include('../../templates/common/header.php');
-?>
+<button id="reservation_button">Book</button>
 
-<form id="reservation_form" class="verticalForm" action="templates/forms/reservation_action.php" method="post" enctype="multipart/form-data">
+<div id="reservationModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>        
+<?php $action_form = "templates/forms/reservation_action.php?idHabitacao=". $habitation['idHabitacao'] ?>
+
+<form id="reservation_form" class="commentForm verticalForm" action=<?= $action_form ?> method="post" enctype="multipart/form-data">
             <label> Type
-                <div>  <?php $_GET['type'] ?>  </div>
+                <input type="text" name="type" value= <?= getNameType($habitation['idTipo'])['nome'] ?> readonly >
             </label>
             <!--          guests and numbers            -->
             <label> Number of Guests
-                <input type="number" name="minNumberGuests"  value="<?=$_GET['guests'] ?>" min="1">
+                <input type="number" name="guests"  value="<?=$_GET['guests'] ?>" min="1" max=<?=$habitation['maxHospedes']?>>
             </label>
+            
             <label> Number of Bedrooms
-               <?=$_GET['guests'] ?>
+                <input type="number" name="bedrooms"  value="<?= $habitation['numQuartos'] ?>" readonly>
+            </label>
+            <label> Dates
+                <input type="text" name="dateFrom"  value=" <?=$dateFrom?>" readonly>
+            -> 
+            <input type="text" name="dateTo"  value=" <?=$dateTo?>" readonly>
             </label>
             <!--          prices             -->
             <label class="currency"> Total
-                <?=$_GET['total'] ?>
+                <input type="number" name="precoTotal"  value="<?=$habitation['precoNoite']*$days+$habitation['taxaLimpeza'] ?>" readonly>
             </label>
             <input class="submit" type="submit" value="Submit">
         </form>
@@ -24,10 +33,10 @@
 
 <script>
     // Get the modal
-    var modal = document.getElementById("filterModal");
+    var modal = document.getElementById("reservationModal");
 
     // Get the button that opens the modal
-    var btn = document.getElementById("filter_button");
+    var btn = document.getElementById("reservation_button");
 
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
@@ -50,7 +59,3 @@
     }
 </script>
 </form>
-
-<?php
-  include('templates/common/footer.php');
-?>

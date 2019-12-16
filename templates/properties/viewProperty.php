@@ -31,16 +31,14 @@
             <p><?=$habitation['taxaLimpeza']?>€</p>
             <h3>Total</h3>
             <h3><?=$habitation['precoNoite']*$days+$habitation['taxaLimpeza']?>€</h3>
+            <div class="list_properties_options">
+              <?=  include_once("templates/forms/reservation.php"); ?>
+            </div>;
             <?php if(isset($_SESSION['user'])) {?>
-                <a href="templates/forms/reservation.php?type=<?=getNameType($habitation['idTipo'])['nome'] ?>&guests=<?= $_GET['guests']?>&total=<?=$habitation['precoNoite']*$days+$habitation['taxaLimpeza']?>" class="submit"> <p>Book</p></a>
             <?php }
             else{ ?>
                 <a href="login.php" class="submit"><p>Login to Reserve</p></a>
             <?php } ?>
-
-            <?php  
-                $properties = array($habitation);
-                include('templates/properties/map.php'); ?>
 
         </aside>
     <?php } ?>
@@ -57,7 +55,9 @@
         foreach ($amenities as $value) { ?>
             <p id="amenity">   <?=$value['nome']?></p>
         <?php } ?>
-
+        <?php  
+                $properties = array($habitation);
+                include('templates/properties/map.php'); ?>
         <h3>Reviews</h3>
         <?php
             $photos = getHabitationPictures($habitation['idHabitacao']);

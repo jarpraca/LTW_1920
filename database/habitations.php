@@ -80,6 +80,12 @@ function getReservationById($id){
     return $stmt->fetch();
 }
 
+function addReservation($dataCheckIn, $dataCheckOut, $numHospedes, $precoTotal, $idHabitacao, $idUtilizador){
+    global $db;
+    $stmt = $db->prepare('INSERT INTO Reserva(dataCheckIn, dataCheckOut, numHospedes, precoTotal, idEstado, idHabitacao, idUtilizador) VALUES (?, ?, ?, ?, ?, ?, ?)');
+    $stmt->execute(array($dataCheckIn, $dataCheckOut, $numHospedes, $precoTotal, 0, $idHabitacao, $idUtilizador));
+}   
+
 include_once("users.php");
 
 function insertHabitation($name, $numQuartos, $maxHospedes, $morada, $precoNoite, $taxaLimpeza, $pais, $cidade, $tipo, $politica, $descricao, $latitude, $longitude, $idUser){
@@ -431,7 +437,7 @@ function isAvailableDay($idHabitation, $date){
     $reservations = $stmt->fetchAll();
 
     foreach($reservations as $reservation){
-        if ($date >= $reservation['dateCheckIn'] && $date <= $reservation['dateCheckOut']){
+        if ($date >= $reservation['dateCheckIn'] && $date <= $reservation['dateCheckOut'] && $reservation['idEstado']!= 3){
             $available=false;
             break;
         }
