@@ -18,14 +18,14 @@ function generate_random_token() {
         header('Location: ../../homepage.php');
     }
 
-    $anonimous=false;
+    $anonimous=0;
     if (isset($_POST['anonimous'])){
-        $anonimous=true;
+        $anonimous=1;
     }
     addComment($_GET['id'], $_POST['cleaning'], $_POST['value'], $_POST['checkIn'], $_POST['location'], $_POST['description'], $anonimous);
     
     if (isset($_GET['dateFrom']) && isset($_GET['dateTo']))
-        header( 'Location: ../../viewProperty.php?id=' . $_GET['id'] . '&dateFrom=' . $_GET['dateFrom'] . '&dateTo=' . $_GET['dateTo'] );
+        header( 'Location: ../../viewProperty.php?id=' . $_GET['idH'] . '&dateFrom=' . $_GET['dateFrom'] . '&dateTo=' . $_GET['dateTo'] );
     else
-    header( 'Location: ../../viewProperty.php?id=' . $_GET['id']);
+    header( 'Location: ../../viewProperty.php?id=' . $_GET['idH']);
 ?>

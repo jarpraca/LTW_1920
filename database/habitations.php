@@ -112,7 +112,7 @@ function removeHabitation($id){
     $stmt = $db->prepare('DELETE FROM Habitacao WHERE idHabitacao = ?');
     $stmt->execute(array($id));
 
-    removeAllImages($id);
+    removeAllImages($id, "../../");
     removeReservationsHabitation($id);
 }
 
@@ -143,11 +143,11 @@ function addImage($idHab, $url, $description){
     }
 }
 
-function removeAllImages($idHab){   
+function removeAllImages($idHab, $path){   
     $pictures = getHabitationPictures($idHab);
 
     foreach($pictures as $picture){
-        unlink($picture['urlImagem']);
+        unlink($path . $picture['urlImagem']);
     }
     
     global $db;

@@ -1,8 +1,8 @@
 <?php 
 if($dateTo==null || $dateFrom==null) 
-    echo '<form id="comment_form" class="commentForm verticalForm" action="templates/forms/comment_action.php?id=<?=$idReserva?>&<?=$habitation?>" method="post">';
+    echo '<form id="comment_form" class="commentForm verticalForm" action="templates/forms/comment_action.php?id=' . $idReserva . '&idH=' . $habitation['idHabitacao'] . '" method="post">';
 else
-    echo '<form id="comment_form" class="commentForm verticalForm" action="templates/forms/comment_action.php?id=<?=$idReserva?>&<?=$habitation?>&<?=$dateFrom?>&<?=$dateTo?>" method="post">';
+    echo '<form id="comment_form" class="commentForm verticalForm" action="templates/forms/comment_action.php?id=' . $idReserva . '&idH=' . $habitation['idHabitacao'] . '&dateFrom=' . $dateFrom . '&dateTo=' . $dateTo . '" method="post">';
 ?>
     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
     <label> Cleaning

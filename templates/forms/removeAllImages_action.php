@@ -13,7 +13,7 @@ function generate_random_token() {
     include_once('../../database/habitations.php');
     include_once('../../database/users.php');
 
-    removeAllImages($_GET['id']);
+    removeAllImages($_GET['id'], "");
 
     header( 'Location: ../../editProperty.php?id='.$_GET['id']) ;
 ?>
