@@ -1,11 +1,11 @@
 <section id="property">
     <header>
         <h1><?=$habitation['nome']?></h1>
-        <h3><?= getNameCity($habitation['idCidade'])?>, <?= getNameCountry($habitation['idCidade'])?> </h3>
-        <?php 
-            include("templates/properties/image_slideshow.php");
-        ?>
+        <h3><?= getNameCity($habitation['idCidade'])?>, <?= getNameCountry($habitation['idCidade'])?> </h3>       
     </header>
+            <?php 
+                include("templates/properties/image_slideshow.php");
+            ?>
     <!-- fotos -->
     <?php
     if ($dateFrom!=null && $dateTo!=null){
@@ -29,8 +29,8 @@
             <h3>Total</h3>
             <h3><?=$habitation['precoNoite']*$days+$habitation['taxaLimpeza']?>€</h3>
             <div class="list_properties_options">
-              <?=  include_once("templates/forms/reservation.php"); ?>
-            </div>;
+              <?php  include_once("templates/forms/reservation.php"); ?>
+            </div>
             <?php if(isset($_SESSION['user'])) {?>
             <?php }
             else{ ?>

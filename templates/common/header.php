@@ -17,7 +17,7 @@
             <input type="checkbox" id="hamburger"> 
             <label class="hamburger" for="hamburger"></label> 
             <ul>
-                <li><a href="homepage.php" id="title"><h1>Amazing Rentals</h1></a></li>
+                <li><a href="homepage.php" class="title"><h1 class="title">Amazing Rentals</h1></a></li>
                 <li>
                     <?php
                         if($displaySearch)

@@ -1,7 +1,8 @@
-<button id="reservation_button">Book</button>
+<button  class="submit" id="reservation_button"> Book </button>
 
 <div id="reservationModal" class="modal">
     <div class="modal-content">
+
         <span class="close">&times;</span>        
         <?php $action_form = "templates/forms/reservation_action.php?idHabitacao=". $habitation['idHabitacao'] ?>
 
@@ -27,7 +28,7 @@
             <label class="currency"> Total
                 <input type="number" name="precoTotal"  value="<?=$habitation['precoNoite']*$days+$habitation['taxaLimpeza'] ?>" readonly>
             </label>
-            <input class="submit" type="submit" value="Submit">
+            <input class="submit" type="submit" value="Make a Reservation">
         </form>
     </div>
 </div>

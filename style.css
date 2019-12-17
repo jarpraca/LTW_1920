@@ -134,11 +134,6 @@ input, select, textarea {
 
 .homepageForm {
     background: var(--myDarkBlue);
-    width: 17em;
-    height: 35%;
-    position: absolute;
-    top: 15%;
-    left:5em;
     border-radius: 1em;
 }
 
@@ -150,9 +145,6 @@ input, select, textarea {
 .homepageForm h3{
     color: var(--myLightBlue);
     font-weight: bold;
-    align-self: flex-start;
-    padding-bottom: 0.5em;
-    padding-top: 0.5em;
 }
 
 #homepage {

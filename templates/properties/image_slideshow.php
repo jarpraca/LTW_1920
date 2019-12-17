@@ -20,17 +20,12 @@
 
         let img = document.createElement("img");
         img.setAttribute("src", pictures[i]['urlImagem']);
-        img.setAttribute("style", "width:100%");
+        img.setAttribute("style", "max-height:45vh;margin-top:2em;width:100%");
         img.setAttribute("alt", pictures[i]['legenda']);
-
-        let numberText = document.createElement("div");
-        numberText.setAttribute("class", "numbertext");
-        numberText.innerHTML = i + " / " + pictures.length;
-        numberText.appendChild(img);
 
         let div = document.createElement("div");
         div.setAttribute("class", "mySlides fade");
-        div.appendChild(numberText);
+        div.appendChild(img);
         slideshow.insertBefore(div, button);
 
         let span = document.createElement("span");
