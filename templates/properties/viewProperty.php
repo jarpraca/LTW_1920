@@ -3,10 +3,10 @@
         <h1><?=$habitation['nome']?></h1>
         <h3><?= getNameCity($habitation['idCidade'])?>, <?= getNameCountry($habitation['idCidade'])?> </h3>       
     </header>
-            <?php 
-                include("templates/properties/image_slideshow.php");
-            ?>
     <!-- fotos -->
+    <?php 
+        include("templates/properties/image_slideshow.php");
+    ?>
     <?php
     if ($dateFrom!=null && $dateTo!=null){
     ?>
