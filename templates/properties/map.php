@@ -1,4 +1,4 @@
-<div id="mapid"></div>
+<div id="mapid">
 <script>
     function getStartingCoords(properties) {
         var latitude = 0;
@@ -45,4 +45,4 @@
 	mymap.on('click', onMapClick);
 
 </script>
-
+</div>
